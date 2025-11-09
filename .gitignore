@@ -7,6 +7,7 @@ xcuserdata/
 *.xccheckout
 *.moved-aside
 *.xcscmblueprint
+**/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
 
 # Swift Package Manager
 /.build/

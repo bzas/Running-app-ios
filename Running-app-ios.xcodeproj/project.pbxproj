@@ -11,6 +11,10 @@
 		481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD4D2EBFDF4200DEDDEB /* Utils */; };
 		481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD532EBFE47D00DEDDEB /* DesignSystem */; };
 		481CAD562EBFE48200DEDDEB /* Analytics in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD552EBFE48200DEDDEB /* Analytics */; };
+		48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 48301F2E2EC0F4A400FAE65A /* Workouts */; };
+		4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BB2EC0D93B00E84AD6 /* Home */; };
+		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
+		4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6C02EC0DD8C00E84AD6 /* Localization */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +47,12 @@
 				Core/Analytics,
 				Core/Database,
 				Core/DesignSystem,
+				Core/Localization,
 				Core/Utils,
+				Features/Home,
+				Features/Profile,
+				Features/Workouts,
+				Info.plist,
 			);
 			target = 481CAD1A2EBFDD1400DEDDEB /* Running-app-ios */;
 		};
@@ -75,9 +84,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */,
+				4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */,
 				481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */,
 				481CAD562EBFE48200DEDDEB /* Analytics in Frameworks */,
 				481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */,
+				4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */,
+				48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */,
 				481CAD4B2EBFDED200DEDDEB /* Database in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +164,10 @@
 				481CAD4D2EBFDF4200DEDDEB /* Utils */,
 				481CAD532EBFE47D00DEDDEB /* DesignSystem */,
 				481CAD552EBFE48200DEDDEB /* Analytics */,
+				4899F6BB2EC0D93B00E84AD6 /* Home */,
+				4899F6BD2EC0D93E00E84AD6 /* Profile */,
+				4899F6C02EC0DD8C00E84AD6 /* Localization */,
+				48301F2E2EC0F4A400FAE65A /* Workouts */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -231,6 +248,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = 481CAD122EBFDD1400DEDDEB;
 			minimizedProjectReferenceProxies = 1;
@@ -439,6 +457,7 @@
 				DEVELOPMENT_TEAM = 3BFY9G26SK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Running-app-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Renn;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -446,6 +465,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,6 +497,7 @@
 				DEVELOPMENT_TEAM = 3BFY9G26SK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Running-app-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Renn;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -484,6 +505,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -646,6 +668,22 @@
 		481CAD552EBFE48200DEDDEB /* Analytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Analytics;
+		};
+		48301F2E2EC0F4A400FAE65A /* Workouts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Workouts;
+		};
+		4899F6BB2EC0D93B00E84AD6 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		4899F6BD2EC0D93E00E84AD6 /* Profile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Profile;
+		};
+		4899F6C02EC0DD8C00E84AD6 /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Localization;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
