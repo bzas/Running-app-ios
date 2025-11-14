@@ -7,6 +7,10 @@
 
 import SwiftUI
 import SwiftData
+import Workouts
+import GarminKit
+import Application
+import Database
 
 @main
 struct Running_app_iosApp: App {
@@ -20,11 +24,26 @@ struct Running_app_iosApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    @StateObject var workoutsViewModel: WorkoutsViewModel
+    
+    init() {
+        let workoutsViewModel = WorkoutsViewModel(useCase: Self.makeGarminUseCase())
+        _workoutsViewModel = StateObject(wrappedValue: workoutsViewModel)
+    }
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(workoutsViewModel)
         }
         .modelContainer(sharedModelContainer)
+    }
+    
+    static func makeGarminUseCase() -> GarminUseCase {
+        GarminUseCase(
+            garminService: GarminService(),
+            repository: WorkoutRepository()
+        )
     }
 }

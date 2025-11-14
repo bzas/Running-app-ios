@@ -4,43 +4,45 @@
 import PackageDescription
 
 let package = Package(
-    name: "Workouts",
+    name: "Application",
     platforms: [
         .iOS(.v18)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Workouts",
-            targets: ["Workouts"]
+            name: "Application",
+            targets: ["Application"]
         ),
     ],
     dependencies: [
-        .package(path: "../Domain"),
-        .package(path: "../Application")
+        .package(path: "../GarminKit"),
+        .package(path: "../Database"),
+        .package(path: "../Domain")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Workouts",
+            name: "Application",
             dependencies: [
+                .product(
+                    name: "GarminKit",
+                    package: "GarminKit"
+                ),
+                .product(
+                    name: "Database",
+                    package: "Database"
+                ),
                 .product(
                     name: "Domain",
                     package: "Domain"
-                ),
-                .product(
-                    name: "Application",
-                    package: "Application"
                 )
-            ],
-            resources: [
-                .process("Resources")
             ]
         ),
         .testTarget(
-            name: "WorkoutsTests",
-            dependencies: ["Workouts"]
+            name: "ApplicationTests",
+            dependencies: ["Application"]
         ),
     ]
 )

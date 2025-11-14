@@ -4,43 +4,43 @@
 import PackageDescription
 
 let package = Package(
-    name: "Workouts",
+    name: "GarminKit",
     platforms: [
         .iOS(.v18)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Workouts",
-            targets: ["Workouts"]
+            name: "GarminKit",
+            targets: ["GarminKit"]
         ),
     ],
     dependencies: [
-        .package(path: "../Domain"),
-        .package(path: "../Application")
+        .package(
+            url: "https://github.com/garmin/fit-swift-sdk.git",
+            exact: "21.187.0"
+        ),
+        .package(path: "../Database")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Workouts",
+            name: "GarminKit",
             dependencies: [
                 .product(
-                    name: "Domain",
-                    package: "Domain"
+                    name: "FITSwiftSDK",
+                    package: "fit-swift-sdk"
                 ),
                 .product(
-                    name: "Application",
-                    package: "Application"
-                )
-            ],
-            resources: [
-                .process("Resources")
+                    name: "Database",
+                    package: "Database"
+                ),
             ]
         ),
         .testTarget(
-            name: "WorkoutsTests",
-            dependencies: ["Workouts"]
+            name: "GarminKitTests",
+            dependencies: ["GarminKit"]
         ),
     ]
 )

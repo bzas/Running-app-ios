@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		481CAD4B2EBFDED200DEDDEB /* Database in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD4A2EBFDED200DEDDEB /* Database */; };
 		481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD4D2EBFDF4200DEDDEB /* Utils */; };
 		481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD532EBFE47D00DEDDEB /* DesignSystem */; };
-		481CAD562EBFE48200DEDDEB /* Analytics in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD552EBFE48200DEDDEB /* Analytics */; };
 		48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 48301F2E2EC0F4A400FAE65A /* Workouts */; };
 		4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BB2EC0D93B00E84AD6 /* Home */; };
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
 		4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6C02EC0DD8C00E84AD6 /* Localization */; };
+		48A826902EC67DA100C73FEA /* GarminKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48A8268F2EC67DA100C73FEA /* GarminKit */; };
+		48F29E422EC7BB870072DD69 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E412EC7BB870072DD69 /* Domain */; };
+		48F29E452EC7C6CF0072DD69 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E442EC7C6CF0072DD69 /* Application */; };
+		48F29E482EC7C7AA0072DD69 /* Database in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E472EC7C7AA0072DD69 /* Database */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +46,11 @@
 		481CAD482EBFDE3400DEDDEB /* Exceptions for "Running-app-ios" folder in "Running-app-ios" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Core/Analytics,
+				Core/Application,
 				Core/Database,
 				Core/DesignSystem,
+				Core/Domain,
+				Core/GarminKit,
 				Core/Localization,
 				Core/Utils,
 				Features/Home,
@@ -84,14 +88,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48F29E422EC7BB870072DD69 /* Domain in Frameworks */,
 				4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */,
 				4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */,
 				481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */,
-				481CAD562EBFE48200DEDDEB /* Analytics in Frameworks */,
 				481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */,
 				4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */,
+				48F29E482EC7C7AA0072DD69 /* Database in Frameworks */,
+				48F29E452EC7C6CF0072DD69 /* Application in Frameworks */,
 				48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */,
-				481CAD4B2EBFDED200DEDDEB /* Database in Frameworks */,
+				48A826902EC67DA100C73FEA /* GarminKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,14 +166,16 @@
 			);
 			name = "Running-app-ios";
 			packageProductDependencies = (
-				481CAD4A2EBFDED200DEDDEB /* Database */,
 				481CAD4D2EBFDF4200DEDDEB /* Utils */,
 				481CAD532EBFE47D00DEDDEB /* DesignSystem */,
-				481CAD552EBFE48200DEDDEB /* Analytics */,
 				4899F6BB2EC0D93B00E84AD6 /* Home */,
 				4899F6BD2EC0D93E00E84AD6 /* Profile */,
 				4899F6C02EC0DD8C00E84AD6 /* Localization */,
 				48301F2E2EC0F4A400FAE65A /* Workouts */,
+				48A8268F2EC67DA100C73FEA /* GarminKit */,
+				48F29E412EC7BB870072DD69 /* Domain */,
+				48F29E442EC7C6CF0072DD69 /* Application */,
+				48F29E472EC7C7AA0072DD69 /* Database */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -252,6 +260,8 @@
 			);
 			mainGroup = 481CAD122EBFDD1400DEDDEB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 481CAD1C2EBFDD1400DEDDEB /* Products */;
 			projectDirPath = "";
@@ -653,10 +663,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		481CAD4A2EBFDED200DEDDEB /* Database */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Database;
-		};
 		481CAD4D2EBFDF4200DEDDEB /* Utils */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Utils;
@@ -664,10 +670,6 @@
 		481CAD532EBFE47D00DEDDEB /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DesignSystem;
-		};
-		481CAD552EBFE48200DEDDEB /* Analytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Analytics;
 		};
 		48301F2E2EC0F4A400FAE65A /* Workouts */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -684,6 +686,22 @@
 		4899F6C02EC0DD8C00E84AD6 /* Localization */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Localization;
+		};
+		48A8268F2EC67DA100C73FEA /* GarminKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GarminKit;
+		};
+		48F29E412EC7BB870072DD69 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		48F29E442EC7C6CF0072DD69 /* Application */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Application;
+		};
+		48F29E472EC7C7AA0072DD69 /* Database */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Database;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

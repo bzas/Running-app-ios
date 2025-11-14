@@ -9,17 +9,24 @@ import SwiftUI
 
 public struct WorkoutsView: View {
     
-    @StateObject var viewModel: WorkoutsViewModel
-
-    public init() {
-        _viewModel = StateObject(wrappedValue: WorkoutsViewModel())
-    }
+    @EnvironmentObject var viewModel: WorkoutsViewModel
+    
+    public init() {}
     
     public var body: some View {
-        Text("Workouts")
+        VStack {
+            List {
+                Section(header: Text("Activities")) {
+                    ForEach(viewModel.sessions) { session in
+                        WorkoutCellView(
+                            viewModel: WorkoutCellViewModel(session: session)
+                        )
+                    }
+                }
+            }
+        }
+        .onAppear {
+            viewModel.loadTestActivity()
+        }
     }
-}
-
-#Preview {
-    WorkoutsView()
 }
