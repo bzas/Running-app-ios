@@ -17,7 +17,22 @@ public struct WorkoutSession: Identifiable, Sendable {
     public var speed: Double
     public var distance: Double
     public var totalTime: Double
+    public var latitude: Double?
+    public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPoint]
+    
+    public var distanceInKm: Double {
+        distance / 1000.0
+    }
+
+    public var paceInSeconds: Double {
+        guard speed <= 0 else {
+            return 1000.0 / speed
+        }
+        
+        guard distanceInKm > 0 else { return 0 }
+        return totalTime / distanceInKm
+    }
     
     public init(
         name: String,
@@ -27,6 +42,8 @@ public struct WorkoutSession: Identifiable, Sendable {
         speed: Double,
         distance: Double,
         totalTime: Double,
+        latitude: Double?,
+        longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPoint]
     ) {
         self.name = name
@@ -36,6 +53,8 @@ public struct WorkoutSession: Identifiable, Sendable {
         self.speed = speed
         self.distance = distance
         self.totalTime = totalTime
+        self.latitude = latitude
+        self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
     }
 }

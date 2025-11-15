@@ -18,6 +18,8 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
     public var speed: Double?
     public var distance: Double?
     public var totalTime: Double?
+    public var latitude: Double?
+    public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     
     public init(
@@ -28,6 +30,8 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
         speed: Double?,
         distance: Double?,
         totalTime: Double?,
+        latitude: Double?,
+        longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     ) {
         self.name = name
@@ -43,6 +47,8 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
         self.speed = speed
         self.distance = distance
         self.totalTime = totalTime
+        self.latitude = latitude
+        self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
     }
 }
@@ -52,7 +58,7 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
 public extension WorkoutSessionDataModel {
     
     func toDomain() -> WorkoutSession {
-        WorkoutSession(
+        return WorkoutSession(
             name: name ?? "",
             timestamp: timestamp,
             heartRate: heartRate,
@@ -60,7 +66,9 @@ public extension WorkoutSessionDataModel {
             speed: speed ?? 0,
             distance: distance ?? 0,
             totalTime: totalTime ?? 0,
-            sessionTrackPoints: sessionTrackPoints.map { $0.toDomain() }
+            latitude: latitude,
+            longitude: longitude,
+            sessionTrackPoints: sessionTrackPoints.compactMap { $0.toDomain() }
         )
     }
 }

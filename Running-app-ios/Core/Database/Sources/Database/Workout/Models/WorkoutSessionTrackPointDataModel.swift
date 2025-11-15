@@ -9,21 +9,17 @@ import Domain
 
 public struct WorkoutSessionTrackPointDataModel: Sendable {
     
-    public var latitude: Int?
-    public var longitude: Int?
+    public var latitude: Double?
+    public var longitude: Double?
     public var altitude: Double?
     
     public init(
-        latitude: Int32?,
-        longitude: Int32?,
+        latitude: Double?,
+        longitude: Double?,
         altitude: Double?
     ) {
-        if let latitude {
-            self.latitude = Int(latitude)
-        }
-        if let longitude {
-            self.longitude = Int(longitude)
-        }
+        self.latitude = latitude
+        self.longitude = longitude
         self.altitude = altitude
     }
 }
@@ -32,11 +28,14 @@ public struct WorkoutSessionTrackPointDataModel: Sendable {
 
 public extension WorkoutSessionTrackPointDataModel {
     
-    func toDomain() -> WorkoutSessionTrackPoint {
-        WorkoutSessionTrackPoint(
-            latitude: latitude ?? 0,
-            longitude: longitude ?? 0,
-            altitude: altitude ?? 0
+    func toDomain() -> WorkoutSessionTrackPoint? {
+        guard let latitude,
+              let longitude else { return nil }
+        
+        return WorkoutSessionTrackPoint(
+            latitude: latitude,
+            longitude: longitude,
+            altitude: altitude
         )
     }
 }

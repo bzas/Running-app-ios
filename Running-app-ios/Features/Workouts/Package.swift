@@ -17,6 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Domain"),
+        .package(path: "../Common"),
         .package(path: "../Application")
     ],
     targets: [
@@ -28,6 +29,10 @@ let package = Package(
                 .product(
                     name: "Domain",
                     package: "Domain"
+                ),
+                .product(
+                    name: "Common",
+                    package: "Common"
                 ),
                 .product(
                     name: "Application",

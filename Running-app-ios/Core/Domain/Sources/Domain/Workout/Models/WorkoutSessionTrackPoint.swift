@@ -7,14 +7,14 @@
 
 public struct WorkoutSessionTrackPoint: Sendable {
     
-    public var latitude: Int
-    public var longitude: Int
-    public var altitude: Double
+    public var latitude: Double
+    public var longitude: Double
+    public var altitude: Double?
     
     public init(
-        latitude: Int,
-        longitude: Int,
-        altitude: Double
+        latitude: Double,
+        longitude: Double,
+        altitude: Double?
     ) {
         self.latitude = latitude
         self.longitude = longitude

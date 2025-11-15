@@ -7,10 +7,6 @@
 
 public enum Localizables {
     
-    public enum Home {
-        public static let tabTitle = "home_tabTitle".localized
-    }
-    
     public enum Workouts {
         public static let tabTitle = "workouts_tabTitle".localized
     }

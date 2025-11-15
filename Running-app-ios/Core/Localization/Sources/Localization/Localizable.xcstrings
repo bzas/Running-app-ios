@@ -1,23 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "home_tabTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activities"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actividades"
-          }
-        }
-      }
-    },
     "profile_tabTitle" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41,13 +24,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Workouts"
+            "value" : "Activities"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Entrenamientos"
+            "value" : "Actividades"
           }
         }
       }

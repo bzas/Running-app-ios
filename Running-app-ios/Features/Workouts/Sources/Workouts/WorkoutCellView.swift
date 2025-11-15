@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct WorkoutCellView: View {
     
@@ -16,27 +17,63 @@ struct WorkoutCellView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(viewModel.session.name)
-                .font(.headline)
-            
-            Text(viewModel.session.timestamp?.description ?? "")
-                .font(.caption)
-            
-            HStack {
-                if let heartRate = viewModel.session.heartRate {
+        VStack {
+            VStack(alignment: .leading, spacing: 8) {
+                Text(viewModel.session.name)
+                    .font(.title2)
+                
+                Text(viewModel.session.timestamp?.formatted() ?? "")
+                    .font(.caption)
+                
+                HStack {
+                    VStack {
+                        Text("Pace")
+                            .font(.caption2)
+                        Text(viewModel.pace)
+                            .bold()
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("Distance")
+                            .font(.caption2)
+                        Text(viewModel.distance)
+                            .bold()
+                    }
+                    
+                    Spacer()
+                    
                     VStack {
                         Text("Heart Rate")
-                        Text("\(heartRate) bpm")
+                            .font(.caption2)
+                        Text(viewModel.heartRate)
+                            .bold()
                     }
                 }
+                .font(.subheadline)
+                .padding(.top)
+            }
+            .padding(.horizontal)
+
+            Map(
+                initialPosition: .region(viewModel.mapRegion),
+                interactionModes: []
+            ) {
+                MapPolyline(coordinates: viewModel.sessionRoute)
+                    .stroke(.primary, lineWidth: 2)
+            
+                if let startPoint = viewModel.sessionRoute.first {
+                    Marker("Start", coordinate: startPoint).tint(.primary)
+                }
                 
-                VStack {
-                    Text("Distance")
-                    Text(String(format: "%.2fm", viewModel.session.distance))
+                if let finishPoint = viewModel.sessionRoute.last {
+                    Marker("Finish", coordinate: finishPoint).tint(.primary)
                 }
             }
-            .font(.subheadline)
+            .frame(height: 200)
+            .cornerRadius(10)
         }
     }
 }
+

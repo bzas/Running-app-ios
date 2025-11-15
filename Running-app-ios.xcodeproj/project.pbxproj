@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD4D2EBFDF4200DEDDEB /* Utils */; };
-		481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 481CAD532EBFE47D00DEDDEB /* DesignSystem */; };
 		48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 48301F2E2EC0F4A400FAE65A /* Workouts */; };
-		4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BB2EC0D93B00E84AD6 /* Home */; };
+		4839DBE12EC8C525002FBE52 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 4839DBE02EC8C525002FBE52 /* Common */; };
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
 		4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6C02EC0DD8C00E84AD6 /* Localization */; };
 		48A826902EC67DA100C73FEA /* GarminKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48A8268F2EC67DA100C73FEA /* GarminKit */; };
@@ -47,13 +46,12 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Core/Application,
+				Core/Common,
 				Core/Database,
-				Core/DesignSystem,
 				Core/Domain,
 				Core/GarminKit,
 				Core/Localization,
 				Core/Utils,
-				Features/Home,
 				Features/Profile,
 				Features/Workouts,
 				Info.plist,
@@ -91,10 +89,9 @@
 				48F29E422EC7BB870072DD69 /* Domain in Frameworks */,
 				4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */,
 				4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */,
-				481CAD542EBFE47D00DEDDEB /* DesignSystem in Frameworks */,
 				481CAD4E2EBFDF4200DEDDEB /* Utils in Frameworks */,
-				4899F6BC2EC0D93B00E84AD6 /* Home in Frameworks */,
 				48F29E482EC7C7AA0072DD69 /* Database in Frameworks */,
+				4839DBE12EC8C525002FBE52 /* Common in Frameworks */,
 				48F29E452EC7C6CF0072DD69 /* Application in Frameworks */,
 				48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */,
 				48A826902EC67DA100C73FEA /* GarminKit in Frameworks */,
@@ -167,8 +164,6 @@
 			name = "Running-app-ios";
 			packageProductDependencies = (
 				481CAD4D2EBFDF4200DEDDEB /* Utils */,
-				481CAD532EBFE47D00DEDDEB /* DesignSystem */,
-				4899F6BB2EC0D93B00E84AD6 /* Home */,
 				4899F6BD2EC0D93E00E84AD6 /* Profile */,
 				4899F6C02EC0DD8C00E84AD6 /* Localization */,
 				48301F2E2EC0F4A400FAE65A /* Workouts */,
@@ -176,6 +171,7 @@
 				48F29E412EC7BB870072DD69 /* Domain */,
 				48F29E442EC7C6CF0072DD69 /* Application */,
 				48F29E472EC7C7AA0072DD69 /* Database */,
+				4839DBE02EC8C525002FBE52 /* Common */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -667,17 +663,13 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Utils;
 		};
-		481CAD532EBFE47D00DEDDEB /* DesignSystem */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DesignSystem;
-		};
 		48301F2E2EC0F4A400FAE65A /* Workouts */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Workouts;
 		};
-		4899F6BB2EC0D93B00E84AD6 /* Home */ = {
+		4839DBE02EC8C525002FBE52 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Home;
+			productName = Common;
 		};
 		4899F6BD2EC0D93E00E84AD6 /* Profile */ = {
 			isa = XCSwiftPackageProductDependency;
