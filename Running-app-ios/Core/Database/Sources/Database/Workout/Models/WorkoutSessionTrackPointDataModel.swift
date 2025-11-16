@@ -6,21 +6,36 @@
 //
 
 import Domain
+import Foundation
 
 public struct WorkoutSessionTrackPointDataModel: Sendable {
     
     public var latitude: Double?
     public var longitude: Double?
     public var altitude: Double?
+    public var distance: Double
+    public var heartRate: Int?
+    public var timestamp: Date
     
-    public init(
+    public init?(
         latitude: Double?,
         longitude: Double?,
-        altitude: Double?
+        altitude: Double?,
+        distance: Double?,
+        heartRate: UInt8?,
+        timestamp: Date?
     ) {
+        guard let distance,
+              let timestamp else { return nil }
+        
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
+        self.distance = distance
+        self.timestamp = timestamp
+        if let heartRate {
+            self.heartRate = Int(heartRate)
+        }
     }
 }
 
@@ -35,7 +50,10 @@ public extension WorkoutSessionTrackPointDataModel {
         return WorkoutSessionTrackPoint(
             latitude: latitude,
             longitude: longitude,
-            altitude: altitude
+            altitude: altitude,
+            distance: distance,
+            heartRate: heartRate,
+            timestamp: timestamp
         )
     }
 }

@@ -11,9 +11,10 @@ import Domain
 public struct WorkoutSessionDataModel: Identifiable, Sendable {
     
     public let id = UUID()
-    public var name: String?
     public var timestamp: Date?
     public var heartRate: Int?
+    public var maxHeartRate: Int?
+    public var minHeartRate: Int?
     public var cadence: Int?
     public var speed: Double?
     public var distance: Double?
@@ -23,9 +24,10 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
     public var sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     
     public init(
-        name: String?,
         timestamp: Date?,
         heartRate: UInt8?,
+        maxHeartRate: UInt8?,
+        minHeartRate: UInt8?,
         cadence: UInt8?,
         speed: Double?,
         distance: Double?,
@@ -34,11 +36,16 @@ public struct WorkoutSessionDataModel: Identifiable, Sendable {
         longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     ) {
-        self.name = name
         self.timestamp = timestamp
         
         if let heartRate {
             self.heartRate = Int(heartRate)
+        }
+        if let maxHeartRate {
+            self.maxHeartRate = Int(maxHeartRate)
+        }
+        if let minHeartRate {
+            self.minHeartRate = Int(minHeartRate)
         }
         if let cadence {
             self.cadence = Int(cadence)
@@ -59,9 +66,10 @@ public extension WorkoutSessionDataModel {
     
     func toDomain() -> WorkoutSession {
         return WorkoutSession(
-            name: name ?? "",
             timestamp: timestamp,
             heartRate: heartRate,
+            maxHeartRate: maxHeartRate,
+            minHeartRate: minHeartRate,
             cadence: cadence,
             speed: speed ?? 0,
             distance: distance ?? 0,

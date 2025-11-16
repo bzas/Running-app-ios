@@ -20,9 +20,10 @@ extension WorkoutSessionDataModel {
         }
         
         self.init(
-            name: garminSession.getSportProfileName(),
             timestamp: garminSession.getTimestamp()?.date,
             heartRate: garminSession.getAvgHeartRate(),
+            maxHeartRate: garminSession.getMaxHeartRate(),
+            minHeartRate: garminSession.getMinHeartRate(),
             cadence: garminSession.getAvgCadence(),
             speed: garminSession.getAvgSpeed(),
             distance: garminSession.getTotalDistance(),

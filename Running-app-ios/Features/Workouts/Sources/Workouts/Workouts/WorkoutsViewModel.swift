@@ -14,7 +14,7 @@ public final class WorkoutsViewModel: ObservableObject {
     
     @Published var sessions: [WorkoutSession] = []
     private let useCase: GarminUseCase
-        
+            
     public init(useCase: GarminUseCase) {
         self.useCase = useCase
     }
@@ -26,6 +26,14 @@ public final class WorkoutsViewModel: ObservableObject {
             guard let url = Bundle.module.url(forResource: "SampleActivity", withExtension: "fit"),
                   let data = try? Data(contentsOf: url) else {
                 return
+            }
+            
+            if let session = await useCase.fetch(from: data) {
+                sessions.append(session)
+            }
+            
+            if let session = await useCase.fetch(from: data) {
+                sessions.append(session)
             }
             
             if let session = await useCase.fetch(from: data) {

@@ -10,11 +10,14 @@ import FITSwiftSDK
 
 extension WorkoutSessionTrackPointDataModel {
     
-    init(record: RecordMesg) {
+    init?(record: RecordMesg) {
         self.init(
             latitude: toDegrees(record.getPositionLat()),
             longitude: toDegrees(record.getPositionLong()),
-            altitude: record.getAltitude()
+            altitude: record.getAltitude(),
+            distance: record.getDistance(),
+            heartRate: record.getHeartRate(),
+            timestamp: record.getTimestamp()?.date
         )
     }
 }

@@ -17,13 +17,13 @@ struct ContentView: View {
             WorkoutsView()
                 .tabItem {
                     Image(systemName: "house")
-                    Text(Localizables.Workouts.tabTitle)
+                    Text(Localizables.Workouts.title)
                 }
             
             ProfileView()
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis.ascending")
-                    Text(Localizables.Profile.tabTitle)
+                    Text(Localizables.Profile.title)
                 }
         }
     }

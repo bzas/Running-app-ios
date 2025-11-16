@@ -8,10 +8,10 @@
 public enum Localizables {
     
     public enum Workouts {
-        public static let tabTitle = "workouts_tabTitle".localized
+        public static let title = "workouts_title".localized
     }
     
     public enum Profile {
-        public static let tabTitle = "profile_tabTitle".localized
+        public static let title = "profile_title".localized
     }
 }
