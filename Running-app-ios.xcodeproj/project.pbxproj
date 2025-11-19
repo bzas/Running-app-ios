@@ -12,6 +12,7 @@
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
 		4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6C02EC0DD8C00E84AD6 /* Localization */; };
 		48A826902EC67DA100C73FEA /* GarminKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48A8268F2EC67DA100C73FEA /* GarminKit */; };
+		48E4AD612ECE67BE00DB31E5 /* Launch in Frameworks */ = {isa = PBXBuildFile; productRef = 48E4AD602ECE67BE00DB31E5 /* Launch */; };
 		48F29E422EC7BB870072DD69 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E412EC7BB870072DD69 /* Domain */; };
 		48F29E452EC7C6CF0072DD69 /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E442EC7C6CF0072DD69 /* Application */; };
 		48F29E482EC7C7AA0072DD69 /* Database in Frameworks */ = {isa = PBXBuildFile; productRef = 48F29E472EC7C7AA0072DD69 /* Database */; };
@@ -50,6 +51,7 @@
 				Core/Domain,
 				Core/GarminKit,
 				Core/Localization,
+				Features/Launch,
 				Features/Profile,
 				Features/Workouts,
 				Info.plist,
@@ -86,6 +88,7 @@
 			files = (
 				48F29E422EC7BB870072DD69 /* Domain in Frameworks */,
 				4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */,
+				48E4AD612ECE67BE00DB31E5 /* Launch in Frameworks */,
 				4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */,
 				48F29E482EC7C7AA0072DD69 /* Database in Frameworks */,
 				4839DBE12EC8C525002FBE52 /* Common in Frameworks */,
@@ -168,6 +171,7 @@
 				48F29E442EC7C6CF0072DD69 /* Application */,
 				48F29E472EC7C7AA0072DD69 /* Database */,
 				4839DBE02EC8C525002FBE52 /* Common */,
+				48E4AD602ECE67BE00DB31E5 /* Launch */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -674,6 +678,10 @@
 		48A8268F2EC67DA100C73FEA /* GarminKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GarminKit;
+		};
+		48E4AD602ECE67BE00DB31E5 /* Launch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Launch;
 		};
 		48F29E412EC7BB870072DD69 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -8,9 +8,7 @@
 import SwiftUI
 import SwiftData
 import Workouts
-import GarminKit
-import Application
-import Database
+import Launch
 
 @main
 struct Running_app_iosApp: App {
@@ -25,25 +23,12 @@ struct Running_app_iosApp: App {
         }
     }()
     
-    @StateObject var workoutsViewModel: WorkoutsViewModel
-    
-    init() {
-        let workoutsViewModel = WorkoutsViewModel(useCase: Self.makeGarminUseCase())
-        _workoutsViewModel = StateObject(wrappedValue: workoutsViewModel)
-    }
+    @StateObject var coordinator = AppCoordinator()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(workoutsViewModel)
+            coordinator.rootView()
         }
         .modelContainer(sharedModelContainer)
-    }
-    
-    static func makeGarminUseCase() -> GarminUseCase {
-        GarminUseCase(
-            garminService: GarminService(),
-            repository: WorkoutRepository()
-        )
     }
 }

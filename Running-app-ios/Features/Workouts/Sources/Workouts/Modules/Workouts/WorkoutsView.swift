@@ -8,7 +8,7 @@
 import SwiftUI
 import Localization
 
-public struct WorkoutsView: View {
+struct WorkoutsView: View {
     
     @EnvironmentObject var viewModel: WorkoutsViewModel
     

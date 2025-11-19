@@ -16,23 +16,16 @@ struct WorkoutDetailView: View {
     
     var body: some View {
         NavigationStack {
-            WorkoutMap(
-                sessionRoute: viewModel.sessionRoute,
-                isInDetail: true
-            )
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .clipShape(Circle())
-                    }
-                }
+            ZStack {
+                WorkoutMap(
+                    sessionRoute: viewModel.sessionRoute,
+                    isInDetail: true
+                )
                 
-                ToolbarItem(placement: .bottomBar) {
+                VStack {
+                    Spacer()
                     Button {
-                        viewModel.isDetailPresented.toggle()
+                        viewModel.isDetailPresented = true
                     } label: {
                         HStack(spacing: 24) {
                             Text(viewModel.session.name)
@@ -42,8 +35,22 @@ struct WorkoutDetailView: View {
                         }
                         .font(.callout)
                         .padding(.horizontal)
+                        .padding(.vertical, 12)
+                        .contentShape(Capsule())
                         .clipShape(Capsule())
+                        .glassEffect(.regular.interactive())
                         .matchedTransitionSource(id: viewModel.detailInfoTransitionId, in: nameSpace)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .clipShape(Circle())
                     }
                 }
             }

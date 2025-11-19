@@ -10,7 +10,7 @@ import Domain
 import MapKit
 
 @MainActor
-public final class WorkoutCellViewModel: ObservableObject {
+final class WorkoutCellViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
     @Published var sessionRoute: [CLLocationCoordinate2D] = []

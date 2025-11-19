@@ -8,9 +8,8 @@
 import Foundation
 import Domain
 
-public struct WorkoutSessionDataModel: Identifiable, Sendable {
+public struct WorkoutSessionDataModel: Sendable {
     
-    public let id = UUID()
     public var timestamp: Date?
     public var heartRate: Int?
     public var maxHeartRate: Int?
