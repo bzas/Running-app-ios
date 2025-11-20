@@ -11,25 +11,22 @@ import Domain
 struct WorkoutRowView: View {
     
     @Namespace var nameSpace
-    @State private var isDetailPresented = false
-    
+
     let session: WorkoutSession
-    let detailTransitionId = "detailTransition"
+    let onTap: (WorkoutSession) -> Void
 
     var body: some View {
         Button {
-            isDetailPresented.toggle()
+            onTap(session)
         } label: {
             WorkoutCellView()
                 .environmentObject(WorkoutCellViewModel(session: session))
                 .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .matchedTransitionSource(id: detailTransitionId + session.id.uuidString, in: nameSpace)
-        .fullScreenCover(isPresented: $isDetailPresented) {
-            WorkoutDetailView()
-                .environmentObject(WorkoutDetailViewModel(session: session))
-                .navigationTransition(.zoom(sourceID: detailTransitionId + session.id.uuidString, in: nameSpace))
-        }
+        .matchedTransitionSource(
+            id: WorkoutsCoordinator.detailTransitionId(for: session),
+            in: nameSpace
+        )
     }
 }

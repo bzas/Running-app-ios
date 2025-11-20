@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import Domain
 
 @MainActor
-public final class WorkoutsCoordinator {
+public final class WorkoutsCoordinator: ObservableObject {
     
     let assembly: WorkoutsAssemblyProtocol
+    
+    @Published var selectedSession: WorkoutSession? = nil
     
     public init(assembly: WorkoutsAssemblyProtocol) {
         self.assembly = assembly
@@ -18,7 +21,27 @@ public final class WorkoutsCoordinator {
     
     @ViewBuilder
     public func rootView() -> some View {
-        WorkoutsView()
-            .environmentObject(assembly.makeWorkoutsViewModel())
+        WorkoutsRootView(coordinator: self)
     }
+    
+    public func open(_ session: WorkoutSession) {
+        selectedSession = session
+    }
+
+    public func dismiss() {
+        selectedSession = nil
+    }
+}
+
+// MARK: - Aux methods
+
+extension WorkoutsCoordinator {
+    
+    static func detailInfoTransitionId(for session: WorkoutSession) -> String {
+         "detailInfoTransition-\(session.id.uuidString)"
+     }
+    
+    static func detailTransitionId(for session: WorkoutSession) -> String {
+         "detailTransition-\(session.id.uuidString)"
+     }
 }

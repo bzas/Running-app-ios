@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-public final class ProfileCoordinator {
+public final class ProfileCoordinator: ObservableObject {
     
     let assembly: ProfileAssemblyProtocol
     
@@ -18,7 +18,6 @@ public final class ProfileCoordinator {
     
     @ViewBuilder
     public func rootView() -> some View {
-        ProfileView()
-            .environmentObject(assembly.makeProfileViewModel())
+        ProfileRootView(coordinator: self)
     }
 }

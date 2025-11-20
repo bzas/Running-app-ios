@@ -14,25 +14,38 @@ import Launch
 import Profile
 
 @MainActor
-public final class AppAssembly: WorkoutsAssemblyProtocol, ProfileAssemblyProtocol, LaunchAssemblyProtocol {
+public final class AppAssembly {
     
     let container = DependencyContainer()
-        
-    // MARK: - WorkoutsAssemblyProtocol conformance
+}
+
+// MARK: - WorkoutsAssemblyProtocol conformance
+
+extension AppAssembly: WorkoutsAssemblyProtocol {
     
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
         let garminUseCase = makeGarminUseCase()
         return WorkoutsViewModel(useCase: garminUseCase)
     }
     
-    // MARK: - ProfileAssemblyProtocol conformance
+    public func makeWorkoutDetailViewModel(for session: WorkoutSession) -> WorkoutDetailViewModel {
+        WorkoutDetailViewModel(session: session)
+    }
+}
 
+// MARK: - ProfileAssemblyProtocol conformance
+
+extension AppAssembly: ProfileAssemblyProtocol {
+    
     public func makeProfileViewModel() -> ProfileViewModel {
         ProfileViewModel()
     }
-    
-    // MARK: - LaunchAssemblyProtocol conformance
+}
 
+// MARK: - LaunchAssemblyProtocol conformance
+
+extension AppAssembly: LaunchAssemblyProtocol {
+    
     public func makeLaunchViewModel() -> LaunchViewModel {
         let userUseCase = makeUserUseCase()
         return LaunchViewModel(useCase: userUseCase)

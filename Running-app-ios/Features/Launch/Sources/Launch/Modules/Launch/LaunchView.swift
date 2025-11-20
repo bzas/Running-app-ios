@@ -9,9 +9,11 @@ import SwiftUI
 
 struct LaunchView: View {
     
-    @EnvironmentObject var viewModel: LaunchViewModel
+    @StateObject var viewModel: LaunchViewModel
     
-    public init() {}
+    init(viewModel: LaunchViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     public var body: some View {
         Text("Test")

@@ -8,7 +8,7 @@
 import SwiftUI
 
 @MainActor
-public final class LaunchCoordinator {
+public final class LaunchCoordinator: ObservableObject {
     
     let assembly: LaunchAssemblyProtocol
     
@@ -18,7 +18,6 @@ public final class LaunchCoordinator {
     
     @ViewBuilder
     public func rootView() -> some View {
-        LaunchView()
-            .environmentObject(assembly.makeLaunchViewModel())
+        LaunchRootView(coordinator: self)
     }
 }

@@ -10,15 +10,14 @@ import Domain
 import MapKit
 
 @MainActor
-final class WorkoutDetailViewModel: ObservableObject {
+public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
     @Published var sessionRoute: [CLLocationCoordinate2D] = []
     
     // MARK: Sheet presentation
     
-    @Published var isDetailPresented = false
-    let detailInfoTransitionId = "detailInfoTransition"
+    @Published var isDetailInfoPresented = false
     
     // MARK: - Pace
     
@@ -31,7 +30,7 @@ final class WorkoutDetailViewModel: ObservableObject {
     @Published var hrValues: [Int] = []
     @Published var hrChartRange: ClosedRange<Double> = 0.0...220.0
 
-    init(session: WorkoutSession) {
+    public init(session: WorkoutSession) {
         self.session = session
         setup()
     }

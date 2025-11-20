@@ -7,46 +7,52 @@
 
 import SwiftUI
 import Localization
+import Domain
 
 struct WorkoutsView: View {
     
-    @EnvironmentObject var viewModel: WorkoutsViewModel
+    @StateObject var viewModel: WorkoutsViewModel
+    private let onOpenSession: (WorkoutSession) -> Void
     
-    public init() {}
+    public init(
+        viewModel: WorkoutsViewModel,
+        onOpenSession: @escaping (WorkoutSession) -> Void
+    ) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+        self.onOpenSession = onOpenSession
+        viewModel.loadTestActivity()
+    }
     
     public var body: some View {
-        NavigationStack {
-            ScrollView {
-                LazyVStack {
-                    ForEach(viewModel.sessions) { session in
-                        WorkoutRowView(session: session)
-                    }
-                }
-                .padding(.bottom)
-            }
-            .navigationTitle(Localizables.Workouts.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        print("Add")
-                    } label: {
-                        Image(systemName: "plus")
-                            .clipShape(Circle())
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        print("Search")
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .clipShape(Circle())
+        ScrollView {
+            LazyVStack {
+                ForEach(viewModel.sessions) { session in
+                    WorkoutRowView(session: session) {
+                        onOpenSession($0)
                     }
                 }
             }
+            .padding(.bottom)
         }
-        .onAppear {
-            viewModel.loadTestActivity()
+        .navigationTitle(Localizables.Workouts.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    print("Add")
+                } label: {
+                    Image(systemName: "plus")
+                        .clipShape(Circle())
+                }
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    print("Search")
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                        .clipShape(Circle())
+                }
+            }
         }
     }
 }

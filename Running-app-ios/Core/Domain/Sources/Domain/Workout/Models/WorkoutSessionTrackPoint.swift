@@ -7,8 +7,9 @@
 
 import Foundation
 
-public struct WorkoutSessionTrackPoint: Sendable {
+public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
     
+    public let id = UUID()
     public var latitude: Double
     public var longitude: Double
     public var altitude: Double?

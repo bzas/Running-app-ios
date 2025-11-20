@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Workouts
-import Profile
 import Localization
 import Combine
 import Profile
@@ -18,9 +17,9 @@ final class AppCoordinator: ObservableObject {
     
     let assembly: AppAssembly
     
-    @Published var workoutsCoordinator: WorkoutsCoordinator
-    @Published var profileCoordinator: ProfileCoordinator
-    @Published var launchCoordinator: LaunchCoordinator
+    var workoutsCoordinator: WorkoutsCoordinator
+    var profileCoordinator: ProfileCoordinator
+    var launchCoordinator: LaunchCoordinator
 
     init() {
         assembly = AppAssembly()

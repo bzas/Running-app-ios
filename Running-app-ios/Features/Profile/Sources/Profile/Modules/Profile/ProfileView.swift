@@ -11,15 +11,11 @@ struct ProfileView: View {
     
     @StateObject var viewModel: ProfileViewModel
 
-    public init() {
-        _viewModel = StateObject(wrappedValue: ProfileViewModel())
+    public init(viewModel: ProfileViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     public var body: some View {
         Text("Profile")
     }
-}
-
-#Preview {
-    ProfileView()
 }
