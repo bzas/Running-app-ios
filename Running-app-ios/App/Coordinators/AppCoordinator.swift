@@ -11,6 +11,7 @@ import Localization
 import Combine
 import Profile
 import Launch
+import Search
 
 @MainActor
 final class AppCoordinator: ObservableObject {
@@ -20,28 +21,30 @@ final class AppCoordinator: ObservableObject {
     var workoutsCoordinator: WorkoutsCoordinator
     var profileCoordinator: ProfileCoordinator
     var launchCoordinator: LaunchCoordinator
+    var searchCoordinator: SearchCoordinator
 
     init() {
         assembly = AppAssembly()
         workoutsCoordinator = WorkoutsCoordinator(assembly: assembly)
         profileCoordinator = ProfileCoordinator(assembly: assembly)
         launchCoordinator = LaunchCoordinator(assembly: assembly)
+        searchCoordinator = SearchCoordinator(assembly: assembly)
     }
-    
+        
     @ViewBuilder
     func rootView() -> some View {
         TabView {
-            workoutsCoordinator.rootView()
-                .tabItem {
-                    Image(systemName: "house")
-                    Text(Localizables.Workouts.title)
-                }
+            Tab(Localizables.Workouts.title, systemImage: "house") {
+                workoutsCoordinator.rootView()
+            }
+
+            Tab(Localizables.Profile.title, systemImage: "chart.bar.xaxis.ascending") {
+                profileCoordinator.rootView()
+            }
             
-            profileCoordinator.rootView()
-                .tabItem {
-                    Image(systemName: "chart.bar.xaxis.ascending")
-                    Text(Localizables.Profile.title)
-                }
+            Tab(role: .search) {
+                searchCoordinator.rootView()
+            }
         }
     }
 }

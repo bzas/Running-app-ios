@@ -10,14 +10,12 @@ import SwiftUI
 public struct ProfileRootView: View {
     
     @ObservedObject var coordinator: ProfileCoordinator
-    
-    init(coordinator: ProfileCoordinator) {
-        self.coordinator = coordinator
-    }
 
     public var body: some View {
-        ProfileView(
-            viewModel: coordinator.assembly.makeProfileViewModel()
-        )
+        NavigationStack {
+            ProfileView(
+                viewModel: coordinator.assembly.makeProfileViewModel()
+            )
+        }
     }
 }

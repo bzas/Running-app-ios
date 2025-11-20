@@ -11,10 +11,6 @@ public struct WorkoutsRootView: View {
     
     @ObservedObject var coordinator: WorkoutsCoordinator
     
-    init(coordinator: WorkoutsCoordinator) {
-        self.coordinator = coordinator
-    }
-
     public var body: some View {
         NavigationStack {
             WorkoutsView(

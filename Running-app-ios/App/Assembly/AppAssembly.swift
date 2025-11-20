@@ -6,12 +6,12 @@
 //
 
 import Workouts
-import GarminKit
 import Database
 import Domain
 import Application
 import Launch
 import Profile
+import Search
 
 @MainActor
 public final class AppAssembly {
@@ -49,6 +49,15 @@ extension AppAssembly: LaunchAssemblyProtocol {
     public func makeLaunchViewModel() -> LaunchViewModel {
         let userUseCase = makeUserUseCase()
         return LaunchViewModel(useCase: userUseCase)
+    }
+}
+
+// MARK: - SearchAssemblyProtocol conformance
+
+extension AppAssembly: SearchAssemblyProtocol {
+    
+    public func makeSearchViewModel() -> SearchViewModel {
+        SearchViewModel()
     }
 }
 

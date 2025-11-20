@@ -45,14 +45,6 @@ struct WorkoutsView: View {
                         .clipShape(Circle())
                 }
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    print("Search")
-                } label: {
-                    Image(systemName: "magnifyingglass")
-                        .clipShape(Circle())
-                }
-            }
         }
     }
 }

@@ -11,13 +11,11 @@ struct LaunchRootView: View {
     
     @ObservedObject var coordinator: LaunchCoordinator
     
-    init(coordinator: LaunchCoordinator) {
-        self.coordinator = coordinator
-    }
-    
     var body: some View {
-        LaunchView(
-            viewModel: coordinator.assembly.makeLaunchViewModel()
-        )
+        NavigationStack {
+            LaunchView(
+                viewModel: coordinator.assembly.makeLaunchViewModel()
+            )
+        }
     }
 }
