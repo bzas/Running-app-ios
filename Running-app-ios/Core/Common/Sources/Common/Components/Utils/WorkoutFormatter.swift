@@ -7,9 +7,9 @@
 
 import Domain
 
-class WorkoutFormatter {
+public class WorkoutFormatter {
     
-    static func pace(seconds: Double) -> String {
+    public static func pace(seconds: Double) -> String {
         guard seconds > 0 else { return "--:--" }
         
         let m = Int(seconds) / 60
@@ -17,15 +17,15 @@ class WorkoutFormatter {
         return "\(m):\(String(format: "%02d", s)) /km"
     }
     
-    static func pace(session: WorkoutSession) -> String {
+    public static func pace(session: WorkoutSession) -> String {
         pace(seconds: session.paceInSeconds)
     }
     
-    static func distance(session: WorkoutSession) -> String {
+    public static func distance(session: WorkoutSession) -> String {
         String(format: "%.2f km", session.distanceInKm)
     }
     
-    static func time(session: WorkoutSession) -> String {
+    public static func time(session: WorkoutSession) -> String {
         let totalSeconds = Int(session.totalTime)
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
@@ -40,7 +40,7 @@ class WorkoutFormatter {
         }
     }
     
-    static func heartRate(_ heartRate: Int?) -> String {
+    public static func heartRate(_ heartRate: Int?) -> String {
         guard let heartRate else { return "- bpm" }
         return "\(heartRate) bpm"
     }

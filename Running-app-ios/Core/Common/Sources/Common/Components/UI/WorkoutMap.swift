@@ -7,7 +7,7 @@
 import SwiftUI
 import MapKit
 
-struct WorkoutMap: View {
+public struct WorkoutMap: View {
     
     var mapRegion = MKCoordinateRegion()
     var sessionRoute: [CLLocationCoordinate2D]
@@ -15,7 +15,7 @@ struct WorkoutMap: View {
     var moveRegion: Bool
     let edgePaddingMeters = 200.0
 
-    init(
+    public init(
         sessionRoute: [CLLocationCoordinate2D],
         isInDetail: Bool = false,
         moveRegion: Bool = false
@@ -26,7 +26,7 @@ struct WorkoutMap: View {
         self.mapRegion = calculateRegion()
     }
     
-    var body: some View {
+    public var body: some View {
         Map(
             initialPosition: .region(mapRegion),
             interactionModes: isInDetail ? .all : []

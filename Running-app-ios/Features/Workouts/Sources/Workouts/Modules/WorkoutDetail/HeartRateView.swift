@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 import Domain
+import Common
 
 struct HeartRateView: View {
 

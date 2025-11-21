@@ -6,11 +6,11 @@
 
 import SwiftUI
 
-struct WorkoutMenu: View {
+public struct WorkoutMenu: View {
     
-    init() {}
+    public init() {}
     
-    var body: some View {
+    public var body: some View {
         Menu {
             Button {
                 print("Share")

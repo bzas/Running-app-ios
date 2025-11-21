@@ -8,6 +8,7 @@
 import SwiftUI
 import Domain
 import Charts
+import Common
 
 struct PaceView: View {
     

@@ -8,11 +8,15 @@
 import SwiftUI
 import Domain
 
-struct WorkoutSummaryView: View {
+public struct WorkoutSummaryView: View {
     
     @State var session: WorkoutSession
     
-    var body: some View {
+    public init(session: WorkoutSession) {
+        self.session = session
+    }
+    
+    public var body: some View {
         HStack {
             VStack(alignment: .leading){
                 Text("Pace")

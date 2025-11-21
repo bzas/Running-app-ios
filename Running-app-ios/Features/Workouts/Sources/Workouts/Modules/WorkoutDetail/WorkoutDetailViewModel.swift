@@ -8,6 +8,7 @@
 import Foundation
 import Domain
 import MapKit
+import Common
 
 @MainActor
 public final class WorkoutDetailViewModel: ObservableObject {
