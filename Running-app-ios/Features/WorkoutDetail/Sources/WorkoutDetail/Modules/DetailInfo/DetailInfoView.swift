@@ -19,8 +19,12 @@ struct DetailInfoView: View {
                 Text(viewModel.session.name)
                     .font(.title)
                 
-                WorkoutSummaryView(session: viewModel.session)
-                    .padding(.horizontal, 8)
+                WorkoutSummaryView(
+                    paceInSeconds: viewModel.session.paceInSeconds,
+                    distance: viewModel.session.distanceInKm,
+                    time: viewModel.session.totalTime
+                )
+                .padding(.horizontal, 8)
                 
                 LazyVStack(spacing: 48) {
                     PaceView()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Common
 
 struct GalleryButton: View {
     
@@ -24,7 +25,7 @@ struct GalleryButton: View {
         }
         .buttonStyle(.plain)
         .matchedTransitionSource(
-            id: WorkoutsCoordinator.galleryTransitionId(for: viewModel.session),
+            id: TransitionManager.galleryTransitionId(for: viewModel.session.id),
             in: nameSpace
         )
     }

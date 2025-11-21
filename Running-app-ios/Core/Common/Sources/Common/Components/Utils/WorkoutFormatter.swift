@@ -5,8 +5,6 @@
 //  Created by Alfonso Boizas Crespo on 17/11/25.
 //
 
-import Domain
-
 public class WorkoutFormatter {
     
     public static func pace(seconds: Double) -> String {
@@ -17,16 +15,12 @@ public class WorkoutFormatter {
         return "\(m):\(String(format: "%02d", s)) /km"
     }
     
-    public static func pace(session: WorkoutSession) -> String {
-        pace(seconds: session.paceInSeconds)
+    public static func distance(_ distance: Double) -> String {
+        String(format: "%.2f km", distance)
     }
     
-    public static func distance(session: WorkoutSession) -> String {
-        String(format: "%.2f km", session.distanceInKm)
-    }
-    
-    public static func time(session: WorkoutSession) -> String {
-        let totalSeconds = Int(session.totalTime)
+    public static func time(_ time: Double) -> String {
+        let totalSeconds = Int(time)
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
 

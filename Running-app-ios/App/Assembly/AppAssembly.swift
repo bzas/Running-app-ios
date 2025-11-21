@@ -12,6 +12,7 @@ import Application
 import Launch
 import Profile
 import Search
+import WorkoutDetail
 
 @MainActor
 public final class AppAssembly {
@@ -26,10 +27,6 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
         let garminUseCase = makeGarminUseCase()
         return WorkoutsViewModel(useCase: garminUseCase)
-    }
-    
-    public func makeWorkoutDetailViewModel(for session: WorkoutSession) -> WorkoutDetailViewModel {
-        WorkoutDetailViewModel(session: session)
     }
 }
 

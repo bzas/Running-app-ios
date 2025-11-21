@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Domain
+import Common
 
 struct WorkoutRowView: View {
     
@@ -25,7 +26,7 @@ struct WorkoutRowView: View {
         }
         .buttonStyle(.plain)
         .matchedTransitionSource(
-            id: WorkoutsCoordinator.detailTransitionId(for: session),
+            id: TransitionManager.detailTransitionId(for: session.id),
             in: nameSpace
         )
     }

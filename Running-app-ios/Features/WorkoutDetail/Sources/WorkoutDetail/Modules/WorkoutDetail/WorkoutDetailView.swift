@@ -8,7 +8,7 @@
 import SwiftUI
 import Common
 
-struct WorkoutDetailView: View {
+public struct WorkoutDetailView: View {
     
     @Namespace var nameSpace
     @StateObject var viewModel: WorkoutDetailViewModel
@@ -22,7 +22,7 @@ struct WorkoutDetailView: View {
         self.onDismiss = onDismiss
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ZStack {
                 WorkoutMap(
@@ -57,7 +57,7 @@ struct WorkoutDetailView: View {
                 .environmentObject(viewModel)
                 .navigationTransition(
                     .zoom(
-                        sourceID: WorkoutsCoordinator.detailInfoTransitionId(for: viewModel.session),
+                        sourceID: TransitionManager.detailInfoTransitionId(for: viewModel.session.id),
                         in: nameSpace
                     )
                 )
@@ -66,14 +66,14 @@ struct WorkoutDetailView: View {
             GalleryView()
                 .navigationTransition(
                     .zoom(
-                        sourceID: WorkoutsCoordinator.galleryTransitionId(for: viewModel.session),
+                        sourceID: TransitionManager.galleryTransitionId(for: viewModel.session.id),
                         in: nameSpace
                     )
                 )
         }
         .navigationTransition(
             .zoom(
-                sourceID: WorkoutsCoordinator.detailTransitionId(for: viewModel.session),
+                sourceID: TransitionManager.detailTransitionId(for: viewModel.session.id),
                 in: nameSpace
             )
         )

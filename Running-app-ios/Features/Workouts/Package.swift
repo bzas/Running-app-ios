@@ -19,7 +19,7 @@ let package = Package(
         .package(path: "../Domain"),
         .package(path: "../Common"),
         .package(path: "../Application"),
-        .package(path: "../DetailWorkout"),
+        .package(path: "../WorkoutDetail"),
         .package(path: "../Localization")
     ],
     targets: [
@@ -41,8 +41,8 @@ let package = Package(
                     package: "Common"
                 ),
                 .product(
-                    name: "DetailWorkout",
-                    package: "DetailWorkout"
+                    name: "WorkoutDetail",
+                    package: "WorkoutDetail"
                 ),
                 .product(
                     name: "Application",

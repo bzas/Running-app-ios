@@ -6,9 +6,9 @@
 //
 
 import Domain
+import WorkoutDetail
 
 public protocol WorkoutsAssemblyProtocol {
     
     func makeWorkoutsViewModel() -> WorkoutsViewModel
-    func makeWorkoutDetailViewModel(for session: WorkoutSession) -> WorkoutDetailViewModel
 }

@@ -32,20 +32,3 @@ public final class WorkoutsCoordinator: ObservableObject {
         selectedSession = nil
     }
 }
-
-// MARK: - Aux methods
-
-extension WorkoutsCoordinator {
-    
-    static func detailInfoTransitionId(for session: WorkoutSession) -> String {
-         "detailInfoTransition-\(session.id.uuidString)"
-     }
-    
-    static func galleryTransitionId(for session: WorkoutSession) -> String {
-         "galleryTransition-\(session.id.uuidString)"
-     }
-    
-    static func detailTransitionId(for session: WorkoutSession) -> String {
-         "detailTransition-\(session.id.uuidString)"
-     }
-}

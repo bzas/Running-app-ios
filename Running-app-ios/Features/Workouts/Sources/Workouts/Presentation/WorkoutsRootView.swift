@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WorkoutDetail
 
 public struct WorkoutsRootView: View {
     
@@ -19,8 +20,8 @@ public struct WorkoutsRootView: View {
                 coordinator.open(session)
             }
             .fullScreenCover(item: $coordinator.selectedSession) { session in
-                WorkoutDetailView(
-                    viewModel: coordinator.assembly.makeWorkoutDetailViewModel(for: session),
+                WorkoutDetailAssembly.makeWorkoutDetailView(
+                    for: session,
                     onDismiss: { coordinator.dismiss() }
                 )
             }

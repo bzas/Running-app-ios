@@ -20,7 +20,7 @@ struct InfoButton: View {
             HStack(spacing: 24) {
                 Text(viewModel.session.name)
                     .bold()
-                Text(WorkoutFormatter.distance(session: viewModel.session))
+                Text(WorkoutFormatter.distance(viewModel.session.distanceInKm))
                     .opacity(0.5)
             }
             .font(.callout)
@@ -32,7 +32,7 @@ struct InfoButton: View {
         }
         .buttonStyle(.plain)
         .matchedTransitionSource(
-            id: WorkoutsCoordinator.detailInfoTransitionId(for: viewModel.session),
+            id: TransitionManager.detailInfoTransitionId(for: viewModel.session.id),
             in: nameSpace
         )
     }

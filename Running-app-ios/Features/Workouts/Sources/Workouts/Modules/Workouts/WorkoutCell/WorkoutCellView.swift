@@ -24,7 +24,11 @@ struct WorkoutCellView: View {
                         .opacity(0.75)
                 }
                 
-                WorkoutSummaryView(session: viewModel.session)
+                WorkoutSummaryView(
+                    paceInSeconds: viewModel.session.paceInSeconds,
+                    distance: viewModel.session.distanceInKm,
+                    time: viewModel.session.totalTime
+                )
             }
             .padding(.horizontal, 8)
 

@@ -26,7 +26,7 @@ struct PaceView: View {
             
             RuleMark(
                 y: .value(
-                    WorkoutFormatter.pace(session: viewModel.session),
+                    WorkoutFormatter.pace(seconds: viewModel.session.paceInSeconds),
                     viewModel.session.paceInSeconds
                 )
             )
@@ -35,7 +35,7 @@ struct PaceView: View {
             .opacity(0.75)
             .annotation(position: .top,
                         alignment: .center) {
-                Text(WorkoutFormatter.pace(session: viewModel.session))
+                Text(WorkoutFormatter.pace(seconds: viewModel.session.paceInSeconds))
                     .font(.caption2)
                     .opacity(0.75)
             }

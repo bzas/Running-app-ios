@@ -10,7 +10,7 @@
 		48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 48301F2E2EC0F4A400FAE65A /* Workouts */; };
 		4837E7062ECF878200EBFEC7 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = 4837E7052ECF878200EBFEC7 /* Search */; };
 		4839DBE12EC8C525002FBE52 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 4839DBE02EC8C525002FBE52 /* Common */; };
-		4883AD972ED0A32E00AAE54A /* DetailWorkout in Frameworks */ = {isa = PBXBuildFile; productRef = 4883AD962ED0A32E00AAE54A /* DetailWorkout */; };
+		4883AE2C2ED0F13E00AAE54A /* WorkoutDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */; };
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
 		4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6C02EC0DD8C00E84AD6 /* Localization */; };
 		48A826902EC67DA100C73FEA /* GarminKit in Frameworks */ = {isa = PBXBuildFile; productRef = 48A8268F2EC67DA100C73FEA /* GarminKit */; };
@@ -53,10 +53,10 @@
 				Core/Domain,
 				Core/GarminKit,
 				Core/Localization,
-				Features/DetailWorkout,
 				Features/Launch,
 				Features/Profile,
 				Features/Search,
+				Features/WorkoutDetail,
 				Features/Workouts,
 				Info.plist,
 			);
@@ -92,12 +92,12 @@
 			files = (
 				4837E7062ECF878200EBFEC7 /* Search in Frameworks */,
 				48F29E422EC7BB870072DD69 /* Domain in Frameworks */,
-				4883AD972ED0A32E00AAE54A /* DetailWorkout in Frameworks */,
 				4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */,
 				48E4AD612ECE67BE00DB31E5 /* Launch in Frameworks */,
 				4899F6C12EC0DD8C00E84AD6 /* Localization in Frameworks */,
 				48F29E482EC7C7AA0072DD69 /* Database in Frameworks */,
 				4839DBE12EC8C525002FBE52 /* Common in Frameworks */,
+				4883AE2C2ED0F13E00AAE54A /* WorkoutDetail in Frameworks */,
 				48F29E452EC7C6CF0072DD69 /* Application in Frameworks */,
 				48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */,
 				48A826902EC67DA100C73FEA /* GarminKit in Frameworks */,
@@ -179,7 +179,7 @@
 				4839DBE02EC8C525002FBE52 /* Common */,
 				48E4AD602ECE67BE00DB31E5 /* Launch */,
 				4837E7052ECF878200EBFEC7 /* Search */,
-				4883AD962ED0A32E00AAE54A /* DetailWorkout */,
+				4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -679,9 +679,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
 		};
-		4883AD962ED0A32E00AAE54A /* DetailWorkout */ = {
+		4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DetailWorkout;
+			productName = WorkoutDetail;
 		};
 		4899F6BD2EC0D93E00E84AD6 /* Profile */ = {
 			isa = XCSwiftPackageProductDependency;
