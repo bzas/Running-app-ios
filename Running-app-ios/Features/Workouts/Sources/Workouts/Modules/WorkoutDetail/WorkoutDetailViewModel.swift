@@ -18,7 +18,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     // MARK: Sheet presentation
     
     @Published var isDetailInfoPresented = false
-    
+    @Published var isGalleryPresented = false
+
     // MARK: - Pace
     
     @Published var paceChartData: [ChartData] = []

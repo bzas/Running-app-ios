@@ -41,6 +41,10 @@ extension WorkoutsCoordinator {
          "detailInfoTransition-\(session.id.uuidString)"
      }
     
+    static func galleryTransitionId(for session: WorkoutSession) -> String {
+         "galleryTransition-\(session.id.uuidString)"
+     }
+    
     static func detailTransitionId(for session: WorkoutSession) -> String {
          "detailTransition-\(session.id.uuidString)"
      }

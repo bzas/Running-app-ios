@@ -1,5 +1,5 @@
 //
-//  WorkoutDetailInfoView.swift
+//  DetailInfoView.swift
 //  Workouts
 //
 //  Created by Alfonso Boizas Crespo on 16/11/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Domain
 
-struct WorkoutDetailInfoView: View {
+struct DetailInfoView: View {
     
     @EnvironmentObject var viewModel: WorkoutDetailViewModel
 

@@ -9,11 +9,11 @@ import SwiftUI
 import Common
 
 struct WorkoutDetailView: View {
-        
+    
     @Namespace var nameSpace
     @StateObject var viewModel: WorkoutDetailViewModel
     private let onDismiss: () -> Void
-
+    
     public init(
         viewModel: WorkoutDetailViewModel,
         onDismiss: @escaping () -> Void
@@ -32,27 +32,13 @@ struct WorkoutDetailView: View {
                 
                 VStack {
                     Spacer()
-                    Button {
-                        viewModel.isDetailInfoPresented = true
-                    } label: {
-                        HStack(spacing: 24) {
-                            Text(viewModel.session.name)
-                                .bold()
-                            Text(WorkoutFormatter.distance(session: viewModel.session))
-                                .opacity(0.5)
-                        }
-                        .font(.callout)
-                        .padding(.horizontal)
-                        .padding(.vertical, 12)
-                        .contentShape(Capsule())
-                        .clipShape(Capsule())
-                        .glassEffect(.regular.interactive())
-                        .matchedTransitionSource(
-                            id: WorkoutsCoordinator.detailInfoTransitionId(for: viewModel.session),
-                            in: nameSpace
-                        )
+                    HStack {
+                        InfoButton(nameSpace: nameSpace)
+                            .environmentObject(viewModel)
+                        
+                        GalleryButton(nameSpace: nameSpace)
+                            .environmentObject(viewModel)
                     }
-                    .buttonStyle(.plain)
                 }
             }
             .toolbar {
@@ -67,11 +53,20 @@ struct WorkoutDetailView: View {
             }
         }
         .sheet(isPresented: $viewModel.isDetailInfoPresented) {
-            WorkoutDetailInfoView()
+            DetailInfoView()
                 .environmentObject(viewModel)
                 .navigationTransition(
                     .zoom(
                         sourceID: WorkoutsCoordinator.detailInfoTransitionId(for: viewModel.session),
+                        in: nameSpace
+                    )
+                )
+        }
+        .sheet(isPresented: $viewModel.isGalleryPresented) {
+            GalleryView()
+                .navigationTransition(
+                    .zoom(
+                        sourceID: WorkoutsCoordinator.galleryTransitionId(for: viewModel.session),
                         in: nameSpace
                     )
                 )
