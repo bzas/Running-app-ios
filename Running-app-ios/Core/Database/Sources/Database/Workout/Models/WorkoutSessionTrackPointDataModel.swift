@@ -7,8 +7,10 @@
 
 import Domain
 import Foundation
+import SwiftData
 
-public struct WorkoutSessionTrackPointDataModel: Sendable {
+@Model
+public final class WorkoutSessionTrackPointDataModel {
     
     public var latitude: Double?
     public var longitude: Double?
@@ -17,25 +19,36 @@ public struct WorkoutSessionTrackPointDataModel: Sendable {
     public var heartRate: Int?
     public var timestamp: Date
     
-    public init?(
+    public init(
         latitude: Double?,
         longitude: Double?,
         altitude: Double?,
-        distance: Double?,
-        heartRate: UInt8?,
-        timestamp: Date?
+        distance: Double,
+        heartRate: Int?,
+        timestamp: Date
     ) {
-        guard let distance,
-              let timestamp else { return nil }
-        
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
         self.distance = distance
         self.timestamp = timestamp
-        if let heartRate {
-            self.heartRate = Int(heartRate)
+        self.heartRate = heartRate
+    }
+    
+    convenience init(from domain: WorkoutSessionTrackPoint?) throws {
+        guard let distance = domain?.distance,
+              let timestamp = domain?.timestamp else {
+            throw DatabaseError.trackPointDataError
         }
+        
+        self.init(
+            latitude: domain?.latitude,
+            longitude: domain?.longitude,
+            altitude: domain?.altitude,
+            distance: distance,
+            heartRate: domain?.heartRate,
+            timestamp: timestamp
+        )
     }
 }
 
@@ -43,9 +56,11 @@ public struct WorkoutSessionTrackPointDataModel: Sendable {
 
 public extension WorkoutSessionTrackPointDataModel {
     
-    func toDomain() -> WorkoutSessionTrackPoint? {
+    func toDomain() throws -> WorkoutSessionTrackPoint {
         guard let latitude,
-              let longitude else { return nil }
+              let longitude else {
+            throw DatabaseError.trackPointDataError
+        }
         
         return WorkoutSessionTrackPoint(
             latitude: latitude,

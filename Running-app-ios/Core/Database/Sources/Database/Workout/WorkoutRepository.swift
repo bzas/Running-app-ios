@@ -5,10 +5,25 @@
 //  Created by Alfonso Boizas Crespo on 14/11/25.
 //
 
-import Foundation
+import SwiftData
 import Domain
+import Foundation
 
+@ModelActor
 public actor WorkoutRepository: WorkoutRepositoryProtocol {
     
-    public init() {}
+    public func save(_ session: WorkoutSession) async throws {
+        let model = try WorkoutSessionDataModel(from: session)
+        modelContext.insert(model)
+        try modelContext.save()
+    }
+    
+    public func fetchAll() async throws -> [WorkoutSession] {
+        let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
+            sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
+        )
+        
+        let models = try modelContext.fetch(descriptor)
+        return try models.map { try $0.toDomain() }
+    }
 }

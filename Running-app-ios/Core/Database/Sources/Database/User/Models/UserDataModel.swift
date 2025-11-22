@@ -6,9 +6,11 @@
 //
 
 import Domain
+import SwiftData
 import Foundation
 
-public struct UserDataModel: Sendable {
+@Model
+public class UserDataModel {
     
     public var name: String?
     public var age: String?

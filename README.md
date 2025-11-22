@@ -24,6 +24,7 @@ The project is divided into independent modules:
 - GarminKit:
     - Handles parsing and mapping of Garmin .fit files into Database models
     - Based on FITSwiftSDK
+    - Garmin DTO models
 - Features: (Workouts, Profile, Launch, Search, WorkoutDetail)
     - Its own Coordinator
     - A RootView

@@ -15,16 +15,17 @@ public struct WorkoutsPlaceholderView: View {
         VStack(spacing: 16) {
             Image(systemName: "figure.run.square.stack")
                 .font(.system(size: 60))
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(.secondary)
 
             VStack(spacing: 8) {
                 Text("No workouts yet")
                     .font(.title2)
-                    .foregroundStyle(.tertiary)
+                    .bold()
+                    .foregroundStyle(.secondary)
 
                 Text("Import a .fit file to start")
                     .font(.callout)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
             }
         }
         .padding(32)

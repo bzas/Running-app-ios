@@ -15,7 +15,7 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
     public var altitude: Double?
     public var distance: Double
     public var heartRate: Int?
-    public var timestamp: Date
+    public var timestamp: Date?
     
     public init(
         latitude: Double,
@@ -23,7 +23,7 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
         altitude: Double?,
         distance: Double,
         heartRate: Int?,
-        timestamp: Date
+        timestamp: Date?
     ) {
         self.latitude = latitude
         self.longitude = longitude
@@ -34,12 +34,19 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
     }
 }
 
+// MARK: - Aux methods
+
 extension WorkoutSessionTrackPoint {
     
     static func secondsBetween(
         previous: WorkoutSessionTrackPoint,
         current: WorkoutSessionTrackPoint
     ) -> Double {
-        current.timestamp.timeIntervalSince(previous.timestamp)
+        guard let currentTimestamp = current.timestamp,
+              let previousTimestamp = previous.timestamp else {
+            return 0
+        }
+        
+        return currentTimestamp.timeIntervalSince(previousTimestamp)
     }
 }

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import SwiftData
 import Domain
 
-public struct WorkoutSessionDataModel: Sendable {
+@Model
+public final class WorkoutSessionDataModel {
     
     public var timestamp: Date?
     public var heartRate: Int?
@@ -24,10 +26,10 @@ public struct WorkoutSessionDataModel: Sendable {
     
     public init(
         timestamp: Date?,
-        heartRate: UInt8?,
-        maxHeartRate: UInt8?,
-        minHeartRate: UInt8?,
-        cadence: UInt8?,
+        heartRate: Int?,
+        maxHeartRate: Int?,
+        minHeartRate: Int?,
+        cadence: Int?,
         speed: Double?,
         distance: Double?,
         totalTime: Double?,
@@ -36,20 +38,10 @@ public struct WorkoutSessionDataModel: Sendable {
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     ) {
         self.timestamp = timestamp
-        
-        if let heartRate {
-            self.heartRate = Int(heartRate)
-        }
-        if let maxHeartRate {
-            self.maxHeartRate = Int(maxHeartRate)
-        }
-        if let minHeartRate {
-            self.minHeartRate = Int(minHeartRate)
-        }
-        if let cadence {
-            self.cadence = Int(cadence)
-        }
-        
+        self.heartRate = heartRate
+        self.maxHeartRate = maxHeartRate
+        self.minHeartRate = minHeartRate
+        self.cadence = cadence
         self.speed = speed
         self.distance = distance
         self.totalTime = totalTime
@@ -57,13 +49,33 @@ public struct WorkoutSessionDataModel: Sendable {
         self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
     }
+    
+    convenience init(from domain: WorkoutSession) throws {
+        self.init(
+            timestamp: domain.timestamp,
+            heartRate: domain.heartRate,
+            maxHeartRate: domain.maxHeartRate,
+            minHeartRate: domain.minHeartRate,
+            cadence: domain.cadence,
+            speed: domain.speed,
+            distance: domain.distance,
+            totalTime: domain.totalTime,
+            latitude: domain.latitude,
+            longitude: domain.longitude,
+            sessionTrackPoints: domain.sessionTrackPoints.compactMap {
+                try? WorkoutSessionTrackPointDataModel(from: $0)
+            }
+        )
+    }
 }
 
 // MARK: - Convert to Domain object
 
 public extension WorkoutSessionDataModel {
     
-    func toDomain() -> WorkoutSession {
+    func toDomain() throws -> WorkoutSession {
+        let sortedTrackPoints = sessionTrackPoints.sorted { $0.timestamp < $1.timestamp }
+        
         return WorkoutSession(
             timestamp: timestamp,
             heartRate: heartRate,
@@ -75,7 +87,9 @@ public extension WorkoutSessionDataModel {
             totalTime: totalTime ?? 0,
             latitude: latitude,
             longitude: longitude,
-            sessionTrackPoints: sessionTrackPoints.compactMap { $0.toDomain() }
+            sessionTrackPoints: try sortedTrackPoints.map {
+                try $0.toDomain()
+            }
         )
     }
 }

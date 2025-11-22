@@ -7,10 +7,12 @@
 
 import Domain
 import Foundation
+import SwiftData
 
-public struct HeartRateZoneDataModel: Sendable {
+@Model
+public class HeartRateZoneDataModel {
     
-    public let zoneNumber: Int
+    public var zoneNumber: Int
     public var minHeartRate: Int
     public var maxHeartRate: Int
     

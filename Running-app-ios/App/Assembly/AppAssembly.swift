@@ -15,9 +15,13 @@ import Search
 import WorkoutDetail
 
 @MainActor
-public final class AppAssembly {
+final class AppAssembly {
     
-    let container = DependencyContainer()
+    let container: DependencyContainer
+    
+    public init() {
+        self.container = DependencyContainer()
+    }
 }
 
 // MARK: - WorkoutsAssemblyProtocol conformance
@@ -62,8 +66,8 @@ extension AppAssembly: SearchAssemblyProtocol {
 
 private extension AppAssembly {
     
-    func makeGarminUseCase() -> GarminUseCase {
-        GarminUseCase(
+    func makeGarminUseCase() -> WorkoutsUseCase {
+        WorkoutsUseCase(
             garminService: container.garminService,
             repository: container.workoutRepository
         )

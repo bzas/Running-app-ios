@@ -13,17 +13,32 @@ import Application
 public final class WorkoutsViewModel: ObservableObject {
     
     @Published var sessions: [WorkoutSession] = []
-    private let useCase: GarminUseCase
+    private let useCase: WorkoutsUseCase
             
-    public init(useCase: GarminUseCase) {
+    public init(useCase: WorkoutsUseCase) {
         self.useCase = useCase
+        
+        Task {
+            await fetchAll()
+        }
     }
     
     func importFile(from file: URL) {
         Task {
-            if let session = await useCase.fetch(from: file) {
-                sessions.append(session)
+            do {
+                try await useCase.importSession(from: file)
+                await fetchAll()
+            } catch {
+                print(error.localizedDescription)
             }
+        }
+    }
+    
+    func fetchAll() async {
+        do {
+            sessions = try await useCase.fetchAllSessions()
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

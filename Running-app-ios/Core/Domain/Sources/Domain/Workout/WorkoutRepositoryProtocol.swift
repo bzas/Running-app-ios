@@ -7,4 +7,8 @@
 
 import Foundation
 
-public protocol WorkoutRepositoryProtocol: Sendable {}
+public protocol WorkoutRepositoryProtocol: Sendable {
+    
+    func save(_ session: WorkoutSession) async throws
+    func fetchAll() async throws -> [WorkoutSession]
+}

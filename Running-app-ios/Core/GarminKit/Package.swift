@@ -20,7 +20,7 @@ let package = Package(
             url: "https://github.com/garmin/fit-swift-sdk.git",
             exact: "21.187.0"
         ),
-        .package(path: "../Database")
+        .package(path: "../Domain")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -33,8 +33,8 @@ let package = Package(
                     package: "fit-swift-sdk"
                 ),
                 .product(
-                    name: "Database",
-                    package: "Database"
+                    name: "Domain",
+                    package: "Domain"
                 ),
             ]
         ),
