@@ -15,11 +15,40 @@ let package = Package(
             targets: ["Search"]
         ),
     ],
+    dependencies: [
+        .package(path: "../Domain"),
+        .package(path: "../Common"),
+        .package(path: "../Application"),
+        .package(path: "../WorkoutDetail"),
+        .package(path: "../Localization")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Search"
+            name: "Search",
+            dependencies: [
+                .product(
+                    name: "Domain",
+                    package: "Domain"
+                ),
+                .product(
+                    name: "Localization",
+                    package: "Localization"
+                ),
+                .product(
+                    name: "Common",
+                    package: "Common"
+                ),
+                .product(
+                    name: "WorkoutDetail",
+                    package: "WorkoutDetail"
+                ),
+                .product(
+                    name: "Application",
+                    package: "Application"
+                )
+            ],
         ),
         .testTarget(
             name: "SearchTests",

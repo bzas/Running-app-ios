@@ -9,5 +9,6 @@ import Foundation
 import Database
 
 public protocol GarminServiceProtocol: Sendable {
+    
     func fetchFitFile(from data: Data) async throws -> WorkoutSessionDataModel?
 }

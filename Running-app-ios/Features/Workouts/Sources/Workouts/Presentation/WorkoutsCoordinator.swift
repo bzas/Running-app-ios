@@ -14,6 +14,7 @@ public final class WorkoutsCoordinator: ObservableObject {
     let assembly: WorkoutsAssemblyProtocol
     
     @Published var selectedSession: WorkoutSession? = nil
+    @Published var isPresentingFilePicker = false
     
     public init(assembly: WorkoutsAssemblyProtocol) {
         self.assembly = assembly
@@ -23,12 +24,21 @@ public final class WorkoutsCoordinator: ObservableObject {
     public func rootView() -> some View {
         WorkoutsRootView(coordinator: self)
     }
+}
+
+// MARK: - Module methods
+
+extension WorkoutsCoordinator {
     
-    public func open(_ session: WorkoutSession) {
+    func open(_ session: WorkoutSession) {
         selectedSession = session
     }
+    
+    func openFilePicker() {
+        isPresentingFilePicker.toggle()
+    }
 
-    public func dismiss() {
+    func dismiss() {
         selectedSession = nil
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Common
 
 struct SearchView: View {
     
@@ -16,7 +17,13 @@ struct SearchView: View {
     }
     
     var body: some View {
-        Text("Search")
-            .searchable(text: $viewModel.searchText)
+        Group {
+            if viewModel.sessions.isEmpty {
+                WorkoutsPlaceholderView()
+            } else {
+                Text("Search")
+            }
+        }
+        .searchable(text: $viewModel.searchText)
     }
 }

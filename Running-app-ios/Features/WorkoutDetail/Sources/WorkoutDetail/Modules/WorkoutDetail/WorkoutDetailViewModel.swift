@@ -25,6 +25,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var paceChartData: [ChartData] = []
     @Published var paceChartRange: ClosedRange<Double> = 120.0...600.0
+    @Published var paceChartStrideValue = 0.0
     
     // MARK: Heart Rate
     
@@ -71,8 +72,12 @@ private extension WorkoutDetailViewModel {
         let minVal = session.paceInSecondsPerKm.min() ?? 0.0
         let maxVal = session.paceInSecondsPerKm.max() ?? 0.0
         
+        let tempStride = abs(maxVal - minVal) / 3
+        self.paceChartStrideValue = round(Double(tempStride) / 15.0) * 15.0
+
         let lower = max(0.0, minVal - 20.0)
         let upper = maxVal + 10.0
+        
         self.paceChartRange = (lower < upper) ? (lower...upper) : (lower...lower + 1.0)
     }
     

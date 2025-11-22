@@ -43,7 +43,7 @@ struct PaceView: View {
         .chartXAxis(viewModel.paceChartData.count < 25 ? .automatic : .hidden)
         .chartYScale(domain: viewModel.paceChartRange)
         .chartYAxis {
-            AxisMarks(values: .stride(by: 30)) { value in
+            AxisMarks(values: .stride(by: viewModel.paceChartStrideValue)) { value in
                 AxisGridLine()
                 AxisValueLabel {
                     if let seconds = value.as(Double.self) {

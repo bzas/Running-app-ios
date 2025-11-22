@@ -27,7 +27,7 @@ extension WorkoutSessionDataModel {
             cadence: garminSession.getAvgCadence(),
             speed: garminSession.getAvgSpeed(),
             distance: garminSession.getTotalDistance(),
-            totalTime: garminSession.getTotalTimerTime(),
+            totalTime: garminSession.getTotalElapsedTime(),
             latitude: toDegrees(garminSession.getSwcLat()),
             longitude: toDegrees(garminSession.getSwcLong()),
             sessionTrackPoints: garminMapPoints

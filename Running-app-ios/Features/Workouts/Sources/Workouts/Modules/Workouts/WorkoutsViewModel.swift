@@ -19,24 +19,9 @@ public final class WorkoutsViewModel: ObservableObject {
         self.useCase = useCase
     }
     
-    func loadTestActivity() {
-        sessions.removeAll()
-        
+    func importFile(from file: URL) {
         Task {
-            guard let url = Bundle.module.url(forResource: "SampleActivity", withExtension: "fit"),
-                  let data = try? Data(contentsOf: url) else {
-                return
-            }
-            
-            if let session = await useCase.fetch(from: data) {
-                sessions.append(session)
-            }
-            
-            if let session = await useCase.fetch(from: data) {
-                sessions.append(session)
-            }
-            
-            if let session = await useCase.fetch(from: data) {
+            if let session = await useCase.fetch(from: file) {
                 sessions.append(session)
             }
         }

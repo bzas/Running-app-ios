@@ -23,8 +23,17 @@ public actor GarminUseCase {
         self.repository = repository
     }
     
-    public func fetch(from data: Data) async -> WorkoutSession? {
-        guard let sessionDataModel = try? await garminService.fetchFitFile(from: data) else { return nil }
-        return sessionDataModel.toDomain()
+    public func fetch(from file: URL) async -> WorkoutSession? {
+        do {
+            _ = file.startAccessingSecurityScopedResource()
+            let data = try Data(contentsOf: file)
+            file.stopAccessingSecurityScopedResource()
+            
+            let sessionDataModel = try await garminService.fetchFitFile(from: data)
+            return sessionDataModel?.toDomain()
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
     }
 }

@@ -6,11 +6,13 @@
 //
 
 import Foundation
+import Domain
 
 @MainActor
 public final class SearchViewModel: ObservableObject {
     
     @Published var searchText: String = ""
+    @Published var sessions: [WorkoutSession] = []
     
     public init() {}
 }
