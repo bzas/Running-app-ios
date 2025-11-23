@@ -32,9 +32,6 @@ struct DetailInfoView: View {
                     
                     HeartRateView()
                         .environmentObject(viewModel)
-
-//                    HeartRateZonesView()
-//                        .environmentObject(viewModel)
                 }
             }
             .padding(32)

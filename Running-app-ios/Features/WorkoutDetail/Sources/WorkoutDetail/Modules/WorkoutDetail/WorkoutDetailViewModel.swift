@@ -94,7 +94,7 @@ private extension WorkoutDetailViewModel {
         let maxVal = session.paceInSecondsPerKm.max() ?? 0.0
         
         let tempStride = abs(maxVal - minVal) / 3
-        self.paceChartStrideValue = round(Double(tempStride) / 15.0) * 15.0
+        self.paceChartStrideValue = ceil(tempStride / 15.0) * 15.0
 
         let lower = max(0.0, minVal - 20.0)
         let upper = maxVal + 10.0

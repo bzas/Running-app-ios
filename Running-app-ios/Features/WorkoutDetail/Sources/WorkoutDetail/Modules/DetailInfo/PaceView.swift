@@ -40,7 +40,7 @@ struct PaceView: View {
                     .opacity(0.75)
             }
         }
-        .chartXAxis(viewModel.paceChartData.count < 25 ? .automatic : .hidden)
+        .chartXAxis(viewModel.paceChartData.count <= 12 ? .automatic : .hidden)
         .chartYScale(domain: viewModel.paceChartRange)
         .chartYAxis {
             AxisMarks(values: .stride(by: viewModel.paceChartStrideValue)) { value in
