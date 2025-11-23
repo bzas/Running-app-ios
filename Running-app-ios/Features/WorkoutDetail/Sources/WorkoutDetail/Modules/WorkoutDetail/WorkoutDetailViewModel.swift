@@ -17,7 +17,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
     @Published var isDetailInfoPresented = false
-    
+    @Published var isDetailHeartRatePresented = false
+
     var onDismiss: () -> Void
     
     // MARK: - Use case

@@ -54,6 +54,16 @@ struct WorkoutDetailRootView: View {
                     )
                 )
         }
+        .sheet(isPresented: $viewModel.isDetailHeartRatePresented) {
+            HeartRateView()
+                .environmentObject(viewModel)
+                .navigationTransition(
+                    .zoom(
+                        sourceID: TransitionManager.detailHeartRateTransitionId(for: viewModel.session.id),
+                        in: nameSpace
+                    )
+                )
+        }
         .sheet(isPresented: $viewModel.isGalleryPresented) {
             GalleryView(nameSpace: nameSpace)
                 .environmentObject(viewModel)

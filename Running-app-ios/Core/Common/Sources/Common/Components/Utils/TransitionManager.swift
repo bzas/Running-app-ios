@@ -13,6 +13,10 @@ public final class TransitionManager {
          "detailInfoTransition-\(id.uuidString)"
      }
     
+    public static func detailHeartRateTransitionId(for id: UUID) -> String {
+         "heartRateDetailTransition-\(id.uuidString)"
+     }
+    
     public static func galleryTransitionId(for id: UUID) -> String {
          "galleryTransition-\(id.uuidString)"
      }

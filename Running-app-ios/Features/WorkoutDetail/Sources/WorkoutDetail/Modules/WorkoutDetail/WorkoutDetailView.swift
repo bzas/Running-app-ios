@@ -22,31 +22,22 @@ public struct WorkoutDetailView: View {
     }
     
     public var body: some View {
-        ZStack {
-            WorkoutMap(
-                sessionRoute: viewModel.session.locationPoints,
-                isInDetail: true
-            )
-            
-            VStack {
-                Spacer()
-                HStack {
-                    InfoButton(nameSpace: nameSpace)
-                        .environmentObject(viewModel)
-                    
-                    GalleryButton(nameSpace: nameSpace)
-                        .environmentObject(viewModel)
-                }
-            }
-        }
+        WorkoutMap(
+            sessionRoute: viewModel.session.locationPoints,
+            isInDetail: true
+        )
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
                     viewModel.onDismiss()
                 } label: {
                     Image(systemName: "xmark")
-                        .clipShape(Circle())
                 }
+            }
+            
+            ToolbarItemGroup(placement: .bottomBar) {
+                WorkoutDetailBottomBarView(nameSpace: nameSpace)
+                    .environmentObject(viewModel)
             }
         }
     }
