@@ -8,11 +8,12 @@
 import SwiftUI
 import Common
 import Domain
+import MapKit
 
 struct SearchCell: View {
     
     @State var session: WorkoutSession
-
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {

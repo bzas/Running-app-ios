@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct GalleryView: View {
+    
+    @EnvironmentObject var viewModel: WorkoutDetailViewModel
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -34,20 +38,19 @@ struct GalleryView: View {
                 .scrollIndicators(.hidden)
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        // TODO: Finish
-                    } label: {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text("Add")
-                        }
-                        .padding(.horizontal, 8)
-                        .clipShape(Capsule())
+                PhotosPicker(selection: $viewModel.selectedPhoto) {
+                    HStack {
+                        Image(systemName: "plus")
+                        Text("Add")
                     }
+                    .padding(.horizontal, 8)
+                    .clipShape(Capsule())
                 }
             }
         }
+        .onChange(of: viewModel.selectedPhoto, {
+            viewModel.storePhoto()
+        })
         .presentationBackgroundInteraction(.enabled)
         .presentationDetents([.fraction(0.3)])
     }

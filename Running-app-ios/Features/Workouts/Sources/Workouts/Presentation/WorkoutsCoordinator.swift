@@ -7,17 +7,20 @@
 
 import SwiftUI
 import Domain
+import WorkoutDetail
 
 @MainActor
 public final class WorkoutsCoordinator: ObservableObject {
     
-    let assembly: WorkoutsAssemblyProtocol
-    
+    let assembly: WorkoutsAssemblyProtocol & WorkoutDetailAssemblyProtocol
+    let workoutDetailCoordinator: WorkoutDetailCoordinator
+
     @Published var selectedSession: WorkoutSession? = nil
     @Published var isPresentingFilePicker = false
     
-    public init(assembly: WorkoutsAssemblyProtocol) {
+    public init(assembly: WorkoutsAssemblyProtocol & WorkoutDetailAssemblyProtocol) {
         self.assembly = assembly
+        self.workoutDetailCoordinator = WorkoutDetailCoordinator(assembly: assembly)
     }
     
     @ViewBuilder

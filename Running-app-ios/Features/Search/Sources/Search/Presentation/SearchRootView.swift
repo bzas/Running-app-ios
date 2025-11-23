@@ -21,9 +21,10 @@ struct SearchRootView: View {
                 onOpenSession: { coordinator.open($0) }
             )
             .fullScreenCover(item: $coordinator.selectedSession) { session in
-                WorkoutDetailAssembly.makeWorkoutDetailView(
-                    for: session, nameSpace: nameSpace,
-                    onDismiss: { coordinator.dismiss() }
+                coordinator.workoutDetailCoordinator.rootView(
+                    session: session,
+                    nameSpace: nameSpace,
+                    onDismiss: coordinator.dismiss
                 )
             }
         }

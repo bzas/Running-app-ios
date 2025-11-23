@@ -30,10 +30,10 @@ public struct WorkoutsRootView: View {
                 onOpenFilePicker: { coordinator.openFilePicker() }
             )
             .fullScreenCover(item: $coordinator.selectedSession) { session in
-                WorkoutDetailAssembly.makeWorkoutDetailView(
-                    for: session,
+                coordinator.workoutDetailCoordinator.rootView(
+                    session: session,
                     nameSpace: nameSpace,
-                    onDismiss: { coordinator.dismiss() }
+                    onDismiss: coordinator.dismiss
                 )
             }
             .fileImporter(

@@ -42,8 +42,8 @@ public final class WorkoutSessionTrackPointDataModel {
         }
         
         self.init(
-            latitude: domain?.latitude,
-            longitude: domain?.longitude,
+            latitude: domain?.locationPoint.latitude,
+            longitude: domain?.locationPoint.longitude,
             altitude: domain?.altitude,
             distance: distance,
             heartRate: domain?.heartRate,

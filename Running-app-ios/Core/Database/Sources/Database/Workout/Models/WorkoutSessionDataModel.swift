@@ -23,6 +23,7 @@ public final class WorkoutSessionDataModel {
     public var latitude: Double?
     public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
+    @Attribute(.externalStorage) public var photos: [Data]
     
     public init(
         timestamp: Date?,
@@ -35,7 +36,8 @@ public final class WorkoutSessionDataModel {
         totalTime: Double?,
         latitude: Double?,
         longitude: Double?,
-        sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
+        sessionTrackPoints: [WorkoutSessionTrackPointDataModel],
+        photos: [Data]
     ) {
         self.timestamp = timestamp
         self.heartRate = heartRate
@@ -48,6 +50,7 @@ public final class WorkoutSessionDataModel {
         self.latitude = latitude
         self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
+        self.photos = photos
     }
     
     convenience init(from domain: WorkoutSession) throws {
@@ -64,7 +67,8 @@ public final class WorkoutSessionDataModel {
             longitude: domain.longitude,
             sessionTrackPoints: domain.sessionTrackPoints.compactMap {
                 try? WorkoutSessionTrackPointDataModel(from: $0)
-            }
+            },
+            photos: domain.photos
         )
     }
 }
@@ -89,7 +93,8 @@ public extension WorkoutSessionDataModel {
             longitude: longitude,
             sessionTrackPoints: try sortedTrackPoints.map {
                 try $0.toDomain()
-            }
+            },
+            photos: photos
         )
     }
 }

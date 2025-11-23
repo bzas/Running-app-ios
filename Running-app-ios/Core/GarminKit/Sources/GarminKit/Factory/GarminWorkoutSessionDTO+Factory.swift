@@ -41,7 +41,8 @@ extension GarminWorkoutSessionDTO {
             totalTime: totalTime ?? 0,
             latitude: latitude,
             longitude: longitude,
-            sessionTrackPoints: sessionTrackPoints.compactMap { try? $0.toDomain() }
+            sessionTrackPoints: sessionTrackPoints.compactMap { try? $0.toDomain() },
+            photos: []
         )
     }
 }

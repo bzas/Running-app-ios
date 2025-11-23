@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import MapKit
 
 public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
     
     public let id = UUID()
-    public var latitude: Double
-    public var longitude: Double
+    public var locationPoint: CLLocationCoordinate2D
     public var altitude: Double?
     public var distance: Double
     public var heartRate: Int?
     public var timestamp: Date?
+    
     
     public init(
         latitude: Double,
@@ -25,8 +26,10 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
         heartRate: Int?,
         timestamp: Date?
     ) {
-        self.latitude = latitude
-        self.longitude = longitude
+        self.locationPoint = CLLocationCoordinate2D(
+            latitude: latitude,
+            longitude: longitude
+        )
         self.altitude = altitude
         self.distance = distance
         self.heartRate = heartRate

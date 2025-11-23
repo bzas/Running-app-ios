@@ -8,16 +8,19 @@
 import Foundation
 import SwiftUI
 import Domain
+import WorkoutDetail
 
 @MainActor
 public final class SearchCoordinator: ObservableObject {
  
-    let assembly: SearchAssemblyProtocol
+    let assembly: SearchAssemblyProtocol & WorkoutDetailAssemblyProtocol
+    let workoutDetailCoordinator: WorkoutDetailCoordinator
     
     @Published var selectedSession: WorkoutSession? = nil
 
-    public init(assembly: SearchAssemblyProtocol) {
+    public init(assembly: SearchAssemblyProtocol & WorkoutDetailAssemblyProtocol) {
         self.assembly = assembly
+        self.workoutDetailCoordinator = WorkoutDetailCoordinator(assembly: assembly)
     }
     
     @ViewBuilder

@@ -7,32 +7,33 @@
 
 import SwiftUI
 import Common
+import Domain
 
 struct WorkoutCellView: View {
     
-    @EnvironmentObject var viewModel: WorkoutCellViewModel
-
+    @State var session: WorkoutSession
+    
     var body: some View {
         VStack(spacing: 16) {
             VStack(alignment: .leading, spacing: 24) {
                 HStack {
-                    Text(viewModel.session.name)
+                    Text(session.name)
                         .font(.title2)
                     Spacer()
-                    Text(viewModel.session.timestamp?.formatted() ?? "")
+                    Text(session.timestamp?.formatted() ?? "")
                         .font(.caption)
                         .opacity(0.75)
                 }
                 
                 WorkoutSummaryView(
-                    paceInSeconds: viewModel.session.paceInSeconds,
-                    distance: viewModel.session.distanceInKm,
-                    time: viewModel.session.totalTime
+                    paceInSeconds: session.paceInSeconds,
+                    distance: session.distanceInKm,
+                    time: session.totalTime
                 )
             }
             .padding(.horizontal, 8)
-
-            WorkoutMap(sessionRoute: viewModel.sessionRoute)
+            
+            WorkoutMap(sessionRoute: session.locationPoints)
                 .frame(height: 250)
                 .clipShape(
                     RoundedRectangle(
@@ -55,6 +56,7 @@ struct WorkoutCellView: View {
             )
         )
         .padding(.horizontal, 16)
+        .contentShape(Rectangle())
         .scrollTransition(.animated.threshold(.visible(0.2))) { content, phase in
             content
                 .opacity(phase.isIdentity ? 1 : 0.8)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 public struct WorkoutSession: Identifiable, Sendable {
     
@@ -22,10 +23,17 @@ public struct WorkoutSession: Identifiable, Sendable {
     public var latitude: Double?
     public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPoint]
+    public var photos: [Data]
     public var sessionKmTrackPoints: [WorkoutSessionTrackPoint] = []
     public var paceInSecondsPerKm: [Double] = []
     public var distanceInKm: Double
     public var paceInSeconds: Double = 0
+    
+    public var locationPoints: [CLLocationCoordinate2D] {
+        sessionTrackPoints.map {
+            $0.locationPoint
+        }
+    }
     
     public init(
         timestamp: Date?,
@@ -38,7 +46,8 @@ public struct WorkoutSession: Identifiable, Sendable {
         totalTime: Double,
         latitude: Double?,
         longitude: Double?,
-        sessionTrackPoints: [WorkoutSessionTrackPoint]
+        sessionTrackPoints: [WorkoutSessionTrackPoint],
+        photos: [Data]
     ) {
         self.timestamp = timestamp
         self.heartRate = heartRate
@@ -51,6 +60,7 @@ public struct WorkoutSession: Identifiable, Sendable {
         self.latitude = latitude
         self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
+        self.photos = photos
         self.distanceInKm = distance / 1000.0
         self.paceInSeconds = getPaceInSeconds()
         self.sessionKmTrackPoints = getKmTrackPoints()

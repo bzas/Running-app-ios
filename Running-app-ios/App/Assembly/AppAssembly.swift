@@ -13,6 +13,7 @@ import Launch
 import Profile
 import Search
 import WorkoutDetail
+import SwiftUI
 
 @MainActor
 final class AppAssembly {
@@ -70,6 +71,24 @@ extension AppAssembly: SearchAssemblyProtocol {
 
         return SearchViewModel(
             workoutsUseCase: workoutsUseCase
+        )
+    }
+}
+
+// MARK: - WorkoutDetailAssemblyProtocol conformance
+
+extension AppAssembly: WorkoutDetailAssemblyProtocol {    
+    
+    public func makeWorkoutDetailViewModel(
+        for session: WorkoutSession,
+        onDismiss: @escaping () -> Void
+    ) -> WorkoutDetailViewModel {
+        let workoutsUseCase = makeWorkoutsUseCase()
+
+        return WorkoutDetailViewModel(
+            session: session,
+            workoutsUseCase: workoutsUseCase,
+            onDismiss: onDismiss
         )
     }
 }

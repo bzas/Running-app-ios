@@ -11,7 +11,7 @@ import Common
 
 struct WorkoutRowView: View {
     
-    let session: WorkoutSession
+    @State var session: WorkoutSession
     let nameSpace: Namespace.ID
     let onTap: (WorkoutSession) -> Void
 
@@ -19,9 +19,7 @@ struct WorkoutRowView: View {
         Button {
             onTap(session)
         } label: {
-            WorkoutCellView()
-                .environmentObject(WorkoutCellViewModel(session: session))
-                .contentShape(Rectangle())
+            WorkoutCellView(session: session)
         }
         .buttonStyle(.plain)
         .matchedTransitionSource(

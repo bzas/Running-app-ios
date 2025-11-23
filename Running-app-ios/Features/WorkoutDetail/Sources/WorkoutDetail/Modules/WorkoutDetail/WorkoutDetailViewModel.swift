@@ -9,17 +9,25 @@ import Foundation
 import Domain
 import MapKit
 import Common
+import Application
+import _PhotosUI_SwiftUI
 
 @MainActor
 public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
-    @Published var sessionRoute: [CLLocationCoordinate2D] = []
-    
-    // MARK: Sheet presentation
-    
     @Published var isDetailInfoPresented = false
+    
+    var onDismiss: () -> Void
+    
+    // MARK: - Use case
+    
+    private var workoutsUseCase: WorkoutsUseCase
+    
+    // MARK: - Gallery
+    
     @Published var isGalleryPresented = false
+    @Published var selectedPhoto: PhotosPickerItem?
 
     // MARK: - Pace
     
@@ -33,9 +41,22 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var hrValues: [Int] = []
     @Published var hrChartRange: ClosedRange<Double> = 0.0...220.0
 
-    public init(session: WorkoutSession) {
+    public init(
+        session: WorkoutSession,
+        workoutsUseCase: WorkoutsUseCase,
+        onDismiss: @escaping () -> Void
+    ) {
         self.session = session
+        self.workoutsUseCase = workoutsUseCase
+        self.onDismiss = onDismiss
         setup()
+    }
+    
+    func storePhoto() {
+        guard let selectedPhoto else { return }
+        
+        
+        self.selectedPhoto = nil
     }
 }
 
@@ -43,21 +64,10 @@ public final class WorkoutDetailViewModel: ObservableObject {
 
 private extension WorkoutDetailViewModel {
     
-    func setup() {
-        calculateRouteInfo()
-        
+    func setup() {        
         Task {
             self.calculatePaceInfo()
             self.calculateHRInfo()
-        }
-    }
-    
-    func calculateRouteInfo() {
-        sessionRoute = session.sessionTrackPoints.map { point in
-            CLLocationCoordinate2D(
-                latitude: point.latitude,
-                longitude: point.longitude
-            )
         }
     }
     
