@@ -9,6 +9,7 @@ import Foundation
 
 public protocol WorkoutRepositoryProtocol: Sendable {
     
+    func updatePhotos(_ session: WorkoutSession) async throws
     func save(_ session: WorkoutSession) async throws
     func fetchAll() async throws -> [WorkoutSession]
 }

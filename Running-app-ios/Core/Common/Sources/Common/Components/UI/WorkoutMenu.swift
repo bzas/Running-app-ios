@@ -31,7 +31,7 @@ public struct WorkoutMenu: View {
             }
         } label: {
             Image(systemName: "ellipsis")
-                .clipShape(Circle())
+                .clipShape(Capsule())
         }
     }
 }

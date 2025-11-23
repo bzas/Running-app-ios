@@ -10,7 +10,7 @@ import MapKit
 
 public struct WorkoutSession: Identifiable, Sendable {
     
-    public let id = UUID()
+    public let id: UUID
     public var name: String = "Running"
     public var timestamp: Date?
     public var heartRate: Int?
@@ -36,6 +36,7 @@ public struct WorkoutSession: Identifiable, Sendable {
     }
     
     public init(
+        id: UUID = UUID(),
         timestamp: Date?,
         heartRate: Int?,
         maxHeartRate: Int?,
@@ -49,6 +50,7 @@ public struct WorkoutSession: Identifiable, Sendable {
         sessionTrackPoints: [WorkoutSessionTrackPoint],
         photos: [Data]
     ) {
+        self.id = id
         self.timestamp = timestamp
         self.heartRate = heartRate
         self.maxHeartRate = maxHeartRate

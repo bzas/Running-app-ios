@@ -34,7 +34,10 @@ struct WorkoutsView: View {
     public var body: some View {
         Group {
             if viewModel.sessions.isEmpty {
-                WorkoutsPlaceholderView(isLoading: viewModel.isLoading)
+                PlaceholderView(
+                    isLoading: viewModel.isLoading,
+                    type: .workouts
+                )
             } else {
                 ScrollView {
                     LazyVStack {

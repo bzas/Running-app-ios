@@ -55,7 +55,7 @@ struct WorkoutDetailRootView: View {
                 )
         }
         .sheet(isPresented: $viewModel.isGalleryPresented) {
-            GalleryView()
+            GalleryView(nameSpace: nameSpace)
                 .environmentObject(viewModel)
                 .navigationTransition(
                     .zoom(

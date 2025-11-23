@@ -7,13 +7,18 @@
 
 import SwiftUI
 
-public struct WorkoutsPlaceholderView: View {
+public struct PlaceholderView: View {
     
     @State private var rotate = false
-    var isLoading: Bool
+    private var isLoading: Bool
+    private var type: PlaceholderType
 
-    public init(isLoading: Bool) {
+    public init(
+        isLoading: Bool = false,
+        type: PlaceholderType
+    ) {
         self.isLoading = isLoading
+        self.type = type
     }
     
     public var body: some View {
@@ -31,16 +36,16 @@ public struct WorkoutsPlaceholderView: View {
                 }
         } else {
             VStack(spacing: 16) {
-                Image(systemName: "figure.run.square.stack")
-                    .font(.system(size: 60))
+                Image(systemName: type.iconName)
+                    .font(.system(size: type.iconSize))
                     .fontWeight(.light)
 
                 VStack(spacing: 8) {
-                    Text("No workouts yet")
-                        .font(.title2)
+                    Text(type.title)
+                        .font(.title3)
                         .bold()
 
-                    Text("Import a .fit file to start")
+                    Text(type.subtitle)
                         .font(.caption)
                 }
             }

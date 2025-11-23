@@ -20,4 +20,8 @@ public final class TransitionManager {
     public static func detailTransitionId(for id: UUID) -> String {
          "detailTransition-\(id.uuidString)"
      }
+    
+    public static func detailImageTransitionId(for id: UUID) -> String {
+        "detailImageTransitionId-\(id.uuidString)"
+    }
 }

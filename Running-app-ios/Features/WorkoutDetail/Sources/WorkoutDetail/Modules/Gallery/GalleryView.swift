@@ -7,38 +7,41 @@
 
 import SwiftUI
 import PhotosUI
+import Common
 
 struct GalleryView: View {
     
     @EnvironmentObject var viewModel: WorkoutDetailViewModel
-
+    var nameSpace: Namespace.ID
+    
     var body: some View {
         NavigationStack {
             VStack {
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        Color(uiColor: .black)
-                            .aspectRatio(1.0, contentMode: .fill)
-                            .clipShape(
-                                RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                            )
-                        Color(uiColor: .black)
-                            .aspectRatio(1.0, contentMode: .fill)
-                            .clipShape(
-                                RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                            )
-                        Color(uiColor: .black)
-                            .aspectRatio(1.0, contentMode: .fill)
-                            .clipShape(
-                                RoundedRectangle(cornerSize: CGSize(width: 10, height: 10))
-                            )
+                if viewModel.session.photos.isEmpty {
+                    PlaceholderView(type: .images)
+                } else {
+                    ScrollView(.horizontal) {
+                        LazyHStack {
+                            ForEach(Array(viewModel.session.photos.enumerated()), id: \.1.hashValue) { index, photoData in
+                                if let uiImage = UIImage(data: photoData) {
+                                    let photoItem = PhotoItem(image: uiImage)
+                                    PhotoCellView(
+                                        photoItem: photoItem,
+                                        nameSpace: nameSpace,
+                                        selectedPhotoItem: $viewModel.presentedPhoto
+                                    )
+                                }
+                            }
+                        }
+                        .padding()
                     }
-                    .padding()
+                    .scrollIndicators(.hidden)
                 }
-                .scrollIndicators(.hidden)
             }
+            .navigationTitle("Gallery")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                PhotosPicker(selection: $viewModel.selectedPhoto) {
+                PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
                     HStack {
                         Image(systemName: "plus")
                         Text("Add")
@@ -47,15 +50,18 @@ struct GalleryView: View {
                     .clipShape(Capsule())
                 }
             }
+            .onChange(of: viewModel.selectedPhoto) {
+                viewModel.storePhoto()
+            }
         }
-        .onChange(of: viewModel.selectedPhoto, {
-            viewModel.storePhoto()
-        })
         .presentationBackgroundInteraction(.enabled)
         .presentationDetents([.fraction(0.3)])
+        .fullScreenCover(item: $viewModel.presentedPhoto) { photoItem in
+            PhotoDetailView(
+                photoItem: photoItem,
+                nameSpace: nameSpace,
+                selectedPhotoItem: $viewModel.presentedPhoto
+            )
+        }
     }
-}
-
-#Preview {
-    GalleryView()
 }

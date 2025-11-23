@@ -12,6 +12,7 @@ import Domain
 @Model
 public final class WorkoutSessionDataModel {
     
+    public var id: UUID
     public var timestamp: Date?
     public var heartRate: Int?
     public var maxHeartRate: Int?
@@ -26,6 +27,7 @@ public final class WorkoutSessionDataModel {
     @Attribute(.externalStorage) public var photos: [Data]
     
     public init(
+        id: UUID,
         timestamp: Date?,
         heartRate: Int?,
         maxHeartRate: Int?,
@@ -39,6 +41,7 @@ public final class WorkoutSessionDataModel {
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel],
         photos: [Data]
     ) {
+        self.id = id
         self.timestamp = timestamp
         self.heartRate = heartRate
         self.maxHeartRate = maxHeartRate
@@ -55,6 +58,7 @@ public final class WorkoutSessionDataModel {
     
     convenience init(from domain: WorkoutSession) throws {
         self.init(
+            id: domain.id,
             timestamp: domain.timestamp,
             heartRate: domain.heartRate,
             maxHeartRate: domain.maxHeartRate,
@@ -81,6 +85,7 @@ public extension WorkoutSessionDataModel {
         let sortedTrackPoints = sessionTrackPoints.sorted { $0.timestamp < $1.timestamp }
         
         return WorkoutSession(
+            id: id,
             timestamp: timestamp,
             heartRate: heartRate,
             maxHeartRate: maxHeartRate,

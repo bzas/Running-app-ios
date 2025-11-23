@@ -28,6 +28,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var isGalleryPresented = false
     @Published var selectedPhoto: PhotosPickerItem?
+    @Published var presentedPhoto: PhotoItem?
 
     // MARK: - Pace
     
@@ -55,8 +56,18 @@ public final class WorkoutDetailViewModel: ObservableObject {
     func storePhoto() {
         guard let selectedPhoto else { return }
         
-        
-        self.selectedPhoto = nil
+        Task {
+            do {
+                if let data = try await selectedPhoto.loadTransferable(type: Data.self) {
+                    session.photos.append(data)
+                    try await workoutsUseCase.updatePhotos(session)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            self.selectedPhoto = nil
+        }
     }
 }
 

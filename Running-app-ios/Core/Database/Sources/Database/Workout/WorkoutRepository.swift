@@ -26,4 +26,17 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
         let models = try modelContext.fetch(descriptor)
         return try models.map { try $0.toDomain() }
     }
+    
+    public func updatePhotos(_ session: WorkoutSession) async throws {
+        let sessionId = session.id
+        
+        let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
+            predicate: #Predicate { $0.id == sessionId }
+        )
+        
+        let results = try modelContext.fetch(descriptor)
+        guard let model = results.first else { return }
+        model.photos = session.photos
+        try modelContext.save()
+    }
 }

@@ -18,4 +18,8 @@ public actor WorkoutsUseCase {
     public func fetchAllSessions() async throws -> [WorkoutSession] {
         try await repository.fetchAll()
     }
+    
+    public func updatePhotos(_ model: WorkoutSession) async throws {
+        try await repository.updatePhotos(model)
+    }
 }

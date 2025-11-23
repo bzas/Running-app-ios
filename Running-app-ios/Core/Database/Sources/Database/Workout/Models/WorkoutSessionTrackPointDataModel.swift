@@ -12,6 +12,7 @@ import SwiftData
 @Model
 public final class WorkoutSessionTrackPointDataModel {
     
+    public var id: UUID
     public var latitude: Double?
     public var longitude: Double?
     public var altitude: Double?
@@ -20,6 +21,7 @@ public final class WorkoutSessionTrackPointDataModel {
     public var timestamp: Date
     
     public init(
+        id: UUID,
         latitude: Double?,
         longitude: Double?,
         altitude: Double?,
@@ -27,6 +29,7 @@ public final class WorkoutSessionTrackPointDataModel {
         heartRate: Int?,
         timestamp: Date
     ) {
+        self.id = id
         self.latitude = latitude
         self.longitude = longitude
         self.altitude = altitude
@@ -36,17 +39,18 @@ public final class WorkoutSessionTrackPointDataModel {
     }
     
     convenience init(from domain: WorkoutSessionTrackPoint?) throws {
-        guard let distance = domain?.distance,
-              let timestamp = domain?.timestamp else {
+        guard let domain,
+              let timestamp = domain.timestamp else {
             throw DatabaseError.trackPointDataError
         }
         
         self.init(
-            latitude: domain?.locationPoint.latitude,
-            longitude: domain?.locationPoint.longitude,
-            altitude: domain?.altitude,
-            distance: distance,
-            heartRate: domain?.heartRate,
+            id: domain.id,
+            latitude: domain.locationPoint.latitude,
+            longitude: domain.locationPoint.longitude,
+            altitude: domain.altitude,
+            distance: domain.distance,
+            heartRate: domain.heartRate,
             timestamp: timestamp
         )
     }
@@ -63,6 +67,7 @@ public extension WorkoutSessionTrackPointDataModel {
         }
         
         return WorkoutSessionTrackPoint(
+            id: id,
             latitude: latitude,
             longitude: longitude,
             altitude: altitude,
