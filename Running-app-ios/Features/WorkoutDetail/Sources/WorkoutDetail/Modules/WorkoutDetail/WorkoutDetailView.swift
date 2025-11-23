@@ -10,15 +10,17 @@ import Common
 
 public struct WorkoutDetailView: View {
     
-    @Namespace var nameSpace
     @StateObject var viewModel: WorkoutDetailViewModel
     private let onDismiss: () -> Void
-    
+    var nameSpace: Namespace.ID
+
     public init(
         viewModel: WorkoutDetailViewModel,
+        nameSpace: Namespace.ID,
         onDismiss: @escaping () -> Void
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.nameSpace = nameSpace
         self.onDismiss = onDismiss
     }
     

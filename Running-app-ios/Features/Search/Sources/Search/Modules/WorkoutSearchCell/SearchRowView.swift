@@ -1,27 +1,25 @@
 //
-//  WorkoutRowView.swift
-//  Workouts
+//  SearchRowView.swift
+//  Search
 //
-//  Created by Alfonso Boizas Crespo on 15/11/25.
+//  Created by Alfonso Boizas Crespo on 23/11/25.
 //
 
 import SwiftUI
 import Domain
 import Common
 
-struct WorkoutRowView: View {
+struct SearchRowView: View {
     
-    let session: WorkoutSession
-    let nameSpace: Namespace.ID
+    @State var session: WorkoutSession
+    var nameSpace: Namespace.ID
     let onTap: (WorkoutSession) -> Void
-
+    
     var body: some View {
         Button {
             onTap(session)
         } label: {
-            WorkoutCellView()
-                .environmentObject(WorkoutCellViewModel(session: session))
-                .contentShape(Rectangle())
+            SearchCell(session: session)
         }
         .buttonStyle(.plain)
         .matchedTransitionSource(

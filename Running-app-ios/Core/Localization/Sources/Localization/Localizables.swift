@@ -14,4 +14,8 @@ public enum Localizables {
     public enum Profile {
         public static let title = "profile_title".localized
     }
+    
+    public enum Search {
+        public static let title = "search_title".localized
+    }
 }

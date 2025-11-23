@@ -7,23 +7,54 @@
 
 import SwiftUI
 import Common
+import Localization
+import Domain
 
 struct SearchView: View {
     
     @StateObject var viewModel: SearchViewModel
+    var nameSpace: Namespace.ID
     
-    init(viewModel: SearchViewModel) {
+    private let onOpenSession: (WorkoutSession) -> Void
+    
+    init(
+        viewModel: SearchViewModel,
+        nameSpace: Namespace.ID,
+        onOpenSession: @escaping (WorkoutSession) -> Void
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.nameSpace = nameSpace
+        self.onOpenSession = onOpenSession
     }
     
     var body: some View {
         Group {
             if viewModel.sessions.isEmpty {
-                WorkoutsPlaceholderView()
+                WorkoutsPlaceholderView(isLoading: viewModel.isLoading)
             } else {
-                Text("Search")
+                ScrollView {
+                    LazyVStack {
+                        ForEach(viewModel.sessions) { session in
+                            SearchRowView(
+                                session: session,
+                                nameSpace: nameSpace,
+                                onTap: onOpenSession
+                            )
+                        }
+                    }
+                    .padding()
+                    .padding(.bottom)
+                }
             }
         }
+        .navigationTitle(Localizables.Search.title)
+        .toolbarTitleDisplayMode(.inline)
         .searchable(text: $viewModel.searchText)
+        .onAppear {
+            viewModel.fetchAll()
+        }
+        .onChange(of: viewModel.searchText) {
+            viewModel.applyFilters()
+        }
     }
 }

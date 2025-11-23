@@ -30,7 +30,12 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
     
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
         let garminUseCase = makeGarminUseCase()
-        return WorkoutsViewModel(useCase: garminUseCase)
+        let workoutsUseCase = makeWorkoutsUseCase()
+        
+        return WorkoutsViewModel(
+            garminUseCase: garminUseCase,
+            workoutsUseCase: workoutsUseCase
+        )
     }
 }
 
@@ -49,7 +54,10 @@ extension AppAssembly: LaunchAssemblyProtocol {
     
     public func makeLaunchViewModel() -> LaunchViewModel {
         let userUseCase = makeUserUseCase()
-        return LaunchViewModel(useCase: userUseCase)
+        
+        return LaunchViewModel(
+            useCase: userUseCase
+        )
     }
 }
 
@@ -58,7 +66,11 @@ extension AppAssembly: LaunchAssemblyProtocol {
 extension AppAssembly: SearchAssemblyProtocol {
     
     public func makeSearchViewModel() -> SearchViewModel {
-        SearchViewModel()
+        let workoutsUseCase = makeWorkoutsUseCase()
+
+        return SearchViewModel(
+            workoutsUseCase: workoutsUseCase
+        )
     }
 }
 
@@ -66,14 +78,22 @@ extension AppAssembly: SearchAssemblyProtocol {
 
 private extension AppAssembly {
     
-    func makeGarminUseCase() -> WorkoutsUseCase {
-        WorkoutsUseCase(
+    func makeGarminUseCase() -> GarminImportUseCase {
+        GarminImportUseCase(
             garminService: container.garminService,
             repository: container.workoutRepository
         )
     }
     
+    func makeWorkoutsUseCase() -> WorkoutsUseCase {
+        WorkoutsUseCase(
+            repository: container.workoutRepository
+        )
+    }
+    
     func makeUserUseCase() -> UserUseCase {
-        UserUseCase(repository: container.userRepository)
+        UserUseCase(
+            repository: container.userRepository
+        )
     }
 }

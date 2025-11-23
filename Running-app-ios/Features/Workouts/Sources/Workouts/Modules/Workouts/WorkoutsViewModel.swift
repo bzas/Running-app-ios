@@ -13,10 +13,19 @@ import Application
 public final class WorkoutsViewModel: ObservableObject {
     
     @Published var sessions: [WorkoutSession] = []
-    private let useCase: WorkoutsUseCase
-            
-    public init(useCase: WorkoutsUseCase) {
-        self.useCase = useCase
+    @Published var isLoading = true
+    
+    // MARK: - Use cases
+    
+    private let garminUseCase: GarminImportUseCase
+    private let workoutsUseCase: WorkoutsUseCase
+
+    public init(
+        garminUseCase: GarminImportUseCase,
+        workoutsUseCase: WorkoutsUseCase
+    ) {
+        self.garminUseCase = garminUseCase
+        self.workoutsUseCase = workoutsUseCase
         
         Task {
             await fetchAll()
@@ -24,9 +33,11 @@ public final class WorkoutsViewModel: ObservableObject {
     }
     
     func importFile(from file: URL) {
+        isLoading = true
+        
         Task {
             do {
-                try await useCase.importSession(from: file)
+                try await garminUseCase.importSession(from: file)
                 await fetchAll()
             } catch {
                 print(error.localizedDescription)
@@ -36,7 +47,8 @@ public final class WorkoutsViewModel: ObservableObject {
     
     func fetchAll() async {
         do {
-            sessions = try await useCase.fetchAllSessions()
+            sessions = try await workoutsUseCase.fetchAllSessions()
+            isLoading = false
         } catch {
             print(error.localizedDescription)
         }

@@ -12,6 +12,7 @@ public struct WorkoutsRootView: View {
     
     @ObservedObject var coordinator: WorkoutsCoordinator
     @StateObject private var viewModel: WorkoutsViewModel
+    @Namespace var nameSpace
     
     public init(coordinator: WorkoutsCoordinator) {
         self.coordinator = coordinator
@@ -24,12 +25,14 @@ public struct WorkoutsRootView: View {
         NavigationStack {
             WorkoutsView(
                 viewModel: viewModel,
+                nameSpace: nameSpace,
                 onOpenSession: { coordinator.open($0) },
                 onOpenFilePicker: { coordinator.openFilePicker() }
             )
             .fullScreenCover(item: $coordinator.selectedSession) { session in
                 WorkoutDetailAssembly.makeWorkoutDetailView(
                     for: session,
+                    nameSpace: nameSpace,
                     onDismiss: { coordinator.dismiss() }
                 )
             }

@@ -7,12 +7,48 @@
 
 import Foundation
 import Domain
+import Application
 
 @MainActor
 public final class SearchViewModel: ObservableObject {
     
-    @Published var searchText: String = ""
+    private var allSessions: [WorkoutSession] = []
     @Published var sessions: [WorkoutSession] = []
+    @Published var searchText: String = ""
+    @Published var isLoading = true
     
-    public init() {}
+    // MARK: - Use case
+    
+    private let workoutsUseCase: WorkoutsUseCase
+    
+    public init(
+        workoutsUseCase: WorkoutsUseCase
+    ) {
+        self.workoutsUseCase = workoutsUseCase
+    }
+    
+    func fetchAll() {
+        isLoading = true
+        allSessions = []
+        Task {
+            do {
+                allSessions = try await workoutsUseCase.fetchAllSessions()
+                sessions = allSessions
+                isLoading = false
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func applyFilters() {
+        guard !searchText.isEmpty else {
+            sessions = allSessions
+            return
+        }
+        
+        sessions = allSessions.filter { session in
+            session.name.contains(searchText)
+        }
+    }
 }
