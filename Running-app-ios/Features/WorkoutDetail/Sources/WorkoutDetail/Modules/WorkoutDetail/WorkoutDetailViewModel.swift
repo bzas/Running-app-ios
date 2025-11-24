@@ -17,14 +17,14 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
     @Published var isDetailInfoPresented = false
-    @Published var isDetailHeartRatePresented = false
 
     var onDismiss: () -> Void
     
     // MARK: - Use case
     
     private var workoutsUseCase: WorkoutsUseCase
-    
+    private var getUserUseCase: GetUserUseCase
+
     // MARK: - Gallery
     
     @Published var isGalleryPresented = false
@@ -39,17 +39,21 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     // MARK: Heart Rate
     
+    @Published var isDetailHeartRatePresented = false
     @Published var hrChartData: [ChartData] = []
     @Published var hrValues: [Int] = []
     @Published var hrChartRange: ClosedRange<Double> = 0.0...220.0
+    @Published var heartRateZonesInfo: [SessionHeartRateZone] = []
 
     public init(
         session: WorkoutSession,
         workoutsUseCase: WorkoutsUseCase,
+        getUserUseCase: GetUserUseCase,
         onDismiss: @escaping () -> Void
     ) {
         self.session = session
         self.workoutsUseCase = workoutsUseCase
+        self.getUserUseCase = getUserUseCase
         self.onDismiss = onDismiss
         setup()
     }
@@ -78,8 +82,9 @@ private extension WorkoutDetailViewModel {
     
     func setup() {        
         Task {
-            self.calculatePaceInfo()
-            self.calculateHRInfo()
+            await calculateHeartRateZones()
+            calculatePaceInfo()
+            calculateHeartRateChart()
         }
     }
     
@@ -103,7 +108,16 @@ private extension WorkoutDetailViewModel {
         self.paceChartRange = (lower < upper) ? (lower...upper) : (lower...lower + 1.0)
     }
     
-    func calculateHRInfo() {
+    func calculateHeartRateZones() async {
+        do {
+            let currentUser = try await getUserUseCase.currentUser()
+            self.heartRateZonesInfo = session.heartRateZonesInfo(user: currentUser)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func calculateHeartRateChart() {
         for index in stride(from: 0, to: session.sessionTrackPoints.count, by: 20) {
             if let heartRate = session.sessionTrackPoints[index].heartRate {
                 hrValues.append(heartRate)

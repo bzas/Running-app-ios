@@ -31,7 +31,14 @@ struct HeartRateView: View {
             
             Spacer()
         }
-        .padding(32)
+        .padding(
+            EdgeInsets(
+                top: 32,
+                leading: 32,
+                bottom: 8,
+                trailing: 32
+            )
+        )
         .presentationBackgroundInteraction(.enabled)
         .presentationDetents([.fraction(0.65)])
     }

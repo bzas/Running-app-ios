@@ -10,7 +10,7 @@ import SwiftData
 import Domain
 
 @Model
-public final class WorkoutSessionDataModel {
+public final class WorkoutSessionDataModel: Identifiable {
     
     public var id: UUID
     public var timestamp: Date?

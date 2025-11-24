@@ -1,13 +1,13 @@
 //
-//  UserUseCase.swift
+//  GetUserUseCase.swift
 //  Application
 //
-//  Created by Alfonso Boizas Crespo on 19/11/25.
+//  Created by Alfonso Boizas Crespo on 24/11/25.
 //
 
 import Domain
 
-public actor UserUseCase {
+public actor GetUserUseCase {
     
     private let repository: UserRepositoryProtocol
     
@@ -15,7 +15,7 @@ public actor UserUseCase {
         self.repository = repository
     }
     
-    func getCurrent() async -> User? {
-        nil
+    public func currentUser() async throws -> User {
+        try await repository.fetchCurrent()
     }
 }

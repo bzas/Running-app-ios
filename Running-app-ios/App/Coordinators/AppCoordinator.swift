@@ -28,7 +28,7 @@ final class AppCoordinator: ObservableObject {
     var profileCoordinator: ProfileCoordinator!
     var launchCoordinator: LaunchCoordinator!
     var searchCoordinator: SearchCoordinator!
-    
+        
     init() {
         assembly = AppAssembly()
         workoutsCoordinator = WorkoutsCoordinator(assembly: assembly)
@@ -39,18 +39,6 @@ final class AppCoordinator: ObservableObject {
     
     @ViewBuilder
     func rootView() -> some View {
-        TabView {
-            Tab(Localizables.Workouts.title, systemImage: "house") {
-                workoutsCoordinator.rootView()
-            }
-            
-            Tab(Localizables.Profile.title, systemImage: "chart.bar.xaxis.ascending") {
-                profileCoordinator.rootView()
-            }
-            
-            Tab(role: .search) {
-                searchCoordinator.rootView()
-            }
-        }
+        AppRootView(coordinator: self)
     }
 }

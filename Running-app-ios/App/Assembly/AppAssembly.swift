@@ -54,10 +54,10 @@ extension AppAssembly: ProfileAssemblyProtocol {
 extension AppAssembly: LaunchAssemblyProtocol {
     
     public func makeLaunchViewModel() -> LaunchViewModel {
-        let userUseCase = makeUserUseCase()
+        let createUserUseCase = makeCreateUserUseCase()
         
         return LaunchViewModel(
-            useCase: userUseCase
+            createUserUseCase: createUserUseCase
         )
     }
 }
@@ -84,10 +84,12 @@ extension AppAssembly: WorkoutDetailAssemblyProtocol {
         onDismiss: @escaping () -> Void
     ) -> WorkoutDetailViewModel {
         let workoutsUseCase = makeWorkoutsUseCase()
+        let getUserUseCase = makeGetUserUseCase()
 
         return WorkoutDetailViewModel(
             session: session,
             workoutsUseCase: workoutsUseCase,
+            getUserUseCase: getUserUseCase,
             onDismiss: onDismiss
         )
     }
@@ -110,8 +112,14 @@ private extension AppAssembly {
         )
     }
     
-    func makeUserUseCase() -> UserUseCase {
-        UserUseCase(
+    func makeCreateUserUseCase() -> CreateUserUseCase {
+        CreateUserUseCase(
+            repository: container.userRepository
+        )
+    }
+    
+    func makeGetUserUseCase() -> GetUserUseCase {
+        GetUserUseCase(
             repository: container.userRepository
         )
     }

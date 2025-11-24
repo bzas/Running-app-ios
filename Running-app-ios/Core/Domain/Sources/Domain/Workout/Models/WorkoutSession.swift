@@ -69,6 +69,37 @@ public struct WorkoutSession: Identifiable, Sendable {
         self.paceInSecondsPerKm = computeSecondsPerKm()
         self.name = sessionName()
     }
+    
+    public func heartRateZonesInfo(user: User) -> [SessionHeartRateZone] {
+        var zoneCounter = [0, 0, 0, 0, 0]
+
+        for point in sessionTrackPoints {
+            guard let heartRate = point.heartRate else { continue }
+            
+            if heartRate <= user.heartRateZones[0].maxHeartRate {
+                zoneCounter[0] += 1
+            } else if heartRate <= user.heartRateZones[1].maxHeartRate {
+                zoneCounter[1] += 1
+            } else if heartRate <= user.heartRateZones[2].maxHeartRate {
+                zoneCounter[2] += 1
+            } else if heartRate <= user.heartRateZones[3].maxHeartRate {
+                zoneCounter[3] += 1
+            } else {
+                zoneCounter[4] += 1
+            }
+        }
+        
+        let pointCount = sessionTrackPoints.count
+        return zoneCounter.enumerated().map { index, value in
+            SessionHeartRateZone(
+                zoneNumber: index + 1,
+                unitsInZone: value,
+                totalUnits: pointCount,
+                lowerLimit: user.heartRateZones[index].minHeartRate,
+                upperLimit: user.heartRateZones[index].maxHeartRate
+            )
+        }
+    }
 }
 
 // MARK: - Private methods
@@ -123,5 +154,9 @@ private extension WorkoutSession {
         }
 
         return secondsPerKm
+    }
+    
+    func computeHeartRateZones() -> [SessionHeartRateZone] {
+        []
     }
 }

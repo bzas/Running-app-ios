@@ -6,5 +6,6 @@
 //
 
 enum DatabaseError: Error {
-    case trackPointDataError
+    case trackPointDataError,
+         noUserData
 }

@@ -47,8 +47,9 @@ struct GalleryView: View {
                         Text("Add")
                     }
                     .padding(.horizontal, 8)
-                    .clipShape(Capsule())
                 }
+                .buttonStyle(.borderedProminent)
+                .clipShape(Capsule())
             }
             .onChange(of: viewModel.selectedPhoto) {
                 viewModel.storePhoto()

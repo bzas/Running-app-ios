@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LaunchView: View {
     
+    @AppStorage("userDataNeeded") var userDataNeeded: Bool = true
     @StateObject var viewModel: LaunchViewModel
     
     init(viewModel: LaunchViewModel) {
@@ -16,6 +17,33 @@ struct LaunchView: View {
     }
 
     public var body: some View {
-        Text("Test")
+        Form {
+            Section {
+                TextField("Name", text: $viewModel.name)
+                
+                TextField("Age", text: $viewModel.age)
+                    .keyboardType(.numberPad)
+                
+                TextField("Maximum heart rate", text: $viewModel.maxHeartRate)
+                    .keyboardType(.numberPad)
+            }
+        }
+        .navigationTitle("About you")
+        .navigationBarTitleDisplayMode(.inline)
+        .interactiveDismissDisabled()
+        .presentationDetents([.fraction(0.4)])
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    Task {
+                        userDataNeeded = await !viewModel.trySaveUserData()
+                    }
+                } label: {
+                    Text("Save")
+                }
+                .buttonStyle(.borderedProminent)
+                .clipShape(Capsule())
+            }
+        }
     }
 }

@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import Domain
 
-enum HeartRateZoneType {
+enum HeartRateZoneType: CaseIterable {
+    
     case zone1,
          zone2,
          zone3,
@@ -43,11 +45,26 @@ enum HeartRateZoneType {
             .red
         }
     }
+    
+    static func fromZoneNumber(_ number: Int) -> Self {
+        let index = number - 1
+        guard index >= 0, index < Self.allCases.count else {
+            return .zone1
+        }
+        
+        return Self.allCases[number - 1]
+    }
 }
 
 struct SingleHeartRateZoneView: View {
     
     var zoneNumber: HeartRateZoneType
+    var zoneInfo: SessionHeartRateZone
+    
+    init(zoneInfo: SessionHeartRateZone) {
+        self.zoneNumber = HeartRateZoneType.fromZoneNumber(zoneInfo.zoneNumber)
+        self.zoneInfo = zoneInfo
+    }
     
     var body: some View {
         HStack(spacing: 16) {
@@ -56,23 +73,46 @@ struct SingleHeartRateZoneView: View {
                 .bold()
                 .foregroundStyle(zoneNumber.color)
             
-            ZStack {
-                Capsule()
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(zoneNumber.color.opacity(0.25))
+            HStack(spacing: 4) {
+                GeometryReader { reader in
+                    ZStack {
+                        Capsule()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(zoneNumber.color.opacity(0.25))
 
-                HStack {
-                    Capsule()
-                        .frame(width: 100)
-                        .foregroundColor(zoneNumber.color)
-                    Spacer()
+                        HStack {
+                            Capsule()
+                                .frame(width: reader.size.width * zoneInfo.percentageInZone)
+                                .foregroundColor(zoneNumber.color)
+                            Spacer()
+                        }
+                    }
                 }
+                .frame(height: 8)
+                
+                zoneRangeText()
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 90)
             }
-            .frame(height: 8)
+        }
+    }
+    
+    @ViewBuilder
+    func zoneRangeText() -> some View {
+        HStack {
+            Spacer()
             
-            Text("125-130 bpm")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            if let lowerLimit = zoneInfo.lowerLimit,
+               let upperLimit = zoneInfo.upperLimit {
+                Text("\(lowerLimit)-\(upperLimit) bpm")
+            } else if let lowerLimit = zoneInfo.lowerLimit {
+                Text("\(lowerLimit)+ bpm")
+            } else if let upperLimit = zoneInfo.upperLimit {
+                Text("<\(upperLimit) bpm")
+            } else {
+                EmptyView()
+            }
         }
     }
 }

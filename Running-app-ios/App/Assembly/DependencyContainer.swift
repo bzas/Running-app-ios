@@ -18,7 +18,7 @@ final class DependencyContainer {
         let schema = Schema(
             [
                 WorkoutSessionDataModel.self,
-                WorkoutSessionTrackPointDataModel.self
+                UserDataModel.self
             ]
         )
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -41,7 +41,7 @@ final class DependencyContainer {
     
     init() {
         self.workoutRepository = WorkoutRepository(modelContainer: modelContainer)
-        self.userRepository = UserRepository()
+        self.userRepository = UserRepository(modelContainer: modelContainer)
         self.garminService = GarminService()
     }
 }

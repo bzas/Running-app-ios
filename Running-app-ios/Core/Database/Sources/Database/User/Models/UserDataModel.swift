@@ -13,12 +13,12 @@ import Foundation
 public class UserDataModel {
     
     public var name: String
-    public var age: String
+    public var age: Int
     public var maxHeartRate: Int
     
     public init(
         name: String,
-        age: String,
+        age: Int,
         maxHeartRate: Int
     ) {
         self.name = name

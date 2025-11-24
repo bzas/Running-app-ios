@@ -13,11 +13,9 @@ struct HeartRateZonesView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            SingleHeartRateZoneView(zoneNumber: .zone1)
-            SingleHeartRateZoneView(zoneNumber: .zone2)
-            SingleHeartRateZoneView(zoneNumber: .zone3)
-            SingleHeartRateZoneView(zoneNumber: .zone4)
-            SingleHeartRateZoneView(zoneNumber: .zone5)
+            ForEach(viewModel.heartRateZonesInfo) { info in
+                SingleHeartRateZoneView(zoneInfo: info)
+            }
         }
     }
 }
