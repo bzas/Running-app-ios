@@ -15,9 +15,18 @@ struct DetailInfoView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text(viewModel.session.name)
-                .font(.title2)
-                .fontWeight(.semibold)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(viewModel.session.name)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                
+                if let date = viewModel.session.timestamp?.formatted() {
+                    Text(date)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.bottom, 8)
             
             WorkoutSummaryView(
                 paceInSeconds: viewModel.session.paceInSeconds,
@@ -43,6 +52,6 @@ struct DetailInfoView: View {
             )
         )
         .presentationBackgroundInteraction(.enabled)
-        .presentationDetents([.fraction(0.65)])
+        .presentationDetents([.fraction(0.8)])
     }
 }

@@ -38,4 +38,8 @@ public class WorkoutFormatter {
         guard let heartRate else { return "- bpm" }
         return "\(heartRate) bpm"
     }
+    
+    public static func elevation(_ meters: Int) -> String {
+        "\(meters)m"
+    }
 }

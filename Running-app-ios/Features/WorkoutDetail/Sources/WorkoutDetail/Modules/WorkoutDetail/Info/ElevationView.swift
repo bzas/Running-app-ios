@@ -13,19 +13,32 @@ struct ElevationView: View {
     @EnvironmentObject var viewModel: WorkoutDetailViewModel
     
     var body: some View {
-        Chart {
-            ForEach(viewModel.elevationChartData) { data in
-                AreaMark(
-                    x: .value("", data.label),
-                    yStart: .value("", viewModel.elevationChartRange.lowerBound),
-                    yEnd: .value("", data.value)
-                )
+        VStack(spacing: 24) {
+            HStack {
+                Text("Elevation")
+                    .font(.body)
+                    .bold()
+                Spacer()
             }
-            .interpolationMethod(.cardinal)
-            .foregroundStyle(Color(uiColor: .secondaryLabel))
+            
+            Chart {
+                ForEach(viewModel.elevationChartData) { data in
+                    AreaMark(
+                        x: .value("", data.label),
+                        yStart: .value("", viewModel.elevationChartRange.lowerBound),
+                        yEnd: .value("", data.value)
+                    )
+                }
+                .interpolationMethod(.cardinal)
+                .foregroundStyle(Color(uiColor: .secondaryLabel))
+            }
+            .chartYScale(domain: viewModel.elevationChartRange)
+            .chartXAxis(.hidden)
+            .frame(height: 150)
+            
+            ElevationSummaryView()
+                .environmentObject(viewModel)
         }
-        .chartYScale(domain: viewModel.elevationChartRange)
-        .chartXAxis(.hidden)
-        .frame(height: 150)
+        .padding(.top)
     }
 }

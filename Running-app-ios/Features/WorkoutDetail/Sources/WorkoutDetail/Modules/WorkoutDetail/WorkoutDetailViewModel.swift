@@ -45,6 +45,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var elevationChartData: [ChartData] = []
     @Published var elevationValues: [Int] = []
     @Published var elevationChartRange: ClosedRange<Double> = 0.0...3000.0
+    @Published var maxAltitude: Int = 0
+    @Published var minAltitude: Int = 0
     
     // MARK: Heart Rate
     
@@ -140,8 +142,10 @@ private extension WorkoutDetailViewModel {
             }
         }
         
-        let upper = maxAltitude + 20.0
-        elevationChartRange = (minAltitude < upper) ? (minAltitude...upper) : (minAltitude...minAltitude + 1.0)
+        self.maxAltitude = Int(maxAltitude)
+        self.minAltitude = Int(minAltitude)
+        
+        elevationChartRange = (minAltitude < maxAltitude) ? (minAltitude - 10...maxAltitude) : (minAltitude...minAltitude + 1.0)
     }
     
     func calculateHeartRateZones() async {

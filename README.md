@@ -1,4 +1,4 @@
-# Renn - Running
+# Renn - Running (Work in Progress)
 iOS application (SwiftUI) for running data and stats. This project is in its initial phase and currently displays basic views
 
 ## Architecture
