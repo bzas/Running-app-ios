@@ -16,8 +16,11 @@ import _PhotosUI_SwiftUI
 public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var session: WorkoutSession
+    
+    // MARK: - Presentation
+    
     @Published var isDetailInfoPresented = false
-
+    @Published var isDetailHeartRatePresented = false
     var onDismiss: () -> Void
     
     // MARK: - Use case
@@ -37,9 +40,14 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var paceChartRange: ClosedRange<Double> = 120.0...600.0
     @Published var paceChartStrideValue = 0.0
     
+    // MARK: - Elevation
+    
+    @Published var elevationChartData: [ChartData] = []
+    @Published var elevationValues: [Int] = []
+    @Published var elevationChartRange: ClosedRange<Double> = 0.0...3000.0
+    
     // MARK: Heart Rate
     
-    @Published var isDetailHeartRatePresented = false
     @Published var hrChartData: [ChartData] = []
     @Published var hrValues: [Int] = []
     @Published var hrChartRange: ClosedRange<Double> = 0.0...220.0
@@ -84,6 +92,7 @@ private extension WorkoutDetailViewModel {
         Task {
             await calculateHeartRateZones()
             calculatePaceInfo()
+            calculateElevationInfo()
             calculateHeartRateChart()
         }
     }
@@ -106,6 +115,33 @@ private extension WorkoutDetailViewModel {
         let upper = maxVal + 10.0
         
         self.paceChartRange = (lower < upper) ? (lower...upper) : (lower...lower + 1.0)
+    }
+    
+    func calculateElevationInfo() {
+        var minAltitude: Double = 10000
+        var maxAltitude: Double = 0
+        
+        for index in stride(from: 0, to: session.sessionTrackPoints.count, by: 20) {
+            if let altitude = session.sessionTrackPoints[index].altitude {
+                if altitude < minAltitude {
+                    minAltitude = altitude
+                }
+                if altitude > maxAltitude {
+                    maxAltitude = altitude
+                }
+                
+                elevationValues.append(Int(altitude))
+                elevationChartData.append(
+                    ChartData(
+                        label: "\(index + 1)",
+                        value: altitude
+                    )
+                )
+            }
+        }
+        
+        let upper = maxAltitude + 20.0
+        elevationChartRange = (minAltitude < upper) ? (minAltitude...upper) : (minAltitude...minAltitude + 1.0)
     }
     
     func calculateHeartRateZones() async {

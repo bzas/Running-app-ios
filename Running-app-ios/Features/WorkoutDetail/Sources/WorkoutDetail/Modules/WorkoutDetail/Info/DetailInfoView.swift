@@ -29,6 +29,9 @@ struct DetailInfoView: View {
             PaceView()
                 .environmentObject(viewModel)
             
+            ElevationView()
+                .environmentObject(viewModel)
+            
             Spacer()
         }
         .padding(
@@ -40,6 +43,6 @@ struct DetailInfoView: View {
             )
         )
         .presentationBackgroundInteraction(.enabled)
-        .presentationDetents([.fraction(0.4)])
+        .presentationDetents([.fraction(0.65)])
     }
 }

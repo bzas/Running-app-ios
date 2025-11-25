@@ -37,7 +37,7 @@ final class GarminWorkoutSessionTrackPointDTO {
         self.init(
             latitude: toDegrees(record.getPositionLat()),
             longitude: toDegrees(record.getPositionLong()),
-            altitude: record.getAltitude(),
+            altitude: record.getEnhancedAltitude() ?? record.getAltitude(),
             distance: record.getDistance(),
             heartRate: record.getHeartRate(),
             timestamp: record.getTimestamp()?.date
