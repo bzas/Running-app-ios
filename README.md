@@ -4,6 +4,8 @@ iOS application (SwiftUI) for running data and stats. This project is in its ini
 ## Architecture
 The app follows a modular Clean Architecture combined with MVVM and a Coordinator system to ensure scalability, testability, and maintainability. Each layer has a clear responsibility and communicates only through well-defined interfaces.
 
+![Architecture](images/Architecture.svg)
+
 The project is divided into independent modules:
 - App:
     - Main app target, AppCoordinator, AppAssembly and DependencyContainer
