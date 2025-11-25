@@ -2,9 +2,10 @@
 iOS application (SwiftUI) for running data and stats. This project is in its initial phase and currently displays basic views
 
 ## Architecture
+
 The app follows a modular Clean Architecture combined with MVVM and a Coordinator system to ensure scalability, testability, and maintainability. Each layer has a clear responsibility and communicates only through well-defined interfaces.
 
-![Architecture](images/Architecture.svg)
+<img src="images/Architecture.svg" width="600" />
 
 The project is divided into independent modules:
 - App:
@@ -37,12 +38,20 @@ The project is divided into independent modules:
 - Common: Reusable components, entities....etc
 
 ## Features
+
+<p align="left">
+<img src="images/Detail.PNG" width="275" />
+<img src="images/DetailInfo.PNG" width="275" />
+<img src="images/HeartRate.PNG" width="275" />
+<img src="images/Gallery.PNG" width="275" />
+<img src="images/Workouts.PNG" width="275" />
+</p>
+
 - Garmin integration for reading fitness data
 - Route mapping (MapKit) and real-time route tracking
 - Workout history and session details
 - Graphs (pace, heart rate, elevation, heart rate zones...etc)
 - Goals, personal records, stats
-- Widgets
 
 ## Requirements
 - Xcode 26 or higher

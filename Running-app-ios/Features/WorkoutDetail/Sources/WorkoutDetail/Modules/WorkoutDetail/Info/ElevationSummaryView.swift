@@ -18,7 +18,7 @@ struct ElevationSummaryView: View {
                 Text("Maximum altitude")
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(WorkoutFormatter.elevation(viewModel.minAltitude))
+                Text(WorkoutFormatter.elevation(viewModel.maxAltitude))
                     .bold()
             }
             
@@ -26,7 +26,7 @@ struct ElevationSummaryView: View {
                 Text("Minimum altitude")
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(WorkoutFormatter.elevation(viewModel.maxAltitude))
+                Text(WorkoutFormatter.elevation(viewModel.minAltitude))
                     .bold()
             }
         }
