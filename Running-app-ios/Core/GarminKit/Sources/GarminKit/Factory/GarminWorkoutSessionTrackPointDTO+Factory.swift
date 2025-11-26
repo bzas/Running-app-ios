@@ -21,13 +21,20 @@ extension GarminWorkoutSessionTrackPointDTO {
             domainHeartRate = Int(exactly: heartRate)
         }
         
+        var domainCadence: Int?
+        if let cadence,
+           let intCadence = Int(exactly: cadence) {
+            domainCadence = intCadence * 2
+        }
+        
         return WorkoutSessionTrackPoint(
             latitude: latitude,
             longitude: longitude,
             altitude: altitude,
             distance: distance,
             heartRate: domainHeartRate,
-            timestamp: timestamp
+            timestamp: timestamp,
+            cadence: domainCadence
         )
     }
 }

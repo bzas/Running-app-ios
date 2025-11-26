@@ -25,6 +25,8 @@ public final class WorkoutSessionDataModel: Identifiable {
     public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     @Attribute(.externalStorage) public var photos: [Data]
+    public var verticalOscillation: Double?
+    public var groundContactTime: Int?
     
     public init(
         id: UUID,
@@ -39,7 +41,9 @@ public final class WorkoutSessionDataModel: Identifiable {
         latitude: Double?,
         longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel],
-        photos: [Data]
+        photos: [Data],
+        verticalOscillation: Double?,
+        groundContactTime: Int?
     ) {
         self.id = id
         self.timestamp = timestamp
@@ -54,6 +58,8 @@ public final class WorkoutSessionDataModel: Identifiable {
         self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
         self.photos = photos
+        self.verticalOscillation = verticalOscillation
+        self.groundContactTime = groundContactTime
     }
     
     convenience init(from domain: WorkoutSession) throws {
@@ -72,7 +78,9 @@ public final class WorkoutSessionDataModel: Identifiable {
             sessionTrackPoints: domain.sessionTrackPoints.compactMap {
                 try? WorkoutSessionTrackPointDataModel(from: $0)
             },
-            photos: domain.photos
+            photos: domain.photos,
+            verticalOscillation: domain.verticalOscillation,
+            groundContactTime: domain.groundContactTime
         )
     }
 }
@@ -99,7 +107,9 @@ public extension WorkoutSessionDataModel {
             sessionTrackPoints: try sortedTrackPoints.map {
                 try $0.toDomain()
             },
-            photos: photos
+            photos: photos,
+            verticalOscillation: verticalOscillation,
+            groundContactTime: groundContactTime
         )
     }
 }

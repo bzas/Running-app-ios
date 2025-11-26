@@ -16,6 +16,7 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
     public var distance: Double
     public var heartRate: Int?
     public var timestamp: Date?
+    public var cadence: Int?
     
     public init(
         id: UUID = UUID(),
@@ -24,7 +25,8 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
         altitude: Double?,
         distance: Double,
         heartRate: Int?,
-        timestamp: Date?
+        timestamp: Date?,
+        cadence: Int?
     ) {
         self.id = id
         self.locationPoint = CLLocationCoordinate2D(
@@ -35,6 +37,7 @@ public struct WorkoutSessionTrackPoint: Identifiable, Sendable {
         self.distance = distance
         self.heartRate = heartRate
         self.timestamp = timestamp
+        self.cadence = cadence
     }
 }
 

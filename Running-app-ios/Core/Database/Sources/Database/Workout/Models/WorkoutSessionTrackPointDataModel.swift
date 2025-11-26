@@ -19,6 +19,7 @@ public final class WorkoutSessionTrackPointDataModel {
     public var distance: Double
     public var heartRate: Int?
     public var timestamp: Date
+    public var cadence: Int?
     
     public init(
         id: UUID,
@@ -27,7 +28,8 @@ public final class WorkoutSessionTrackPointDataModel {
         altitude: Double?,
         distance: Double,
         heartRate: Int?,
-        timestamp: Date
+        timestamp: Date,
+        cadence: Int?
     ) {
         self.id = id
         self.latitude = latitude
@@ -36,6 +38,7 @@ public final class WorkoutSessionTrackPointDataModel {
         self.distance = distance
         self.timestamp = timestamp
         self.heartRate = heartRate
+        self.cadence = cadence
     }
     
     convenience init(from domain: WorkoutSessionTrackPoint?) throws {
@@ -51,7 +54,8 @@ public final class WorkoutSessionTrackPointDataModel {
             altitude: domain.altitude,
             distance: domain.distance,
             heartRate: domain.heartRate,
-            timestamp: timestamp
+            timestamp: timestamp,
+            cadence: domain.cadence
         )
     }
 }
@@ -73,7 +77,8 @@ public extension WorkoutSessionTrackPointDataModel {
             altitude: altitude,
             distance: distance,
             heartRate: heartRate,
-            timestamp: timestamp
+            timestamp: timestamp,
+            cadence: cadence
         )
     }
 }

@@ -74,6 +74,16 @@ struct WorkoutDetailRootView: View {
                     )
                 )
         }
+        .sheet(isPresented: $viewModel.isMetricsInfoPresented) {
+            MetricsView()
+                .environmentObject(viewModel)
+                .navigationTransition(
+                    .zoom(
+                        sourceID: TransitionManager.metricsTransitionId(for: viewModel.session.id),
+                        in: nameSpace
+                    )
+                )
+        }
         .navigationTransition(
             .zoom(
                 sourceID: TransitionManager.detailTransitionId(for: viewModel.session.id),

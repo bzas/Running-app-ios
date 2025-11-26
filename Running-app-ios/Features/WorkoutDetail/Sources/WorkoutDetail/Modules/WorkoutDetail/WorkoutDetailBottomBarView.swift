@@ -15,12 +15,16 @@ struct WorkoutDetailBottomBarView: View {
     var body: some View {
         HStack(spacing: 8) {
             Button {
-                // TODO: - Finish
+                viewModel.isMetricsInfoPresented.toggle()
             } label: {
                 Image(systemName: "chart.xyaxis.line")
                     .font(.callout)
             }
-
+            .matchedTransitionSource(
+                id: TransitionManager.metricsTransitionId(for: viewModel.session.id),
+                in: nameSpace
+            )
+            
             Button {
                 viewModel.isDetailHeartRatePresented.toggle()
             } label: {

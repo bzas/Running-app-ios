@@ -21,6 +21,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var isDetailInfoPresented = false
     @Published var isDetailHeartRatePresented = false
+    @Published var isMetricsInfoPresented = false
     var onDismiss: () -> Void
     
     // MARK: - Use case
@@ -45,8 +46,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var elevationChartData: [ChartData] = []
     @Published var elevationValues: [Int] = []
     @Published var elevationChartRange: ClosedRange<Double> = 0.0...3000.0
-    @Published var maxAltitude: Int = 0
-    @Published var minAltitude: Int = 0
+    @Published var maxAltitude: Double = 0.0
+    @Published var minAltitude: Double = 0.0
     
     // MARK: Heart Rate
     
@@ -54,7 +55,15 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var hrValues: [Int] = []
     @Published var hrChartRange: ClosedRange<Double> = 0.0...220.0
     @Published var heartRateZonesInfo: [SessionHeartRateZone] = []
-
+    
+    // MARK: - Cadence
+    
+    @Published var cadenceChartData: [ChartData] = []
+    @Published var cadenceValues: [Int] = []
+    @Published var cadenceChartRange: ClosedRange<Double> = 0.0...220.0
+    @Published var maxCadence: Double = 0.0
+    @Published var minCadence: Double = 0.0
+    
     public init(
         session: WorkoutSession,
         workoutsUseCase: WorkoutsUseCase,
@@ -94,8 +103,7 @@ private extension WorkoutDetailViewModel {
         Task {
             await calculateHeartRateZones()
             calculatePaceInfo()
-            calculateElevationInfo()
-            calculateHeartRateChart()
+            createChartsData()
         }
     }
     
@@ -119,32 +127,81 @@ private extension WorkoutDetailViewModel {
         self.paceChartRange = (lower < upper) ? (lower...upper) : (lower...lower + 1.0)
     }
     
-    func calculateElevationInfo() {
-        var minAltitude: Double = 10000
-        var maxAltitude: Double = 0
+    func createChartsData() {
+        maxAltitude = 0
+        minAltitude = 10000
+        
+        maxCadence = 0
+        minCadence = 220
         
         for index in stride(from: 0, to: session.sessionTrackPoints.count, by: 20) {
-            if let altitude = session.sessionTrackPoints[index].altitude {
-                if altitude < minAltitude {
-                    minAltitude = altitude
-                }
-                if altitude > maxAltitude {
-                    maxAltitude = altitude
-                }
-                
-                elevationValues.append(Int(altitude))
-                elevationChartData.append(
-                    ChartData(
-                        label: "\(index + 1)",
-                        value: altitude
-                    )
-                )
-            }
+            addAltitude(at: index)
+            addHeartRate(at: index)
+            addCadence(at: index)
         }
         
-        self.maxAltitude = Int(maxAltitude)
-        self.minAltitude = Int(minAltitude)
+        setElevationChart()
+        setHeartRateChart()
+        setCadenceChart()
+    }
+    
+    func addAltitude(at index: Int) {
+        guard let altitude = session.sessionTrackPoints[index].altitude else { return }
         
+        if altitude < minAltitude {
+            minAltitude = altitude
+        }
+        if altitude > maxAltitude {
+            maxAltitude = altitude
+        }
+        
+        elevationValues.append(Int(altitude))
+        elevationChartData.append(
+            ChartData(
+                label: "\(index + 1)",
+                value: altitude
+            )
+        )
+    }
+    
+    func addHeartRate(at index: Int) {
+        guard let heartRate = session.sessionTrackPoints[index].heartRate else { return }
+        
+        hrValues.append(heartRate)
+        hrChartData.append(
+            ChartData(
+                label: "\(index + 1)",
+                value: Double(heartRate)
+            )
+        )
+    }
+    
+    func addCadence(at index: Int) {
+        guard let cadenceInt = session.sessionTrackPoints[index].cadence else { return }
+        
+        let cadence = Double(cadenceInt)
+        
+        if cadence < minCadence {
+            minCadence = cadence
+        }
+        if cadence > maxCadence {
+            maxCadence = cadence
+        }
+        
+        cadenceValues.append(cadenceInt)
+        cadenceChartData.append(
+            ChartData(
+                label: "\(index + 1)",
+                value: Double(cadence)
+            )
+        )
+    }
+    
+    func setCadenceChart() {
+        cadenceChartRange = (minCadence < maxCadence) ? (minCadence - 10...maxCadence) : (minCadence...minCadence + 1)
+    }
+    
+    func setElevationChart() {
         elevationChartRange = (minAltitude < maxAltitude) ? (minAltitude - 10...maxAltitude) : (minAltitude...minAltitude + 1.0)
     }
     
@@ -157,19 +214,7 @@ private extension WorkoutDetailViewModel {
         }
     }
     
-    func calculateHeartRateChart() {
-        for index in stride(from: 0, to: session.sessionTrackPoints.count, by: 20) {
-            if let heartRate = session.sessionTrackPoints[index].heartRate {
-                hrValues.append(heartRate)
-                hrChartData.append(
-                    ChartData(
-                        label: "\(index + 1)",
-                        value: Double(heartRate)
-                    )
-                )
-            }
-        }
-        
+    func setHeartRateChart() {
         let minVal = Double(session.minHeartRate ?? 40)
         let maxVal = Double(session.maxHeartRate ?? 240)
         

@@ -39,7 +39,19 @@ public class WorkoutFormatter {
         return "\(heartRate) bpm"
     }
     
-    public static func elevation(_ meters: Int) -> String {
-        "\(meters)m"
+    public static func elevation(_ meters: Double) -> String {
+        "\(Int(meters)) m"
+    }
+    
+    public static func cadence(_ steps: Int) -> String {
+        "\(steps) spm"
+    }
+    
+    public static func verticalOscillation(_ centimeters: Double) -> String {
+        String(format: "%.1f cm", centimeters)
+    }
+    
+    public static func groundContactTime(_ millisecs: Int) -> String {
+        "\(millisecs) ms"
     }
 }

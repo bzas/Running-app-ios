@@ -26,8 +26,14 @@ extension GarminWorkoutSessionDTO {
         }
         
         var domainCadence: Int?
-        if let cadence {
-            domainCadence = Int(exactly: cadence)
+        if let cadence,
+           let cadenceInt = Int(exactly: cadence)  {
+            domainCadence = cadenceInt * 2
+        }
+        
+        var domainGCT: Int?
+        if let stanceTime {
+            domainGCT = Int(stanceTime)
         }
         
         return WorkoutSession(
@@ -42,7 +48,9 @@ extension GarminWorkoutSessionDTO {
             latitude: latitude,
             longitude: longitude,
             sessionTrackPoints: sessionTrackPoints.compactMap { try? $0.toDomain() },
-            photos: []
+            photos: [],
+            verticalOscillation: verticalRatio,
+            groundContactTime: domainGCT
         )
     }
 }

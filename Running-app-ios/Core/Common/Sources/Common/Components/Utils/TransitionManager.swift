@@ -21,6 +21,10 @@ public final class TransitionManager {
          "galleryTransition-\(id.uuidString)"
      }
     
+    public static func metricsTransitionId(for id: UUID) -> String {
+         "metricsTransition-\(id.uuidString)"
+     }
+    
     public static func detailTransitionId(for id: UUID) -> String {
          "detailTransition-\(id.uuidString)"
      }

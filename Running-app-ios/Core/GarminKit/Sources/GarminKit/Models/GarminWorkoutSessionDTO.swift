@@ -20,6 +20,8 @@ final class GarminWorkoutSessionDTO {
     var totalTime: Double?
     var latitude: Double?
     var longitude: Double?
+    var verticalRatio: Double?
+    var stanceTime: Double?
     var sessionTrackPoints: [GarminWorkoutSessionTrackPointDTO]
     
     init(
@@ -33,6 +35,8 @@ final class GarminWorkoutSessionDTO {
         totalTime: Double?,
         latitude: Double?,
         longitude: Double?,
+        verticalRatio: Double?,
+        stanceTime: Double?,
         sessionTrackPoints: [GarminWorkoutSessionTrackPointDTO]
     ) {
         self.timestamp = timestamp
@@ -45,6 +49,8 @@ final class GarminWorkoutSessionDTO {
         self.totalTime = totalTime
         self.latitude = latitude
         self.longitude = longitude
+        self.verticalRatio = verticalRatio
+        self.stanceTime = stanceTime
         self.sessionTrackPoints = sessionTrackPoints
     }
     
@@ -68,6 +74,8 @@ final class GarminWorkoutSessionDTO {
             totalTime: garminSession.getTotalElapsedTime(),
             latitude: toDegrees(garminSession.getSwcLat()),
             longitude: toDegrees(garminSession.getSwcLong()),
+            verticalRatio: garminSession.getAvgVerticalRatio(),
+            stanceTime: garminSession.getAvgStanceTime(),
             sessionTrackPoints: garminMapPoints
         )
     }

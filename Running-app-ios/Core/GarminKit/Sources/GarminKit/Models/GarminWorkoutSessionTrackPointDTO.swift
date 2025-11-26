@@ -16,6 +16,7 @@ final class GarminWorkoutSessionTrackPointDTO {
     var distance: Double?
     var heartRate: UInt8?
     var timestamp: Date?
+    var cadence: UInt8?
     
     init(
         latitude: Double?,
@@ -23,7 +24,8 @@ final class GarminWorkoutSessionTrackPointDTO {
         altitude: Double?,
         distance: Double?,
         heartRate: UInt8?,
-        timestamp: Date?
+        timestamp: Date?,
+        cadence: UInt8?
     ) {
         self.latitude = latitude
         self.longitude = longitude
@@ -31,6 +33,7 @@ final class GarminWorkoutSessionTrackPointDTO {
         self.distance = distance
         self.heartRate = heartRate
         self.timestamp = timestamp
+        self.cadence = cadence
     }
     
     convenience init?(record: RecordMesg) {
@@ -40,7 +43,8 @@ final class GarminWorkoutSessionTrackPointDTO {
             altitude: record.getEnhancedAltitude() ?? record.getAltitude(),
             distance: record.getDistance(),
             heartRate: record.getHeartRate(),
-            timestamp: record.getTimestamp()?.date
+            timestamp: record.getTimestamp()?.date,
+            cadence: record.getCadence()
         )
     }
 }

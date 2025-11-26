@@ -28,6 +28,8 @@ public struct WorkoutSession: Identifiable, Sendable {
     public var paceInSecondsPerKm: [Double] = []
     public var distanceInKm: Double
     public var paceInSeconds: Double = 0
+    public var verticalOscillation: Double?
+    public var groundContactTime: Int?
     
     public var locationPoints: [CLLocationCoordinate2D] {
         sessionTrackPoints.map {
@@ -48,7 +50,9 @@ public struct WorkoutSession: Identifiable, Sendable {
         latitude: Double?,
         longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPoint],
-        photos: [Data]
+        photos: [Data],
+        verticalOscillation: Double?,
+        groundContactTime: Int?
     ) {
         self.id = id
         self.timestamp = timestamp
@@ -63,6 +67,8 @@ public struct WorkoutSession: Identifiable, Sendable {
         self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
         self.photos = photos
+        self.verticalOscillation = verticalOscillation
+        self.groundContactTime = groundContactTime
         self.distanceInKm = distance / 1000.0
         self.paceInSeconds = getPaceInSeconds()
         self.sessionKmTrackPoints = getKmTrackPoints()
