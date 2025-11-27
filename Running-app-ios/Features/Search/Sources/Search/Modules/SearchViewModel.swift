@@ -19,12 +19,12 @@ public final class SearchViewModel: ObservableObject {
     
     // MARK: - Use case
     
-    private let workoutsUseCase: WorkoutsUseCase
+    private let sessionImportUseCase: SessionImportUseCase
     
     public init(
-        workoutsUseCase: WorkoutsUseCase
+        sessionImportUseCase: SessionImportUseCase
     ) {
-        self.workoutsUseCase = workoutsUseCase
+        self.sessionImportUseCase = sessionImportUseCase
     }
     
     func fetchAll() {
@@ -32,7 +32,7 @@ public final class SearchViewModel: ObservableObject {
         allSessions = []
         Task {
             do {
-                allSessions = try await workoutsUseCase.fetchAllSessions()
+                allSessions = try await sessionImportUseCase.fetchAllSessions()
                 sessions = allSessions
                 isLoading = false
             } catch {

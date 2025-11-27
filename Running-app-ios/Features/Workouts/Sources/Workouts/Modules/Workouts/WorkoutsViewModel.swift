@@ -18,16 +18,16 @@ public final class WorkoutsViewModel: ObservableObject {
     // MARK: - Use cases
     
     private let garminUseCase: GarminImportUseCase
-    private let workoutsUseCase: WorkoutsUseCase
+    private let sessionImportUseCase: SessionImportUseCase
     private let workoutDeletionUseCase: WorkoutDeletionUseCase
 
     public init(
         garminUseCase: GarminImportUseCase,
-        workoutsUseCase: WorkoutsUseCase,
+        sessionImportUseCase: SessionImportUseCase,
         workoutDeletionUseCase: WorkoutDeletionUseCase
     ) {
         self.garminUseCase = garminUseCase
-        self.workoutsUseCase = workoutsUseCase
+        self.sessionImportUseCase = sessionImportUseCase
         self.workoutDeletionUseCase = workoutDeletionUseCase
         
         Task {
@@ -50,7 +50,7 @@ public final class WorkoutsViewModel: ObservableObject {
     
     func fetchAll() async {
         do {
-            sessions = try await workoutsUseCase.fetchAllSessions()
+            sessions = try await sessionImportUseCase.fetchAllSessions()
             isLoading = false
         } catch {
             print(error.localizedDescription)

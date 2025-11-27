@@ -31,12 +31,12 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
     
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
         let garminUseCase = makeGarminUseCase()
-        let workoutsUseCase = makeWorkoutsUseCase()
+        let sessionImportUseCase = makeSessionImportUseCase()
         let workoutDeletionUseCase = makeWorkoutDeletionUseCase()
         
         return WorkoutsViewModel(
             garminUseCase: garminUseCase,
-            workoutsUseCase: workoutsUseCase,
+            sessionImportUseCase: sessionImportUseCase,
             workoutDeletionUseCase: workoutDeletionUseCase
         )
     }
@@ -69,10 +69,10 @@ extension AppAssembly: LaunchAssemblyProtocol {
 extension AppAssembly: SearchAssemblyProtocol {
     
     public func makeSearchViewModel() -> SearchViewModel {
-        let workoutsUseCase = makeWorkoutsUseCase()
+        let sessionImportUseCase = makeSessionImportUseCase()
 
         return SearchViewModel(
-            workoutsUseCase: workoutsUseCase
+            sessionImportUseCase: sessionImportUseCase
         )
     }
 }
@@ -85,13 +85,13 @@ extension AppAssembly: WorkoutDetailAssemblyProtocol {
         for session: WorkoutSession,
         onDismiss: @escaping () -> Void
     ) -> WorkoutDetailViewModel {
-        let workoutsUseCase = makeWorkoutsUseCase()
         let getUserUseCase = makeGetUserUseCase()
+        let galleryUseCase = makeGalleryUseCase()
 
         return WorkoutDetailViewModel(
             session: session,
-            workoutsUseCase: workoutsUseCase,
             getUserUseCase: getUserUseCase,
+            galleryUseCase: galleryUseCase,
             onDismiss: onDismiss
         )
     }
@@ -108,8 +108,8 @@ private extension AppAssembly {
         )
     }
     
-    func makeWorkoutsUseCase() -> WorkoutsUseCase {
-        WorkoutsUseCase(
+    func makeSessionImportUseCase() -> SessionImportUseCase {
+        SessionImportUseCase(
             repository: container.workoutRepository
         )
     }
@@ -128,6 +128,12 @@ private extension AppAssembly {
     
     func makeWorkoutDeletionUseCase() -> WorkoutDeletionUseCase {
         WorkoutDeletionUseCase(
+            repository: container.workoutRepository
+        )
+    }
+    
+    func makeGalleryUseCase() -> GalleryUseCase {
+        GalleryUseCase(
             repository: container.workoutRepository
         )
     }

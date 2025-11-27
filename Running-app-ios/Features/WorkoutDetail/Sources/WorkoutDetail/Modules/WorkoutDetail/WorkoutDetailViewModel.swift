@@ -26,8 +26,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     // MARK: - Use case
     
-    private var workoutsUseCase: WorkoutsUseCase
     private var getUserUseCase: GetUserUseCase
+    private var galleryUseCase: GalleryUseCase
 
     // MARK: - Gallery
     
@@ -66,13 +66,13 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     public init(
         session: WorkoutSession,
-        workoutsUseCase: WorkoutsUseCase,
         getUserUseCase: GetUserUseCase,
+        galleryUseCase: GalleryUseCase,
         onDismiss: @escaping () -> Void
     ) {
         self.session = session
-        self.workoutsUseCase = workoutsUseCase
         self.getUserUseCase = getUserUseCase
+        self.galleryUseCase = galleryUseCase
         self.onDismiss = onDismiss
         setup()
     }
@@ -84,7 +84,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
             do {
                 if let data = try await selectedPhoto.loadTransferable(type: Data.self) {
                     session.photos.append(data)
-                    try await workoutsUseCase.updatePhotos(session)
+                    try await galleryUseCase.updatePhotos(session)
                 }
             } catch {
                 print(error.localizedDescription)

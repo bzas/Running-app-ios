@@ -1,5 +1,5 @@
 //
-//  WorkoutsUseCase.swift
+//  SessionImportUseCase.swift
 //  Application
 //
 //  Created by Alfonso Boizas Crespo on 22/11/25.
@@ -7,7 +7,7 @@
 
 import Domain
 
-public actor WorkoutsUseCase {
+public actor SessionImportUseCase {
     
     private let repository: WorkoutRepositoryProtocol
     
@@ -17,9 +17,5 @@ public actor WorkoutsUseCase {
     
     public func fetchAllSessions() async throws -> [WorkoutSession] {
         try await repository.fetchAll()
-    }
-    
-    public func updatePhotos(_ model: WorkoutSession) async throws {
-        try await repository.updatePhotos(model)
     }
 }
