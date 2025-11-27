@@ -19,13 +19,16 @@ public final class WorkoutsViewModel: ObservableObject {
     
     private let garminUseCase: GarminImportUseCase
     private let workoutsUseCase: WorkoutsUseCase
+    private let workoutDeletionUseCase: WorkoutDeletionUseCase
 
     public init(
         garminUseCase: GarminImportUseCase,
-        workoutsUseCase: WorkoutsUseCase
+        workoutsUseCase: WorkoutsUseCase,
+        workoutDeletionUseCase: WorkoutDeletionUseCase
     ) {
         self.garminUseCase = garminUseCase
         self.workoutsUseCase = workoutsUseCase
+        self.workoutDeletionUseCase = workoutDeletionUseCase
         
         Task {
             await fetchAll()
@@ -51,6 +54,19 @@ public final class WorkoutsViewModel: ObservableObject {
             isLoading = false
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func deleteSessions(at offsets: IndexSet) {
+        Task {
+            do {
+                for offset in offsets {
+                    try await workoutDeletionUseCase.delete(sessions[offset])
+                }
+                await fetchAll()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

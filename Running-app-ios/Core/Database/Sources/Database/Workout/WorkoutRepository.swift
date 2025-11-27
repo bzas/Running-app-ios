@@ -28,6 +28,23 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
     }
     
     public func updatePhotos(_ session: WorkoutSession) async throws {
+        guard let model = try getSessionDataModel(for: session) else { return }
+        model.photos = session.photos
+        try modelContext.save()
+    }
+    
+    public func delete(_ session: WorkoutSession) async throws {
+        guard let model = try getSessionDataModel(for: session) else { return }
+        modelContext.delete(model)
+        try modelContext.save() 
+    }
+}
+
+// MARK: - Private methods
+
+private extension WorkoutRepository {
+    
+    func getSessionDataModel(for session: WorkoutSession) throws -> WorkoutSessionDataModel? {
         let sessionId = session.id
         
         let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
@@ -35,8 +52,6 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
         )
         
         let results = try modelContext.fetch(descriptor)
-        guard let model = results.first else { return }
-        model.photos = session.photos
-        try modelContext.save()
+        return results.first
     }
 }

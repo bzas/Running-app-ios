@@ -57,11 +57,5 @@ struct WorkoutCellView: View {
         )
         .padding(.horizontal, 16)
         .contentShape(Rectangle())
-        .scrollTransition(.animated.threshold(.visible(0.2))) { content, phase in
-            content
-                .opacity(phase.isIdentity ? 1 : 0.8)
-                .scaleEffect(phase.isIdentity ? 1 : 0.9)
-                .blur(radius: phase.isIdentity ? 0 : 5)
-        }
     }
 }

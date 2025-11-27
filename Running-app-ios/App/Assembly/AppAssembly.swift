@@ -32,10 +32,12 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
         let garminUseCase = makeGarminUseCase()
         let workoutsUseCase = makeWorkoutsUseCase()
+        let workoutDeletionUseCase = makeWorkoutDeletionUseCase()
         
         return WorkoutsViewModel(
             garminUseCase: garminUseCase,
-            workoutsUseCase: workoutsUseCase
+            workoutsUseCase: workoutsUseCase,
+            workoutDeletionUseCase: workoutDeletionUseCase
         )
     }
 }
@@ -121,6 +123,12 @@ private extension AppAssembly {
     func makeGetUserUseCase() -> GetUserUseCase {
         GetUserUseCase(
             repository: container.userRepository
+        )
+    }
+    
+    func makeWorkoutDeletionUseCase() -> WorkoutDeletionUseCase {
+        WorkoutDeletionUseCase(
+            repository: container.workoutRepository
         )
     }
 }

@@ -22,6 +22,9 @@ struct WorkoutRowView: View {
             WorkoutCellView(session: session)
         }
         .buttonStyle(.plain)
+        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
         .matchedTransitionSource(
             id: TransitionManager.detailTransitionId(for: session.id),
             in: nameSpace

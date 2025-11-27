@@ -39,18 +39,18 @@ struct WorkoutsView: View {
                     type: .workouts
                 )
             } else {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewModel.sessions) { session in
-                            WorkoutRowView(
-                                session: session,
-                                nameSpace: nameSpace,
-                                onTap: onOpenSession
-                            )
-                        }
+                List {
+                    ForEach(viewModel.sessions) { session in
+                        WorkoutRowView(
+                            session: session,
+                            nameSpace: nameSpace,
+                            onTap: onOpenSession
+                        )
                     }
+                    .onDelete(perform: viewModel.deleteSessions)
                     .padding(.bottom)
                 }
+                .listStyle(.plain)
             }
         }
         .navigationTitle(Localizables.Workouts.title)
