@@ -5,7 +5,7 @@ iOS application (SwiftUI) for running data and stats. This project is in its ini
 
 The app follows a modular Clean Architecture combined with MVVM and a Coordinator system to ensure scalability, testability, and maintainability. Each layer has a clear responsibility and communicates only through well-defined interfaces.
 
-<img src="images/Architecture.svg" width="600" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Architecture.svg" width="600" />
 
 The project is divided into independent modules:
 - App:
@@ -40,11 +40,11 @@ The project is divided into independent modules:
 ## Features
 
 <p align="left">
-<img src="images/Detail.PNG" width="275" />
-<img src="images/DetailInfo.PNG" width="275" />
-<img src="images/HeartRate.PNG" width="275" />
-<img src="images/Gallery.PNG" width="275" />
-<img src="images/Workouts.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Detail.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/DetailInfo.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/HeartRate.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Gallery.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Workouts.PNG" width="275" />
 </p>
 
 - Garmin integration for reading fitness data
