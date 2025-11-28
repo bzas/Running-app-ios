@@ -16,7 +16,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../Domain")
+        .package(path: "../Domain"),
+        .package(path: "../GarminKit")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -27,6 +28,10 @@ let package = Package(
                 .product(
                     name: "Domain",
                     package: "Domain"
+                ),
+                .product(
+                    name: "GarminKit",
+                    package: "GarminKit"
                 )
             ]
         ),

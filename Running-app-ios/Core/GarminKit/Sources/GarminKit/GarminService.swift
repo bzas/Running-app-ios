@@ -9,7 +9,7 @@ import Foundation
 import FITSwiftSDK
 import Domain
 
-public struct GarminService: GarminServiceProtocol {
+public actor GarminService: GarminServiceProtocol {
     
     public init() {}
     
