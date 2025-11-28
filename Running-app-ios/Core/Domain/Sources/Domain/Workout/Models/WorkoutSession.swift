@@ -23,7 +23,7 @@ public struct WorkoutSession: Identifiable, Sendable {
     public var latitude: Double?
     public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPoint]
-    public var photos: [Data]
+    public var photos: [SessionPhoto]
     public var sessionKmTrackPoints: [WorkoutSessionTrackPoint] = []
     public var paceInSecondsPerKm: [Double] = []
     public var distanceInKm: Double
@@ -50,7 +50,7 @@ public struct WorkoutSession: Identifiable, Sendable {
         latitude: Double?,
         longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPoint],
-        photos: [Data],
+        photos: [SessionPhoto],
         verticalOscillation: Double?,
         groundContactTime: Int?
     ) {

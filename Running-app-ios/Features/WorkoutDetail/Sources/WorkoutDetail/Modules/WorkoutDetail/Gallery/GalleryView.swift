@@ -22,15 +22,12 @@ struct GalleryView: View {
                 } else {
                     ScrollView(.horizontal) {
                         LazyHStack {
-                            ForEach(Array(viewModel.session.photos.enumerated()), id: \.1.hashValue) { index, photoData in
-                                if let uiImage = UIImage(data: photoData) {
-                                    let photoItem = PhotoItem(image: uiImage)
-                                    PhotoCellView(
-                                        photoItem: photoItem,
-                                        nameSpace: nameSpace,
-                                        selectedPhotoItem: $viewModel.presentedPhoto
-                                    )
-                                }
+                            ForEach(viewModel.session.photos) {  photoItem in
+                                PhotoCellView(
+                                    photoItem: photoItem,
+                                    nameSpace: nameSpace,
+                                    selectedPhotoItem: $viewModel.presentedPhoto
+                                )
                             }
                         }
                         .padding()
@@ -61,7 +58,10 @@ struct GalleryView: View {
             PhotoDetailView(
                 photoItem: photoItem,
                 nameSpace: nameSpace,
-                selectedPhotoItem: $viewModel.presentedPhoto
+                selectedPhotoItem: $viewModel.presentedPhoto,
+                onDeleteImage: {
+                    viewModel.deletePhoto(photoItem)
+                }
             )
         }
     }

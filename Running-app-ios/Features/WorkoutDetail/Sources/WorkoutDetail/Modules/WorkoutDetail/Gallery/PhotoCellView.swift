@@ -7,15 +7,16 @@
 
 import SwiftUI
 import Common
+import Domain
 
 struct PhotoCellView: View {
     
-    var photoItem: PhotoItem
+    var photoItem: SessionPhoto
     var nameSpace: Namespace.ID
-    @Binding var selectedPhotoItem: PhotoItem?
+    @Binding var selectedPhotoItem: SessionPhoto?
 
     var body: some View {
-        Image(uiImage: photoItem.image)
+        Image(uiImage: ImageFetchManager.fetchImage(from: photoItem.data))
             .resizable()
             .aspectRatio(1.0, contentMode: .fill)
             .clipShape(

@@ -29,7 +29,7 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
     
     public func updatePhotos(_ session: WorkoutSession) async throws {
         guard let model = try getSessionDataModel(for: session) else { return }
-        model.photos = session.photos
+        model.photos = session.photos.map { SessionPhotoDataModel(from: $0) }
         try modelContext.save()
     }
     

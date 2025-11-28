@@ -33,7 +33,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     @Published var isGalleryPresented = false
     @Published var selectedPhoto: PhotosPickerItem?
-    @Published var presentedPhoto: PhotoItem?
+    @Published var presentedPhoto: SessionPhoto?
 
     // MARK: - Pace
     
@@ -83,7 +83,9 @@ public final class WorkoutDetailViewModel: ObservableObject {
         Task {
             do {
                 if let data = try await selectedPhoto.loadTransferable(type: Data.self) {
-                    session.photos.append(data)
+                    session.photos.append(
+                        SessionPhoto(data: data)
+                    )
                     try await galleryUseCase.updatePhotos(session)
                 }
             } catch {
@@ -91,6 +93,20 @@ public final class WorkoutDetailViewModel: ObservableObject {
             }
             
             self.selectedPhoto = nil
+        }
+    }
+    
+    func deletePhoto(_ photo: SessionPhoto) {
+        Task {
+            do {
+                session.photos.removeAll {
+                    $0.id == photo.id
+                }
+                try await galleryUseCase.updatePhotos(session)
+                presentedPhoto = nil
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

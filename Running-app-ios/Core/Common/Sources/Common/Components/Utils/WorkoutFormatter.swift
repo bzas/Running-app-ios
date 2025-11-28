@@ -5,7 +5,7 @@
 //  Created by Alfonso Boizas Crespo on 17/11/25.
 //
 
-public class WorkoutFormatter {
+public final class WorkoutFormatter {
     
     public static func pace(seconds: Double) -> String {
         guard seconds > 0 else { return "--:--" }
