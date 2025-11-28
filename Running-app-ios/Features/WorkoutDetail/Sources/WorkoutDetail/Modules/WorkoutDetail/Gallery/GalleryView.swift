@@ -56,12 +56,20 @@ struct GalleryView: View {
         .presentationDetents([.fraction(0.3)])
         .fullScreenCover(item: $viewModel.presentedPhoto) { photoItem in
             PhotoDetailView(
-                photoItem: photoItem,
+                imageData: photoItem.data,
                 nameSpace: nameSpace,
-                selectedPhotoItem: $viewModel.presentedPhoto,
                 onDeleteImage: {
                     viewModel.deletePhoto(photoItem)
+                },
+                onDismiss: {
+                    viewModel.presentedPhoto = nil
                 }
+            )
+            .navigationTransition(
+                .zoom(
+                    sourceID: TransitionManager.detailImageTransitionId(for: photoItem.id),
+                    in: nameSpace
+                )
             )
         }
     }

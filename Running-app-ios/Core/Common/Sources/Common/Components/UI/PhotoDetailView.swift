@@ -6,32 +6,28 @@
 //
 
 import SwiftUI
-import Common
-import Domain
 import UniformTypeIdentifiers
 
-struct PhotoDetailView: View {
+public struct PhotoDetailView: View {
     
-    var photoItem: SessionPhoto
     var nameSpace: Namespace.ID
-    @Binding var selectedPhotoItem: SessionPhoto?
     var onDeleteImage: () -> Void
+    var onDismiss: () -> Void
     var uiImage: UIImage
 
-    init(
-        photoItem: SessionPhoto,
+    public init(
+        imageData: Data,
         nameSpace: Namespace.ID,
-        selectedPhotoItem: Binding<SessionPhoto?>,
-        onDeleteImage: @escaping () -> Void
+        onDeleteImage: @escaping () -> Void,
+        onDismiss: @escaping () -> Void
     ) {
-        self.photoItem = photoItem
         self.nameSpace = nameSpace
-        self._selectedPhotoItem = selectedPhotoItem
         self.onDeleteImage = onDeleteImage
-        self.uiImage = ImageFetchManager.fetchImage(from: photoItem.data)
+        self.onDismiss = onDismiss
+        self.uiImage = ImageFetchManager.fetchImage(from: imageData)
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             Image(uiImage: uiImage)
                 .resizable()
@@ -39,7 +35,7 @@ struct PhotoDetailView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
-                            selectedPhotoItem = nil
+                            onDismiss()
                         } label: {
                             Image(systemName: "xmark")
                                 .clipShape(Circle())
@@ -49,10 +45,10 @@ struct PhotoDetailView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Menu {
                             ShareLink(
-                                item: ShareablePhoto(image: ImageFetchManager.fetchImage(from: photoItem.data)),
+                                item: ShareablePhoto(image: uiImage),
                                 preview: SharePreview(
                                     "Photo",
-                                    image: Image(uiImage: ImageFetchManager.fetchImage(from: photoItem.data))
+                                    image: Image(uiImage: uiImage)
                                 )
                             ) {
                                 Label(
@@ -75,12 +71,6 @@ struct PhotoDetailView: View {
                     }
                 }
         }
-        .navigationTransition(
-            .zoom(
-                sourceID: TransitionManager.detailImageTransitionId(for: photoItem.id),
-                in: nameSpace
-            )
-        )
     }
 }
 
