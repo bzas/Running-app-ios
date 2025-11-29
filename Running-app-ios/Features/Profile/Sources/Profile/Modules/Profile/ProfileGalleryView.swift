@@ -22,7 +22,19 @@ struct ProfileGalleryView: View {
                 .fontWeight(.semibold)
             
             if viewModel.photos.isEmpty {
-                PlaceholderView(type: .images)
+                VStack {
+                    Image(systemName: "camera")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(
+                            width: 30,
+                            height: 30
+                        )
+                    Text("No photos added yet")
+                }
+                .foregroundStyle(.tertiary)
+                .frame(maxWidth: .infinity)
+                .padding()
             } else {
                 ScrollView(.horizontal) {
                     LazyHStack {
@@ -37,6 +49,7 @@ struct ProfileGalleryView: View {
                             }
                         }
                     }
+                    .padding()
                 }
                 .scrollIndicators(.hidden)
             }

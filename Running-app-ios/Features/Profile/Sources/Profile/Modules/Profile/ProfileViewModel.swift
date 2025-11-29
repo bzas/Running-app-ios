@@ -15,6 +15,7 @@ public final class ProfileViewModel: ObservableObject {
     // MARK: - Properties
     
     @Published var photos: [SessionPhoto] = []
+    @Published var userInfo: User?
     @Published var presentedPhoto: SessionPhoto?
     
     // MARK: - Use cases
@@ -52,7 +53,16 @@ extension ProfileViewModel {
     
     func setup() {
         Task {
+            await fetchUserInfo()
             await fetchGallery()
+        }
+    }
+    
+    func fetchUserInfo() async {
+        do {
+            userInfo = try await getUserUseCase.currentUser()
+        } catch {
+            print(error.localizedDescription)
         }
     }
     

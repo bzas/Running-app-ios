@@ -28,7 +28,7 @@ public struct WorkoutSummaryView: View {
             VStack(alignment: .leading){
                 Text("Pace")
                     .font(.caption2)
-                Text(WorkoutFormatter.pace(seconds: paceInSeconds))
+                Text(DataFormatter.pace(seconds: paceInSeconds))
                     .bold()
             }
             
@@ -37,7 +37,7 @@ public struct WorkoutSummaryView: View {
             VStack(alignment: .leading) {
                 Text("Distance")
                     .font(.caption2)
-                Text(WorkoutFormatter.distance(distance))
+                Text(DataFormatter.distance(distance))
                     .bold()
             }
             
@@ -46,7 +46,7 @@ public struct WorkoutSummaryView: View {
             VStack(alignment: .leading) {
                 Text("Time")
                     .font(.caption2)
-                Text(WorkoutFormatter.time(time))
+                Text(DataFormatter.time(time))
                     .bold()
             }
         }

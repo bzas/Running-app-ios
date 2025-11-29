@@ -46,7 +46,7 @@ struct WorkoutDetailBottomBarView: View {
             VStack {
                 Text(viewModel.session.name)
                     .bold()
-                Text(WorkoutFormatter.distance(viewModel.session.distanceInKm))
+                Text(DataFormatter.distance(viewModel.session.distanceInKm))
                     .opacity(0.5)
             }
             .font(.footnote)

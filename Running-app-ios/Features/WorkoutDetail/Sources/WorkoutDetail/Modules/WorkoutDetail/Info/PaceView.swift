@@ -26,7 +26,7 @@ struct PaceView: View {
             
             RuleMark(
                 y: .value(
-                    WorkoutFormatter.pace(seconds: viewModel.session.paceInSeconds),
+                    DataFormatter.pace(seconds: viewModel.session.paceInSeconds),
                     viewModel.session.paceInSeconds
                 )
             )
@@ -35,7 +35,7 @@ struct PaceView: View {
             .opacity(0.75)
             .annotation(position: .top,
                         alignment: .center) {
-                Text(WorkoutFormatter.pace(seconds: viewModel.session.paceInSeconds))
+                Text(DataFormatter.pace(seconds: viewModel.session.paceInSeconds))
                     .font(.caption2)
                     .opacity(0.75)
             }
@@ -47,7 +47,7 @@ struct PaceView: View {
                 AxisGridLine()
                 AxisValueLabel {
                     if let seconds = value.as(Double.self) {
-                        Text(WorkoutFormatter.pace(seconds: seconds))
+                        Text(DataFormatter.pace(seconds: seconds))
                             .font(.caption2)
                     }
                 }

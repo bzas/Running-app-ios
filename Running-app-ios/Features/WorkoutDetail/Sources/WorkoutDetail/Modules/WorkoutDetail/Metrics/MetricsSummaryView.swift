@@ -19,7 +19,7 @@ struct MetricsSummaryView: View {
                 VStack(alignment: .leading){
                     Text("Cadence")
                         .font(.caption2)
-                    Text(WorkoutFormatter.cadence(cadence))
+                    Text(DataFormatter.cadence(cadence))
                         .bold()
                 }
                 Spacer()
@@ -30,7 +30,7 @@ struct MetricsSummaryView: View {
                 VStack(alignment: .leading) {
                     Text("Vertical Oscillation")
                         .font(.caption2)
-                    Text(WorkoutFormatter.verticalOscillation(verticalOscillation))
+                    Text(DataFormatter.verticalOscillation(verticalOscillation))
                         .bold()
                 }
                 Spacer()
@@ -40,7 +40,7 @@ struct MetricsSummaryView: View {
                 VStack(alignment: .leading) {
                     Text("Ground Contact Time")
                         .font(.caption2)
-                    Text(WorkoutFormatter.groundContactTime(groundContactTime))
+                    Text(DataFormatter.groundContactTime(groundContactTime))
                         .bold()
                 }
             }

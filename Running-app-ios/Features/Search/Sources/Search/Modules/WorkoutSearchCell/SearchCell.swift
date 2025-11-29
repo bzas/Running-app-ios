@@ -20,7 +20,7 @@ struct SearchCell: View {
                 Text(session.name)
                     .font(.body)
                 
-                Text(WorkoutFormatter.distance(session.distanceInKm))
+                Text(DataFormatter.distance(session.distanceInKm))
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
@@ -34,7 +34,7 @@ struct SearchCell: View {
                 
                 Spacer()
                 
-                Text(WorkoutFormatter.time(session.totalTime))
+                Text(DataFormatter.time(session.totalTime))
                     .font(.callout)
             }
         }

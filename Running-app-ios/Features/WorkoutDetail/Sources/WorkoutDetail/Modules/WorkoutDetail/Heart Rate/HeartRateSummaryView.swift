@@ -19,7 +19,7 @@ struct HeartRateSummaryView: View {
                 Text("Average heart rate")
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(WorkoutFormatter.heartRate(viewModel.session.heartRate))
+                Text(DataFormatter.heartRate(viewModel.session.heartRate))
                     .bold()
             }
             
@@ -27,7 +27,7 @@ struct HeartRateSummaryView: View {
                 Text("Maximum heart rate")
                     .foregroundStyle(.secondary)
                 Spacer()
-                Text(WorkoutFormatter.heartRate(viewModel.session.maxHeartRate))
+                Text(DataFormatter.heartRate(viewModel.session.maxHeartRate))
                     .bold()
             }
         }

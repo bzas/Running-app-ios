@@ -36,7 +36,7 @@ struct CadenceView: View {
                 if let cadence = viewModel.session.cadence {
                     RuleMark(
                         y: .value(
-                            WorkoutFormatter.cadence(cadence),
+                            DataFormatter.cadence(cadence),
                             cadence
                         )
                     )
@@ -44,7 +44,7 @@ struct CadenceView: View {
                     .foregroundStyle(Color(uiColor: .label))
                     .annotation(position: .top,
                                 alignment: .center) {
-                        Text(WorkoutFormatter.cadence(cadence))
+                        Text(DataFormatter.cadence(cadence))
                             .font(.caption)
                             .foregroundStyle(Color(uiColor: .label))
                     }

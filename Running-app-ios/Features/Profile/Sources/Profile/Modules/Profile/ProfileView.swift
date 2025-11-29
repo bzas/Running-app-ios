@@ -14,13 +14,18 @@ struct ProfileView: View {
     var nameSpace: Namespace.ID
     
     public var body: some View {
-        VStack(alignment: .leading) {
-            ProfileGalleryView(nameSpace: nameSpace)
-                .environmentObject(viewModel)
-            
-            Spacer()
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 24) {
+                ProfileHeaderView()
+                ActivityGridView()
+                ProfileHeartRateZonesView()
+                ProfileGalleryView(nameSpace: nameSpace)
+                Spacer()
+            }
+            .environmentObject(viewModel)
+            .padding()
         }
-        .padding()
+        .scrollIndicators(.hidden)
         .navigationTitle(Localizables.Profile.title)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

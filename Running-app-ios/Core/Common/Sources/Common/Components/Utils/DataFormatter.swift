@@ -1,11 +1,11 @@
 //
-//  WorkoutFormatter.swift
+//  DataFormatter.swift
 //  Workouts
 //
 //  Created by Alfonso Boizas Crespo on 17/11/25.
 //
 
-public final class WorkoutFormatter {
+public final class DataFormatter {
     
     public static func pace(seconds: Double) -> String {
         guard seconds > 0 else { return "--:--" }
@@ -39,6 +39,23 @@ public final class WorkoutFormatter {
         return "\(heartRate) bpm"
     }
     
+    public static func heartRateRange(minHeartRate: Int?, maxHeartRate: Int?) -> String {
+        if let minHeartRate,
+           let maxHeartRate {
+            if minHeartRate == 0 {
+                return "<\(maxHeartRate) bpm"
+            } else if maxHeartRate == 250 {
+                return "\(minHeartRate)+ bpm"
+            }
+            return "\(minHeartRate)-\(maxHeartRate) bpm"
+        } else if let minHeartRate {
+            return "\(minHeartRate)+ bpm"
+        } else if let maxHeartRate {
+            return "<\(maxHeartRate) bpm"
+        }
+        return ""
+    }
+    
     public static func elevation(_ meters: Double) -> String {
         "\(Int(meters)) m"
     }
@@ -53,5 +70,9 @@ public final class WorkoutFormatter {
     
     public static func groundContactTime(_ millisecs: Int) -> String {
         "\(millisecs) ms"
+    }
+    
+    public static func age(_ age: Int) -> String {
+        "(\(age) years)"
     }
 }
