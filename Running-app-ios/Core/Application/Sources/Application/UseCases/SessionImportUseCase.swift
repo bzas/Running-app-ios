@@ -6,6 +6,7 @@
 //
 
 import Domain
+import Foundation
 
 public actor SessionImportUseCase {
     
@@ -17,5 +18,9 @@ public actor SessionImportUseCase {
     
     public func fetchAllSessions() async throws -> [WorkoutSession] {
         try await repository.fetchAll()
+    }
+    
+    public func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {
+        try await repository.fetchSession(with: sessionId)
     }
 }

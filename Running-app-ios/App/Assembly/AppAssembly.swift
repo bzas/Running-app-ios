@@ -47,7 +47,15 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
 extension AppAssembly: ProfileAssemblyProtocol {
     
     public func makeProfileViewModel() -> ProfileViewModel {
-        ProfileViewModel()
+        let getGalleryUseCase = makeGetGalleryUseCase()
+        let updateGalleryUseCase = makeUpdateGalleryUseCase()
+        let getUserUseCase = makeGetUserUseCase()
+
+        return ProfileViewModel(
+            getGalleryUseCase: getGalleryUseCase,
+            updateGalleryUseCase: updateGalleryUseCase,
+            getUserUseCase: getUserUseCase
+        )
     }
 }
 
@@ -86,12 +94,14 @@ extension AppAssembly: WorkoutDetailAssemblyProtocol {
         onDismiss: @escaping () -> Void
     ) -> WorkoutDetailViewModel {
         let getUserUseCase = makeGetUserUseCase()
-        let galleryUseCase = makeGalleryUseCase()
+        let updateGalleryUseCase = makeUpdateGalleryUseCase()
+        let sessionImportUseCase = makeSessionImportUseCase()
 
         return WorkoutDetailViewModel(
             session: session,
             getUserUseCase: getUserUseCase,
-            galleryUseCase: galleryUseCase,
+            updateGalleryUseCase: updateGalleryUseCase,
+            sessionImportUseCase: sessionImportUseCase,
             onDismiss: onDismiss
         )
     }
@@ -132,8 +142,14 @@ private extension AppAssembly {
         )
     }
     
-    func makeGalleryUseCase() -> GalleryUseCase {
-        GalleryUseCase(
+    func makeUpdateGalleryUseCase() -> UpdateGalleryUseCase {
+        UpdateGalleryUseCase(
+            repository: container.workoutRepository
+        )
+    }
+    
+    func makeGetGalleryUseCase() -> GetGalleryUseCase {
+        GetGalleryUseCase(
             repository: container.workoutRepository
         )
     }

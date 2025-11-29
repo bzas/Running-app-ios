@@ -30,9 +30,7 @@ public final class WorkoutsViewModel: ObservableObject {
         self.sessionImportUseCase = sessionImportUseCase
         self.workoutDeletionUseCase = workoutDeletionUseCase
         
-        Task {
-            await fetchAll()
-        }
+        fetchAll()
     }
     
     func importFile(from file: URL) {
@@ -41,19 +39,21 @@ public final class WorkoutsViewModel: ObservableObject {
         Task {
             do {
                 try await garminUseCase.importSession(from: file)
-                await fetchAll()
+                fetchAll()
             } catch {
                 print(error.localizedDescription)
             }
         }
     }
     
-    func fetchAll() async {
-        do {
-            sessions = try await sessionImportUseCase.fetchAllSessions()
-            isLoading = false
-        } catch {
-            print(error.localizedDescription)
+    func fetchAll() {
+        Task {
+            do {
+                sessions = try await sessionImportUseCase.fetchAllSessions()
+                isLoading = false
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
@@ -63,7 +63,7 @@ public final class WorkoutsViewModel: ObservableObject {
                 for offset in offsets {
                     try await workoutDeletionUseCase.delete(sessions[offset])
                 }
-                await fetchAll()
+                fetchAll()
             } catch {
                 print(error.localizedDescription)
             }

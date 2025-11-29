@@ -6,17 +6,25 @@
 //
 
 import SwiftUI
-import Common
-import Domain
 
-struct PhotoCellView: View {
+public struct PhotoCellView: View {
     
-    var photoItem: SessionPhoto
+    let photoId: UUID
+    let photoData: Data
     var nameSpace: Namespace.ID
-    @Binding var selectedPhotoItem: SessionPhoto?
+    
+    public init(
+        photoId: UUID,
+        photoData: Data,
+        nameSpace: Namespace.ID
+    ) {
+        self.photoId = photoId
+        self.photoData = photoData
+        self.nameSpace = nameSpace
+    }
 
-    var body: some View {
-        Image(uiImage: ImageFetchManager.fetchImage(from: photoItem.data))
+    public var body: some View {
+        Image(uiImage: ImageFetchManager.fetchImage(from: photoData))
             .resizable()
             .aspectRatio(1.0, contentMode: .fill)
             .clipShape(
@@ -28,11 +36,8 @@ struct PhotoCellView: View {
                 )
             )
             .matchedTransitionSource(
-                id: TransitionManager.detailImageTransitionId(for: photoItem.id),
+                id: TransitionManager.detailImageTransitionId(for: photoId),
                 in: nameSpace
             )
-            .onTapGesture {
-                selectedPhotoItem = photoItem
-            }
     }
 }

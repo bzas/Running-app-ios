@@ -40,5 +40,8 @@ public struct WorkoutDetailView: View {
                     .environmentObject(viewModel)
             }
         }
+        .onAppear {
+            viewModel.setup()
+        }
     }
 }

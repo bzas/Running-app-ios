@@ -11,7 +11,7 @@ import Domain
 
 struct MetricsSummaryView: View {
     
-    @State var session: WorkoutSession
+    let session: WorkoutSession
 
     var body: some View {
         HStack {

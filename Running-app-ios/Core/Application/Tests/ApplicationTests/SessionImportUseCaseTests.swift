@@ -9,6 +9,7 @@ import Testing
 import Domain
 import TestSupport
 @testable import Application
+import Foundation
 
 struct SessionImportUseCaseTests {
 
@@ -22,5 +23,26 @@ struct SessionImportUseCaseTests {
 
         #expect(sessions.count == expectedSessions.count)
         #expect(sessions.first?.id == expectedSessions.first?.id)
+    }
+    
+    @Test func testFetchSession() async throws {
+        let repository = WorkoutRepositoryMock()
+        let expectedSession = WorkoutSession.mock
+        await repository.setFetchSessionResult(expectedSession)
+        let useCase = SessionImportUseCase(repository: repository)
+        
+        let session = try await useCase.fetchSession(with: expectedSession.id)
+        
+        #expect(session.id == expectedSession.id)
+    }
+    
+    @Test func testFetchSessionFailure() async throws {
+        let repository = WorkoutRepositoryMock()
+        await repository.setFetchSessionError(DatabaseMockError.sessionNotFound)
+        let useCase = SessionImportUseCase(repository: repository)
+        
+        await #expect(throws: Error.self) {
+            _ = try await useCase.fetchSession(with: UUID())
+        }
     }
 }

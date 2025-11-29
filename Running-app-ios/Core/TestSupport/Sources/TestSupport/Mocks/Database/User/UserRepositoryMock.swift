@@ -37,5 +37,6 @@ public actor UserRepositoryMock: UserRepositoryProtocol {
 }
 
 public enum DatabaseMockError: Error {
-    case noUserData
+    case noUserData,
+         sessionNotFound
 }

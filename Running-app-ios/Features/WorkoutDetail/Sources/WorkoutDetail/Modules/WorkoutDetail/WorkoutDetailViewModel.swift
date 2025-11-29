@@ -27,7 +27,8 @@ public final class WorkoutDetailViewModel: ObservableObject {
     // MARK: - Use case
     
     private var getUserUseCase: GetUserUseCase
-    private var galleryUseCase: GalleryUseCase
+    private var updateGalleryUseCase: UpdateGalleryUseCase
+    private var sessionImportUseCase: SessionImportUseCase
 
     // MARK: - Gallery
     
@@ -67,14 +68,24 @@ public final class WorkoutDetailViewModel: ObservableObject {
     public init(
         session: WorkoutSession,
         getUserUseCase: GetUserUseCase,
-        galleryUseCase: GalleryUseCase,
+        updateGalleryUseCase: UpdateGalleryUseCase,
+        sessionImportUseCase: SessionImportUseCase,
         onDismiss: @escaping () -> Void
     ) {
         self.session = session
         self.getUserUseCase = getUserUseCase
-        self.galleryUseCase = galleryUseCase
+        self.updateGalleryUseCase = updateGalleryUseCase
+        self.sessionImportUseCase = sessionImportUseCase
         self.onDismiss = onDismiss
-        setup()
+    }
+    
+    func setup() {
+        Task {
+            await reloadSessionInfo()
+            await calculateHeartRateZones()
+            calculatePaceInfo()
+            createChartsData()
+        }
     }
     
     func storePhoto() {
@@ -86,7 +97,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
                     session.photos.append(
                         SessionPhoto(data: data)
                     )
-                    try await galleryUseCase.updatePhotos(session)
+                    try await updateGalleryUseCase.updatePhotos(session)
                 }
             } catch {
                 print(error.localizedDescription)
@@ -102,7 +113,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
                 session.photos.removeAll {
                     $0.id == photo.id
                 }
-                try await galleryUseCase.updatePhotos(session)
+                try await updateGalleryUseCase.updatePhotos(session)
                 presentedPhoto = nil
             } catch {
                 print(error.localizedDescription)
@@ -115,11 +126,11 @@ public final class WorkoutDetailViewModel: ObservableObject {
 
 private extension WorkoutDetailViewModel {
     
-    func setup() {        
-        Task {
-            await calculateHeartRateZones()
-            calculatePaceInfo()
-            createChartsData()
+    func reloadSessionInfo() async {
+        do {
+            session = try await sessionImportUseCase.fetchSession(with: session.id)
+        } catch {
+            print(error.localizedDescription)
         }
     }
     

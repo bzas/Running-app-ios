@@ -44,6 +44,12 @@ struct WorkoutDetailRootView: View {
                 nameSpace: nameSpace
             )
         }
+        .navigationTransition(
+            .zoom(
+                sourceID: TransitionManager.detailTransitionId(for: viewModel.session.id),
+                in: nameSpace
+            )
+        )
         .sheet(isPresented: $viewModel.isDetailInfoPresented) {
             DetailInfoView()
                 .environmentObject(viewModel)
@@ -73,6 +79,24 @@ struct WorkoutDetailRootView: View {
                         in: nameSpace
                     )
                 )
+                .fullScreenCover(item: $viewModel.presentedPhoto) { photoItem in
+                    PhotoDetailView(
+                        imageData: photoItem.data,
+                        nameSpace: nameSpace,
+                        onDeleteImage: {
+                            viewModel.deletePhoto(photoItem)
+                        },
+                        onDismiss: {
+                            viewModel.presentedPhoto = nil
+                        }
+                    )
+                    .navigationTransition(
+                        .zoom(
+                            sourceID: TransitionManager.detailImageTransitionId(for: photoItem.id),
+                            in: nameSpace
+                        )
+                    )
+                }
         }
         .sheet(isPresented: $viewModel.isMetricsInfoPresented) {
             MetricsView()
@@ -84,11 +108,5 @@ struct WorkoutDetailRootView: View {
                     )
                 )
         }
-        .navigationTransition(
-            .zoom(
-                sourceID: TransitionManager.detailTransitionId(for: viewModel.session.id),
-                in: nameSpace
-            )
-        )
     }
 }

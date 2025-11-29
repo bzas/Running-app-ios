@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
+import Localization
 
 struct ProfileView: View {
     
-    @StateObject var viewModel: ProfileViewModel
-
-    public init(viewModel: ProfileViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @EnvironmentObject var viewModel: ProfileViewModel
+    var nameSpace: Namespace.ID
     
     public var body: some View {
-        Text("Profile")
+        VStack(alignment: .leading) {
+            ProfileGalleryView(nameSpace: nameSpace)
+                .environmentObject(viewModel)
+            
+            Spacer()
+        }
+        .padding()
+        .navigationTitle(Localizables.Profile.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            viewModel.setup()
+        }
     }
 }

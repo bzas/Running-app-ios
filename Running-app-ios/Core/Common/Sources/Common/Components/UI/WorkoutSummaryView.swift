@@ -9,9 +9,9 @@ import SwiftUI
 
 public struct WorkoutSummaryView: View {
     
-    @State var paceInSeconds: Double
-    @State var distance: Double
-    @State var time: Double
+    let paceInSeconds: Double
+    let distance: Double
+    let time: Double
 
     public init(
         paceInSeconds: Double,

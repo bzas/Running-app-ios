@@ -23,7 +23,7 @@ struct AppRootView: View {
                 coordinator.workoutsCoordinator.rootView()
             }
             
-            Tab(Localizables.Profile.title, systemImage: "chart.bar.xaxis.ascending") {
+            Tab(Localizables.Profile.title, systemImage: "figure.run.treadmill") {
                 coordinator.profileCoordinator.rootView()
             }
             

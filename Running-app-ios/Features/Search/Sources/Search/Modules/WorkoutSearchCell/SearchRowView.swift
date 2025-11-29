@@ -11,7 +11,7 @@ import Common
 
 struct SearchRowView: View {
     
-    @State var session: WorkoutSession
+    let session: WorkoutSession
     var nameSpace: Namespace.ID
     let onTap: (WorkoutSession) -> Void
     

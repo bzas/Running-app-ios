@@ -7,5 +7,6 @@
 
 enum DatabaseError: Error {
     case trackPointDataError,
-         noUserData
+         noUserData,
+         sessionNotFound
 }

@@ -38,6 +38,41 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
         modelContext.delete(model)
         try modelContext.save() 
     }
+    
+    public func fetchAllPhotos() async throws -> [SessionPhoto] {
+        let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
+            sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
+        )
+
+        let sessions = try modelContext.fetch(descriptor)
+        let photos = sessions.flatMap(\.photos)
+        return photos.map { $0.toDomain() }
+    }
+    
+    public func deletePhoto(_ photo: SessionPhoto) async throws {
+        let descriptor = FetchDescriptor<WorkoutSessionDataModel>()
+        let sessions = try modelContext.fetch(descriptor)
+        let photoId = photo.id
+        
+        guard let session = sessions.first(where: {
+            $0.photos.contains { $0.id == photoId }
+        }) else { return }
+        
+        session.photos.removeAll { $0.id == photoId }
+        try modelContext.save()
+    }
+    
+    public func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {
+        let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
+            predicate: #Predicate { $0.id == sessionId }
+        )
+        
+        guard let model = try modelContext.fetch(descriptor).first else {
+            throw DatabaseError.sessionNotFound
+        }
+        
+        return try model.toDomain()
+    }
 }
 
 // MARK: - Private methods

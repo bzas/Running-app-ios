@@ -24,10 +24,13 @@ struct GalleryView: View {
                         LazyHStack {
                             ForEach(viewModel.session.photos) {  photoItem in
                                 PhotoCellView(
-                                    photoItem: photoItem,
-                                    nameSpace: nameSpace,
-                                    selectedPhotoItem: $viewModel.presentedPhoto
+                                    photoId: photoItem.id,
+                                    photoData: photoItem.data,
+                                    nameSpace: nameSpace
                                 )
+                                .onTapGesture {
+                                    viewModel.presentedPhoto = photoItem
+                                }
                             }
                         }
                         .padding()
@@ -54,23 +57,5 @@ struct GalleryView: View {
         }
         .presentationBackgroundInteraction(.enabled)
         .presentationDetents([.fraction(0.3)])
-        .fullScreenCover(item: $viewModel.presentedPhoto) { photoItem in
-            PhotoDetailView(
-                imageData: photoItem.data,
-                nameSpace: nameSpace,
-                onDeleteImage: {
-                    viewModel.deletePhoto(photoItem)
-                },
-                onDismiss: {
-                    viewModel.presentedPhoto = nil
-                }
-            )
-            .navigationTransition(
-                .zoom(
-                    sourceID: TransitionManager.detailImageTransitionId(for: photoItem.id),
-                    in: nameSpace
-                )
-            )
-        }
     }
 }

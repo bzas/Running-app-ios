@@ -11,7 +11,7 @@ import Domain
 
 struct WorkoutCellView: View {
     
-    @State var session: WorkoutSession
+    let session: WorkoutSession
     
     var body: some View {
         VStack(spacing: 16) {
