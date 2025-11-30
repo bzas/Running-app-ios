@@ -16,6 +16,10 @@ public extension Date {
             for: self
         ) ?? 0
     }
+
+    var isInCurrentYear: Bool {
+        Calendar.current.isDate(self, equalTo: Date(), toGranularity: .year)
+    }
     
     static var isLeapYear: Bool {
         let year = Calendar.current.component(.year, from: Date())

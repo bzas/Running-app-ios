@@ -9,8 +9,6 @@ import Foundation
 import Domain
 import Application
 
-typealias DayAndKms = (id: UUID, day: Int, kms: Double)
-
 @MainActor
 public final class ProfileViewModel: ObservableObject {
     
@@ -20,6 +18,14 @@ public final class ProfileViewModel: ObservableObject {
     @Published var userInfo: User?
     @Published var sessions: [WorkoutSession] = []
     @Published var sessionDaysAndKmsOfYear: [DayAndKms] = []
+    
+    var totalKilometers: Double {
+        sessions.map(\.distanceInKm).reduce(0, +)
+    }
+    
+    var totalWorkouts: Int {
+        sessions.count
+    }
     
     // MARK: - Presentation
     
@@ -95,14 +101,9 @@ extension ProfileViewModel {
     func fetchSessions() async {
         do {
             sessions = try await sessionImportUseCase.fetchAllSessions()
-            sessionDaysAndKmsOfYear = sessions
-                .map {
-                    DayAndKms(
-                        id: $0.id,
-                        day: $0.timestamp?.dayOfYear ?? 0,
-                        kms: $0.distanceInKm
-                    )
-                }
+            sessionDaysAndKmsOfYear = sessions.compactMap {
+                DayAndKms(session: $0)
+            }
         } catch {
             print(error.localizedDescription)
         }

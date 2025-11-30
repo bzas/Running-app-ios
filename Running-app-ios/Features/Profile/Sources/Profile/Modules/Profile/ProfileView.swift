@@ -18,6 +18,7 @@ struct ProfileView: View {
             LazyVStack(alignment: .leading, spacing: 24) {
                 ProfileHeaderView()
                 ActivityGridView()
+                ActivitySummaryView()
                 ProfileHeartRateZonesView()
                 ProfileGalleryView(nameSpace: nameSpace)
                 Spacer()
