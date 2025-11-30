@@ -26,5 +26,6 @@ struct DayCellView: View {
                 width: cellSize,
                 height: cellSize
             )
+            .contentShape(Rectangle())
     }
 }

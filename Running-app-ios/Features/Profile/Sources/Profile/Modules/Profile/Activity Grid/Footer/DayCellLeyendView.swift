@@ -15,7 +15,7 @@ struct DayCellLeyendView: View {
         HStack(spacing: 4) {
             ForEach(Array(stride(from: 0, through: 12, by: 4)), id: \.self) { kms in
                 DayCellView(
-                    dayAndKms: DayAndKms(day: 0, kms: Double(kms)),
+                    dayAndKms: DayAndKms(id: UUID(), day: 0, kms: Double(kms)),
                     cellSize: cellSize
                 )
             }

@@ -5,6 +5,8 @@
 //  Created by Alfonso Boizas Crespo on 17/11/25.
 //
 
+import Foundation
+
 public final class DataFormatter {
     
     public static func pace(seconds: Double) -> String {
@@ -74,5 +76,13 @@ public final class DataFormatter {
     
     public static func age(_ age: Int) -> String {
         "(\(age) years)"
+    }
+    
+    public static func shortDate(_ date: Date?) -> String {
+        guard let date else { return "" }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM, dd"
+        return formatter.string(from: date).localizedCapitalized
     }
 }

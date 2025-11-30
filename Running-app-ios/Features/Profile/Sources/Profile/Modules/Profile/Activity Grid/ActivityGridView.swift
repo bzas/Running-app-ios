@@ -34,6 +34,10 @@ struct ActivityGridView: View {
                                 dayAndKms: viewModel.sessionDaysAndKmsOfYear.first(where: { $0.day == index + 1}),
                                 cellSize: cellSize
                             )
+                            .onTapGesture {
+                                viewModel.tapOnDay(index: index)
+                            }
+                            .anchorPreference(key: DayCellAnchorKey.self, value: .bounds) { [index: $0] }
                         }
                     }
                 }
@@ -43,28 +47,5 @@ struct ActivityGridView: View {
             GridFooterView(cellSize: cellSize)
         }
         .padding(.bottom)
-    }
-}
-
-// MARK: - Private methods
-
-private extension ActivityGridView {
-    
-    func daysIn(
-        monthIndex: Int,
-        year: Int = Calendar.current.component(.year, from: Date())
-    ) -> Int {
-        let components = DateComponents(
-            year: year,
-            month: monthIndex + 1
-        )
-        let calendar = Calendar.current
-        
-        let date = calendar.date(from: components)!
-        return calendar.range(
-            of: .day,
-            in: .month,
-            for: date
-        )!.count
     }
 }

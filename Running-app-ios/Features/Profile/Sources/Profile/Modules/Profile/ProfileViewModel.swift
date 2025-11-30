@@ -9,7 +9,7 @@ import Foundation
 import Domain
 import Application
 
-typealias DayAndKms = (day: Int, kms: Double)
+typealias DayAndKms = (id: UUID, day: Int, kms: Double)
 
 @MainActor
 public final class ProfileViewModel: ObservableObject {
@@ -20,8 +20,13 @@ public final class ProfileViewModel: ObservableObject {
     @Published var userInfo: User?
     @Published var sessions: [WorkoutSession] = []
     @Published var sessionDaysAndKmsOfYear: [DayAndKms] = []
-    @Published var presentedPhoto: SessionPhoto?
     
+    // MARK: - Presentation
+    
+    @Published var presentedPhoto: SessionPhoto?
+    @Published var tappedDaySession: WorkoutSession?
+    @Published var tappedDayIndex: Int?
+
     // MARK: - Use cases
     
     private let getGalleryUseCase: GetGalleryUseCase
@@ -52,6 +57,23 @@ public final class ProfileViewModel: ObservableObject {
             }
         }
     }
+    
+    func tapOnDay(index: Int) {
+        guard let daySession = sessionDaysAndKmsOfYear.first(where: { $0.day == index + 1 }) else {
+            resetDayTapped()
+            return
+        }
+        
+        tappedDayIndex = index
+        tappedDaySession = sessions.first {
+            $0.id == daySession.id
+        }
+    }
+    
+    func resetDayTapped() {
+        tappedDayIndex = nil
+        tappedDaySession = nil
+    }
 }
 
 // MARK: - Private methods
@@ -59,6 +81,7 @@ public final class ProfileViewModel: ObservableObject {
 extension ProfileViewModel {
     
     func setup() {
+        sessionDaysAndKmsOfYear = []
         sessions = []
         photos = []
         
@@ -75,6 +98,7 @@ extension ProfileViewModel {
             sessionDaysAndKmsOfYear = sessions
                 .map {
                     DayAndKms(
+                        id: $0.id,
                         day: $0.timestamp?.dayOfYear ?? 0,
                         kms: $0.distanceInKm
                     )

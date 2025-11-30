@@ -44,5 +44,29 @@ public struct ProfileRootView: View {
                 )
             )
         }
+        .overlayPreferenceValue(DayCellAnchorKey.self) { preferences in
+            GeometryReader { proxy in
+                if let tappedSession = viewModel.tappedDaySession,
+                   let tappedIndex = viewModel.tappedDayIndex,
+                   let anchor = preferences[tappedIndex] {
+                    let frame = proxy[anchor]
+                    
+                    DayInfoView(
+                        name: tappedSession.name,
+                        date: DataFormatter.shortDate(tappedSession.timestamp),
+                        distance: DataFormatter.distance(tappedSession.distanceInKm)
+                    )
+                    .onTapGesture {
+                        viewModel.resetDayTapped()
+                    }
+                    .position(
+                        x: frame.midX,
+                        y: frame.minY - 28
+                    )
+                    .transition(.opacity)
+                    .animation(.easeInOut, value: tappedIndex)
+                }
+            }
+        }
     }
 }
