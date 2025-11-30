@@ -68,5 +68,12 @@ public struct ProfileRootView: View {
                 }
             }
         }
+        .sheet(isPresented: $viewModel.isShowingEditUser) {
+            coordinator.userConfigurationCoordinator.rootView(
+                savedUser: viewModel.userInfo
+            ) {
+                viewModel.setup()
+            }
+        }
     }
 }

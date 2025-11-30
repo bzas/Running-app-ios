@@ -11,7 +11,7 @@ import Workouts
 import Localization
 import Combine
 import Profile
-import Launch
+import UserConfiguration
 import Search
 import Database
 
@@ -26,14 +26,14 @@ final class AppCoordinator: ObservableObject {
     
     var workoutsCoordinator: WorkoutsCoordinator!
     var profileCoordinator: ProfileCoordinator!
-    var launchCoordinator: LaunchCoordinator!
+    var userConfigurationCoordinator: UserConfigurationCoordinator!
     var searchCoordinator: SearchCoordinator!
         
     init() {
         assembly = AppAssembly()
         workoutsCoordinator = WorkoutsCoordinator(assembly: assembly)
         profileCoordinator = ProfileCoordinator(assembly: assembly)
-        launchCoordinator = LaunchCoordinator(assembly: assembly)
+        userConfigurationCoordinator = UserConfigurationCoordinator(assembly: assembly)
         searchCoordinator = SearchCoordinator(assembly: assembly)
     }
     

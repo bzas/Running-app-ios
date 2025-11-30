@@ -21,26 +21,22 @@ struct ProfileGalleryView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             
-            if viewModel.photos.isEmpty {
-                ProfileGalleryPlaceholderView()
-            } else {
-                ScrollView(.horizontal) {
-                    LazyHStack {
-                        ForEach(viewModel.photos) {  photoItem in
-                            PhotoCellView(
-                                photoId: photoItem.id,
-                                photoData: photoItem.data,
-                                nameSpace: nameSpace
-                            )
-                            .onTapGesture {
-                                viewModel.presentedPhoto = photoItem
-                            }
+            ScrollView(.horizontal) {
+                LazyHStack {
+                    ForEach(viewModel.photos) {  photoItem in
+                        PhotoCellView(
+                            photoId: photoItem.id,
+                            photoData: photoItem.data,
+                            nameSpace: nameSpace
+                        )
+                        .onTapGesture {
+                            viewModel.presentedPhoto = photoItem
                         }
                     }
-                    .padding()
                 }
-                .scrollIndicators(.hidden)
+                .padding()
             }
+            .scrollIndicators(.hidden)
         }
         .frame(height: 200)
     }

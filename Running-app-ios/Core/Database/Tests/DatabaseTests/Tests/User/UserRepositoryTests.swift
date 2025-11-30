@@ -38,6 +38,24 @@ struct UserRepositoryTests {
         #expect(fetched.age == user.age)
         #expect(fetched.maxHeartRate == user.maxHeartRate)
     }
+    
+    @Test func testUpdate() async throws {
+        let (repository, _) = try makeRepository()
+        let user = User.mock
+        try await repository.save(user)
+        
+        var updatedUser = user
+        updatedUser.name = "Jane Doe"
+        updatedUser.age = 40
+        updatedUser.maxHeartRate = 185
+        
+        try await repository.update(updatedUser)
+        
+        let storedUser = try await repository.fetchCurrent()
+        #expect(storedUser.name == updatedUser.name)
+        #expect(storedUser.age == updatedUser.age)
+        #expect(storedUser.maxHeartRate == updatedUser.maxHeartRate)
+    }
 }
 
 // MARK: - Helpers

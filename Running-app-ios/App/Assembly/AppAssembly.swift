@@ -9,7 +9,7 @@ import Workouts
 import Database
 import Domain
 import Application
-import Launch
+import UserConfiguration
 import Profile
 import Search
 import WorkoutDetail
@@ -61,15 +61,22 @@ extension AppAssembly: ProfileAssemblyProtocol {
     }
 }
 
-// MARK: - LaunchAssemblyProtocol conformance
+// MARK: - UserConfigurationAssemblyProtocol conformance
 
-extension AppAssembly: LaunchAssemblyProtocol {
+extension AppAssembly: UserConfigurationAssemblyProtocol {
     
-    public func makeLaunchViewModel() -> LaunchViewModel {
+    public func makeUserConfigurationViewModel(
+        savedUser: User?,
+        completion: (() -> Void)?
+    ) -> UserConfigurationViewModel {
         let createUserUseCase = makeCreateUserUseCase()
+        let editUserUseCase = makeEditUserUseCase()
         
-        return LaunchViewModel(
-            createUserUseCase: createUserUseCase
+        return UserConfigurationViewModel(
+            createUserUseCase: createUserUseCase,
+            editUserUseCase: editUserUseCase,
+            savedUser: savedUser,
+            completion: completion
         )
     }
 }
@@ -128,6 +135,12 @@ private extension AppAssembly {
     
     func makeCreateUserUseCase() -> CreateUserUseCase {
         CreateUserUseCase(
+            repository: container.userRepository
+        )
+    }
+    
+    func makeEditUserUseCase() -> EditUserUseCase {
+        EditUserUseCase(
             repository: container.userRepository
         )
     }

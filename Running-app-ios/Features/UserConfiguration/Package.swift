@@ -4,15 +4,15 @@
 import PackageDescription
 
 let package = Package(
-    name: "Launch",
+    name: "UserConfiguration",
     platforms: [
         .iOS(.v26)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Launch",
-            targets: ["Launch"]
+            name: "UserConfiguration",
+            targets: ["UserConfiguration"]
         ),
     ],
     dependencies: [
@@ -25,7 +25,7 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Launch",
+            name: "UserConfiguration",
             dependencies: [
                 .product(
                     name: "Domain",
@@ -46,8 +46,8 @@ let package = Package(
             ],
         ),
         .testTarget(
-            name: "LaunchTests",
-            dependencies: ["Launch"]
+            name: "UserConfigurationTests",
+            dependencies: ["UserConfiguration"]
         ),
     ]
 )

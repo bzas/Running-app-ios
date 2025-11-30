@@ -15,21 +15,25 @@ struct ActivitySummaryView: View {
     var body: some View {
         HStack {
             Spacer()
-            VStack {
+            VStack(spacing: 8) {
                 Text("Kilometers you run")
                     .font(.footnote)
                 
-                Text(DataFormatter.distance(viewModel.totalKilometers))
-                    .font(.title)
-                    .fontWeight(.heavy)
+                HStack(alignment: .bottom, spacing: 2) {
+                    Text("\(Int(viewModel.totalKilometers))")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                    Text("km")
+                        .baselineOffset(5)
+                }
             }
             Spacer()
-            VStack {
+            VStack(spacing: 8) {
                 Text("Workouts registered")
                     .font(.footnote)
                 
                 Text("\(viewModel.totalWorkouts)")
-                    .font(.title)
+                    .font(.largeTitle)
                     .fontWeight(.heavy)
             }
             Spacer()

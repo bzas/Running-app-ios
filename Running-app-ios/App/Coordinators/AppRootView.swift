@@ -10,7 +10,7 @@ import Localization
 import Workouts
 import Profile
 import Search
-import Launch
+import UserConfiguration
 
 struct AppRootView: View {
     
@@ -32,7 +32,7 @@ struct AppRootView: View {
             }
         }
         .sheet(isPresented: $userDataNeeded) {
-            coordinator.launchCoordinator.rootView()
+            coordinator.userConfigurationCoordinator.rootView()
         }
     }
 }

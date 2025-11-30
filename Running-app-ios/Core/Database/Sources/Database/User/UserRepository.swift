@@ -10,10 +10,22 @@ import SwiftData
 
 @ModelActor
 public actor UserRepository: UserRepositoryProtocol {
-        
+    
     public func save(_ user: User) async throws {
         let model = UserDataModel(from: user)
         modelContext.insert(model)
+        try modelContext.save()
+    }
+    
+    public func update(_ user: User) async throws {
+        let descriptor = FetchDescriptor<UserDataModel>()
+        guard let storedUser = try modelContext.fetch(descriptor).first else {
+            throw DatabaseError.noUserData
+        }
+        
+        storedUser.name = user.name
+        storedUser.age = user.age
+        storedUser.maxHeartRate = user.maxHeartRate
         try modelContext.save()
     }
     

@@ -19,7 +19,8 @@ let package = Package(
         .package(path: "../Domain"),
         .package(path: "../Application"),
         .package(path: "../Common"),
-        .package(path: "../Localization")
+        .package(path: "../Localization"),
+        .package(path: "../UserConfiguration")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -42,6 +43,10 @@ let package = Package(
                 .product(
                     name: "Localization",
                     package: "Localization"
+                ),
+                .product(
+                    name: "UserConfiguration",
+                    package: "UserConfiguration"
                 )
             ]
         ),

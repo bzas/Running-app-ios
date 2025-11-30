@@ -19,6 +19,15 @@ public actor UserRepositoryMock: UserRepositoryProtocol {
         savedUsers.append(user)
     }
     
+    public func update(_ user: User) async throws {
+        if savedUsers.isEmpty {
+            savedUsers.append(user)
+        } else {
+            savedUsers[0] = user
+        }
+        fetchCurrentResult = user
+    }
+    
     public func fetchCurrent() async throws -> User {
         if let error = fetchCurrentError { throw error }
         guard let result = fetchCurrentResult else {

@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import UserConfiguration
 
 @MainActor
 public final class ProfileCoordinator: ObservableObject {
     
-    let assembly: ProfileAssemblyProtocol
+    let assembly: ProfileAssemblyProtocol & UserConfigurationAssemblyProtocol
+    let userConfigurationCoordinator: UserConfigurationCoordinator
     
-    public init(assembly: ProfileAssemblyProtocol) {
+    public init(assembly: ProfileAssemblyProtocol & UserConfigurationAssemblyProtocol) {
         self.assembly = assembly
+        self.userConfigurationCoordinator = UserConfigurationCoordinator(assembly: assembly)
     }
     
     @ViewBuilder

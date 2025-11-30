@@ -60,8 +60,12 @@ struct WorkoutsView: View {
                 Button {
                     onOpenFilePicker()
                 } label: {
-                    Image(systemName: "plus")
-                        .clipShape(Circle())
+                    HStack(spacing: 12) {
+                        Image(systemName: "plus")
+                            .font(.footnote)
+                        Text("Add")
+                    }
+                    .padding(.horizontal, 6)
                 }
             }
         }

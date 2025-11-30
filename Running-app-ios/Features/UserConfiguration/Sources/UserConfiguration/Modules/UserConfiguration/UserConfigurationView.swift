@@ -1,18 +1,18 @@
 //
-//  LaunchView.swift
-//  Launch
+//  UserConfigurationView.swift
+//  UserConfiguration
 //
 //  Created by Alfonso Boizas Crespo on 19/11/25.
 //
 
 import SwiftUI
 
-struct LaunchView: View {
+struct UserConfigurationView: View {
     
     @AppStorage("userDataNeeded") var userDataNeeded: Bool = true
-    @StateObject var viewModel: LaunchViewModel
+    @StateObject var viewModel: UserConfigurationViewModel
     
-    init(viewModel: LaunchViewModel) {
+    init(viewModel: UserConfigurationViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -30,7 +30,7 @@ struct LaunchView: View {
         }
         .navigationTitle("About you")
         .navigationBarTitleDisplayMode(.inline)
-        .interactiveDismissDisabled()
+        .interactiveDismissDisabled(viewModel.savedUser == nil)
         .presentationDetents([.fraction(0.4)])
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

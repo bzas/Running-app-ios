@@ -8,5 +8,6 @@
 public protocol UserRepositoryProtocol: Sendable {
     
     func save(_ user: User) async throws
+    func update(_ user: User) async throws
     func fetchCurrent() async throws -> User
 }

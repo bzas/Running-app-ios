@@ -19,8 +19,12 @@ struct ProfileView: View {
                 ProfileHeaderView()
                 ActivityGridView()
                 ActivitySummaryView()
+                
+                if !viewModel.photos.isEmpty {
+                    ProfileGalleryView(nameSpace: nameSpace)
+                }
+                
                 ProfileHeartRateZonesView()
-                ProfileGalleryView(nameSpace: nameSpace)
                 Spacer()
             }
             .environmentObject(viewModel)
@@ -31,6 +35,20 @@ struct ProfileView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.setup()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.isShowingEditUser.toggle()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "square.and.pencil")
+                            .font(.footnote)
+                        Text("Edit")
+                    }
+                    .padding(.horizontal, 6)
+                }
+            }
         }
     }
 }

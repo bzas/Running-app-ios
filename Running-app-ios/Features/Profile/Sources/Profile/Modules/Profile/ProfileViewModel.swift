@@ -32,6 +32,7 @@ public final class ProfileViewModel: ObservableObject {
     @Published var presentedPhoto: SessionPhoto?
     @Published var tappedDaySession: WorkoutSession?
     @Published var tappedDayIndex: Int?
+    @Published var isShowingEditUser = false
 
     // MARK: - Use cases
     
@@ -87,41 +88,46 @@ public final class ProfileViewModel: ObservableObject {
 extension ProfileViewModel {
     
     func setup() {
+        isShowingEditUser = false
         sessionDaysAndKmsOfYear = []
         sessions = []
         photos = []
         
+        fetchSessions()
+        fetchUserInfo()
+        fetchGallery()
+    }
+    
+    func fetchSessions() {
         Task {
-            await fetchSessions()
-            await fetchUserInfo()
-            await fetchGallery()
-        }
-    }
-    
-    func fetchSessions() async {
-        do {
-            sessions = try await sessionImportUseCase.fetchAllSessions()
-            sessionDaysAndKmsOfYear = sessions.compactMap {
-                DayAndKms(session: $0)
+            do {
+                sessions = try await sessionImportUseCase.fetchAllSessions()
+                sessionDaysAndKmsOfYear = sessions.compactMap {
+                    DayAndKms(session: $0)
+                }
+            } catch {
+                print(error.localizedDescription)
             }
-        } catch {
-            print(error.localizedDescription)
         }
     }
     
-    func fetchUserInfo() async {
-        do {
-            userInfo = try await getUserUseCase.currentUser()
-        } catch {
-            print(error.localizedDescription)
+    func fetchUserInfo() {
+        Task {
+            do {
+                userInfo = try await getUserUseCase.currentUser()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     
-    func fetchGallery() async {
-        do {
-            photos = try await getGalleryUseCase.getAllPhotos()
-        } catch {
-            print(error.localizedDescription)
+    func fetchGallery() {
+        Task {
+            do {
+                photos = try await getGalleryUseCase.getAllPhotos()
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

@@ -7,9 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import Workouts
-import Launch
-import Database
 
 @main
 struct Running_app_iosApp: App {
