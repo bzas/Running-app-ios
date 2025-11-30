@@ -19,7 +19,7 @@ struct ElevationSummaryView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.elevation(viewModel.maxAltitude))
-                    .bold()
+                    .fontWeight(.semibold)
             }
             
             HStack {
@@ -27,7 +27,7 @@ struct ElevationSummaryView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.elevation(viewModel.minAltitude))
-                    .bold()
+                    .fontWeight(.semibold)
             }
         }
         .font(.callout)

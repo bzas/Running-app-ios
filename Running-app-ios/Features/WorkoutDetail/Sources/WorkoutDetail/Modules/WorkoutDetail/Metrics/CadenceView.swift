@@ -18,7 +18,7 @@ struct CadenceView: View {
             HStack {
                 Text("Cadence")
                     .font(.body)
-                    .bold()
+                    .fontWeight(.semibold)
                 Spacer()
             }
             

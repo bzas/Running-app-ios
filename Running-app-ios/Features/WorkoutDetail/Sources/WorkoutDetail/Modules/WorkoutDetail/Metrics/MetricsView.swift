@@ -13,9 +13,7 @@ struct MetricsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Metrics")
-                .font(.title2)
-                .fontWeight(.semibold)
+            SectionTitleView(title: "Metrics")
 
             VStack(spacing: 32) {
                 MetricsSummaryView(session: viewModel.session)
@@ -35,6 +33,6 @@ struct MetricsView: View {
             )
         )
         .presentationBackgroundInteraction(.enabled)
-        .presentationDetents([.fraction(0.45)])
+        .presentationDetents([.fraction(0.5)])
     }
 }

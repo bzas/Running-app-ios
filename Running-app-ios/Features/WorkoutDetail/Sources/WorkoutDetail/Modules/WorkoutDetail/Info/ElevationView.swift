@@ -17,7 +17,7 @@ struct ElevationView: View {
             HStack {
                 Text("Elevation")
                     .font(.body)
-                    .bold()
+                    .fontWeight(.semibold)
                 Spacer()
             }
             

@@ -23,7 +23,7 @@ struct SingleHeartRateZoneView: View {
         HStack(spacing: 16) {
             Text(zoneNumber.title)
                 .font(.callout)
-                .bold()
+                .fontWeight(.semibold)
                 .foregroundStyle(zoneNumber.color)
             
             HStack(spacing: 4) {

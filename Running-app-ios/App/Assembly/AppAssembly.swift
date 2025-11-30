@@ -50,11 +50,13 @@ extension AppAssembly: ProfileAssemblyProtocol {
         let getGalleryUseCase = makeGetGalleryUseCase()
         let updateGalleryUseCase = makeUpdateGalleryUseCase()
         let getUserUseCase = makeGetUserUseCase()
+        let sessionImportUseCase = makeSessionImportUseCase()
 
         return ProfileViewModel(
             getGalleryUseCase: getGalleryUseCase,
             updateGalleryUseCase: updateGalleryUseCase,
-            getUserUseCase: getUserUseCase
+            getUserUseCase: getUserUseCase,
+            sessionImportUseCase: sessionImportUseCase
         )
     }
 }

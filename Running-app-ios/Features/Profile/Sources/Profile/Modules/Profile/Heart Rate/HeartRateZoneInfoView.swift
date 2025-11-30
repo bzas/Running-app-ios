@@ -29,7 +29,7 @@ struct HeartRateZoneInfoView: View {
                     maxHeartRate: zoneInfo.maxHeartRate
                 )
             )
-            .foregroundStyle(.secondary)
+            .font(.footnote)
         }
         .padding(.horizontal)
         .frame(height: 50)

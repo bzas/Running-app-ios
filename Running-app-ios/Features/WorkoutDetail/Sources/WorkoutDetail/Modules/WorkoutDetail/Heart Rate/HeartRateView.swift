@@ -14,9 +14,7 @@ struct HeartRateView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            Text("Heart Rate")
-                .font(.title2)
-                .fontWeight(.semibold)
+            SectionTitleView(title: "Heart Rate")
 
             VStack(spacing: 32) {
                 HeartRateChartView()

@@ -43,7 +43,7 @@ public struct PlaceholderView: View {
                 VStack(spacing: 8) {
                     Text(type.title)
                         .font(.title3)
-                        .bold()
+                        .fontWeight(.semibold)
 
                     Text(type.subtitle)
                         .font(.caption)

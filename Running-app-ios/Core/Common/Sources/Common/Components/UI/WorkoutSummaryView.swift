@@ -29,7 +29,7 @@ public struct WorkoutSummaryView: View {
                 Text("Pace")
                     .font(.caption2)
                 Text(DataFormatter.pace(seconds: paceInSeconds))
-                    .bold()
+                    .fontWeight(.semibold)
             }
             
             Spacer()
@@ -38,7 +38,7 @@ public struct WorkoutSummaryView: View {
                 Text("Distance")
                     .font(.caption2)
                 Text(DataFormatter.distance(distance))
-                    .bold()
+                    .fontWeight(.semibold)
             }
             
             Spacer()
@@ -47,7 +47,7 @@ public struct WorkoutSummaryView: View {
                 Text("Time")
                     .font(.caption2)
                 Text(DataFormatter.time(time))
-                    .bold()
+                    .fontWeight(.semibold)
             }
         }
     }

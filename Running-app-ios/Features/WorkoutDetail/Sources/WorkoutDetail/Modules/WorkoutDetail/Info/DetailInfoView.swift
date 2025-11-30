@@ -16,9 +16,7 @@ struct DetailInfoView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(viewModel.session.name)
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                SectionTitleView(title: viewModel.session.name)
                 
                 if let date = viewModel.session.timestamp?.formatted() {
                     Text(date)

@@ -20,7 +20,7 @@ struct HeartRateSummaryView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.heartRate(viewModel.session.heartRate))
-                    .bold()
+                    .fontWeight(.semibold)
             }
             
             HStack {
@@ -28,7 +28,7 @@ struct HeartRateSummaryView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.heartRate(viewModel.session.maxHeartRate))
-                    .bold()
+                    .fontWeight(.semibold)
             }
         }
         .font(.callout)

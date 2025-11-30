@@ -18,23 +18,11 @@ struct ProfileGalleryView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Gallery")
-                .font(.title2)
+                .font(.title3)
                 .fontWeight(.semibold)
             
             if viewModel.photos.isEmpty {
-                VStack {
-                    Image(systemName: "camera")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(
-                            width: 30,
-                            height: 30
-                        )
-                    Text("No photos added yet")
-                }
-                .foregroundStyle(.tertiary)
-                .frame(maxWidth: .infinity)
-                .padding()
+                ProfileGalleryPlaceholderView()
             } else {
                 ScrollView(.horizontal) {
                     LazyHStack {

@@ -62,8 +62,8 @@ public final class WorkoutsViewModel: ObservableObject {
             do {
                 for offset in offsets {
                     try await workoutDeletionUseCase.delete(sessions[offset])
+                    sessions.remove(at: offset)
                 }
-                fetchAll()
             } catch {
                 print(error.localizedDescription)
             }

@@ -49,34 +49,34 @@ public enum HeartRateZoneType: CaseIterable {
         switch self {
         case .zone1:
             Color(
-                red: 236/255.0,
-                green: 112/255.0,
-                blue: 99/255.0
+                red: 110/255.0,
+                green: 160/255.0,
+                blue: 200/255.0
             )
         case .zone2:
             Color(
-                red: 231/255.0,
-                green: 76/255.0,
-                blue: 60/255.0
+                red: 70/255.0,
+                green: 135/255.0,
+                blue: 200/255.0
                 
             )
         case .zone3:
             Color(
-                red: 203/255.0,
-                green: 67/255.0,
-                blue: 53/255.0
+                red: 40/255.0,
+                green: 110/255.0,
+                blue: 180/255.0
             )
         case .zone4:
             Color(
-                red: 146/255.0,
-                green: 43/255.0,
-                blue: 33/255.0
+                red: 25/255.0,
+                green: 90/255.0,
+                blue: 160/255.0
             )
         case .zone5:
             Color(
-                red: 110/255.0,
-                green: 31/255.0,
-                blue: 24/255.0,
+                red: 12/255.0,
+                green: 55/255.0,
+                blue: 120/255.0
             )
         }
     }

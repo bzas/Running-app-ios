@@ -20,7 +20,7 @@ struct MetricsSummaryView: View {
                     Text("Cadence")
                         .font(.caption2)
                     Text(DataFormatter.cadence(cadence))
-                        .bold()
+                        .fontWeight(.semibold)
                 }
                 Spacer()
             }
@@ -31,7 +31,7 @@ struct MetricsSummaryView: View {
                     Text("Vertical Oscillation")
                         .font(.caption2)
                     Text(DataFormatter.verticalOscillation(verticalOscillation))
-                        .bold()
+                        .fontWeight(.semibold)
                 }
                 Spacer()
             }
@@ -41,7 +41,7 @@ struct MetricsSummaryView: View {
                     Text("Ground Contact Time")
                         .font(.caption2)
                     Text(DataFormatter.groundContactTime(groundContactTime))
-                        .bold()
+                        .fontWeight(.semibold)
                 }
             }
         }

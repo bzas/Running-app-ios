@@ -9,6 +9,8 @@ import Foundation
 import Domain
 import Application
 
+typealias DayAndKms = (day: Int, kms: Double)
+
 @MainActor
 public final class ProfileViewModel: ObservableObject {
     
@@ -16,6 +18,8 @@ public final class ProfileViewModel: ObservableObject {
     
     @Published var photos: [SessionPhoto] = []
     @Published var userInfo: User?
+    @Published var sessions: [WorkoutSession] = []
+    @Published var sessionDaysAndKmsOfYear: [DayAndKms] = []
     @Published var presentedPhoto: SessionPhoto?
     
     // MARK: - Use cases
@@ -23,15 +27,18 @@ public final class ProfileViewModel: ObservableObject {
     private let getGalleryUseCase: GetGalleryUseCase
     private let updateGalleryUseCase: UpdateGalleryUseCase
     private let getUserUseCase: GetUserUseCase
+    private let sessionImportUseCase: SessionImportUseCase
     
     public init(
         getGalleryUseCase: GetGalleryUseCase,
         updateGalleryUseCase: UpdateGalleryUseCase,
-        getUserUseCase: GetUserUseCase
+        getUserUseCase: GetUserUseCase,
+        sessionImportUseCase: SessionImportUseCase
     ) {
         self.getGalleryUseCase = getGalleryUseCase
         self.updateGalleryUseCase = updateGalleryUseCase
         self.getUserUseCase = getUserUseCase
+        self.sessionImportUseCase = sessionImportUseCase
     }
     
     func deletePhoto(_ photo: SessionPhoto) {
@@ -52,9 +59,28 @@ public final class ProfileViewModel: ObservableObject {
 extension ProfileViewModel {
     
     func setup() {
+        sessions = []
+        photos = []
+        
         Task {
+            await fetchSessions()
             await fetchUserInfo()
             await fetchGallery()
+        }
+    }
+    
+    func fetchSessions() async {
+        do {
+            sessions = try await sessionImportUseCase.fetchAllSessions()
+            sessionDaysAndKmsOfYear = sessions
+                .map {
+                    DayAndKms(
+                        day: $0.timestamp?.dayOfYear ?? 0,
+                        kms: $0.distanceInKm
+                    )
+                }
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
