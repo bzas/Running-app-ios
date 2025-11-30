@@ -48,9 +48,6 @@ let package = Package(
                     name: "Application",
                     package: "Application"
                 )
-            ],
-            resources: [
-                .process("Resources")
             ]
         ),
         .testTarget(

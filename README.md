@@ -28,7 +28,7 @@ The project is divided into independent modules:
     - Handles parsing and mapping of Garmin .fit files into Database models
     - Based on FITSwiftSDK
     - Garmin DTO models
-- Features: (Workouts, Profile, Launch, Search, WorkoutDetail)
+- Features: (Workouts, Profile, UserConfiguration, Search, WorkoutDetail)
     - Its own Coordinator
     - A RootView
     - An Assembly protocol
@@ -36,14 +36,18 @@ The project is divided into independent modules:
     - Features remain isolated and only depend on Domain + their UseCases.
 - Localization: String localizations
 - Common: Reusable components, entities....etc
+- TestSupport:
+    - Mocks for repositories and services
+    - Shared helpers for unit tests across packages
 
 ## Features
 
 <p align="left">
 <img src="https://github.com/bzas/bzas/blob/main/images/Renn/Detail.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/DetailInfo.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Profile.PNG" width="275" />
 <img src="https://github.com/bzas/bzas/blob/main/images/Renn/HeartRate.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Gallery.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/DetailInfo.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Metrics.PNG" width="275" />
 <img src="https://github.com/bzas/bzas/blob/main/images/Renn/Workouts.PNG" width="275" />
 </p>
 
@@ -53,7 +57,15 @@ The project is divided into independent modules:
 - Graphs (pace, heart rate, elevation, heart rate zones...etc)
 - Goals, personal records, stats
 
+## How it works
+
+- Import a `.fit` file from Garmin: open the Workouts tab, tap the `+` button (top right) and pick a `.fit` file. The Garmin importer parses the FIT data (using `GarminKit`), persists it via SwiftData, and updates derived metrics (pace per km, HR zones, route coordinates, photos).
+- Browse sessions: workouts are listed with name, time, distance, pace and HR highlights. Tap one to open the detail view with charts (pace, HR, elevation), map route, splits per km, photos, and metadata.
+- Profile: See cumulative stats, activity grid, gallery, and HR zones tailored to the user.
+- Configure user: Set basic profile and HR zones; data is used to compute zones and personalized insights.
+
 ## Requirements
+
 - Xcode 26 or higher
 - iOS 26 or higher
 - Swift 6 or higher

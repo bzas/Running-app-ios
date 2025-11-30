@@ -43,12 +43,15 @@ struct SingleHeartRateZoneView: View {
                 }
                 .frame(height: 8)
                 
-                Text(
-                    DataFormatter.heartRateRange(
-                        minHeartRate: zoneInfo.lowerLimit,
-                        maxHeartRate: zoneInfo.upperLimit
+                HStack(spacing: 0) {
+                    Spacer()
+                    Text(
+                        DataFormatter.heartRateRange(
+                            minHeartRate: zoneInfo.lowerLimit,
+                            maxHeartRate: zoneInfo.upperLimit
+                        )
                     )
-                )
+                }
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .frame(width: 90)
