@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 struct MetricsView: View {
     
@@ -13,7 +14,7 @@ struct MetricsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            SectionTitleView(title: "Metrics")
+            SectionTitleView(title: Localizables.WorkoutDetail.metricsTitle)
 
             VStack(spacing: 32) {
                 MetricsSummaryView(session: viewModel.session)

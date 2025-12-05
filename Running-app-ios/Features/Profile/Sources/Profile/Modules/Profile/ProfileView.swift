@@ -44,7 +44,7 @@ struct ProfileView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "square.and.pencil")
                             .font(.footnote)
-                        Text("Edit")
+                        Text(Localizables.Common.edit)
                     }
                     .padding(.horizontal, 6)
                 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import PhotosUI
 import Common
+import Localization
 
 struct GalleryView: View {
     
@@ -38,13 +39,13 @@ struct GalleryView: View {
                     .scrollIndicators(.hidden)
                 }
             }
-            .navigationTitle("Gallery")
+            .navigationTitle(Localizables.Common.gallery)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 PhotosPicker(selection: $viewModel.selectedPhoto, matching: .images) {
                     HStack {
                         Image(systemName: "plus")
-                        Text("Add")
+                        Text(Localizables.Common.add)
                     }
                     .padding(.horizontal, 8)
                 }

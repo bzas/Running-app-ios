@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 struct UserConfigurationView: View {
     
@@ -19,16 +20,16 @@ struct UserConfigurationView: View {
     public var body: some View {
         Form {
             Section {
-                TextField("Name", text: $viewModel.name)
+                TextField(Localizables.UserConfiguration.name, text: $viewModel.name)
                 
-                TextField("Age", text: $viewModel.age)
+                TextField(Localizables.UserConfiguration.age, text: $viewModel.age)
                     .keyboardType(.numberPad)
                 
-                TextField("Maximum heart rate", text: $viewModel.maxHeartRate)
+                TextField(Localizables.UserConfiguration.maximumHeartRate, text: $viewModel.maxHeartRate)
                     .keyboardType(.numberPad)
             }
         }
-        .navigationTitle("About you")
+        .navigationTitle(Localizables.UserConfiguration.aboutYou)
         .navigationBarTitleDisplayMode(.inline)
         .interactiveDismissDisabled(viewModel.savedUser == nil)
         .presentationDetents([.fraction(0.4)])
@@ -39,7 +40,7 @@ struct UserConfigurationView: View {
                         userDataNeeded = await !viewModel.trySaveUserData()
                     }
                 } label: {
-                    Text("Save")
+                    Text(Localizables.UserConfiguration.save)
                 }
                 .buttonStyle(.borderedProminent)
                 .clipShape(Capsule())

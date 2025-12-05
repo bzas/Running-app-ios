@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Common
+import Localization
 
 struct ProfileHeartRateZonesView: View {
     
@@ -14,13 +15,13 @@ struct ProfileHeartRateZonesView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Heart Rate Zones")
+            Text(Localizables.Profile.heartRateZonesTitle)
                 .font(.title3)
                 .fontWeight(.semibold)
             
             VStack {
                 HStack {
-                    Text("Maximum heart rate")
+                    Text(Localizables.Common.maximumHeartRate)
                         .foregroundStyle(.secondary)
                     Spacer()
                     Text(DataFormatter.heartRate(viewModel.userInfo?.maxHeartRate))

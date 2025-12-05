@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 public struct WorkoutSummaryView: View {
     
@@ -26,7 +27,7 @@ public struct WorkoutSummaryView: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading){
-                Text("Pace")
+                Text(Localizables.Common.pace)
                     .font(.caption2)
                 Text(DataFormatter.pace(seconds: paceInSeconds))
                     .fontWeight(.semibold)
@@ -35,7 +36,7 @@ public struct WorkoutSummaryView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Distance")
+                Text(Localizables.Common.distance)
                     .font(.caption2)
                 Text(DataFormatter.distance(distance))
                     .fontWeight(.semibold)
@@ -44,7 +45,7 @@ public struct WorkoutSummaryView: View {
             Spacer()
             
             VStack(alignment: .leading) {
-                Text("Time")
+                Text(Localizables.Common.time)
                     .font(.caption2)
                 Text(DataFormatter.time(time))
                     .fontWeight(.semibold)

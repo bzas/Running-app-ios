@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Localization
 
 public final class DataFormatter {
     
@@ -37,23 +38,23 @@ public final class DataFormatter {
     }
     
     public static func heartRate(_ heartRate: Int?) -> String {
-        guard let heartRate else { return "- bpm" }
-        return "\(heartRate) bpm"
+        guard let heartRate else { return "- \(Localizables.Common.bpm)" }
+        return "\(heartRate) \(Localizables.Common.bpm)"
     }
     
     public static func heartRateRange(minHeartRate: Int?, maxHeartRate: Int?) -> String {
         if let minHeartRate,
            let maxHeartRate {
             if minHeartRate == 0 {
-                return "<\(maxHeartRate) bpm"
+                return "<\(maxHeartRate) \(Localizables.Common.bpm)"
             } else if maxHeartRate == 250 {
-                return "\(minHeartRate)+ bpm"
+                return "\(minHeartRate)+ \(Localizables.Common.bpm)"
             }
-            return "\(minHeartRate)-\(maxHeartRate) bpm"
+            return "\(minHeartRate)-\(maxHeartRate) \(Localizables.Common.bpm)"
         } else if let minHeartRate {
-            return "\(minHeartRate)+ bpm"
+            return "\(minHeartRate)+ \(Localizables.Common.bpm)"
         } else if let maxHeartRate {
-            return "<\(maxHeartRate) bpm"
+            return "<\(maxHeartRate) \(Localizables.Common.bpm)"
         }
         return ""
     }
@@ -63,7 +64,7 @@ public final class DataFormatter {
     }
     
     public static func cadence(_ steps: Int) -> String {
-        "\(steps) spm"
+        "\(steps) \(Localizables.Common.spm)"
     }
     
     public static func verticalOscillation(_ centimeters: Double) -> String {
@@ -75,7 +76,7 @@ public final class DataFormatter {
     }
     
     public static func age(_ age: Int) -> String {
-        "(\(age) years)"
+        "(\(age) \(Localizables.Common.years))"
     }
     
     public static func shortDate(_ date: Date?) -> String {

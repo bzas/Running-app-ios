@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Common
+import Localization
 
 struct ActivitySummaryView: View {
     
@@ -16,20 +17,20 @@ struct ActivitySummaryView: View {
         HStack {
             Spacer()
             VStack(spacing: 8) {
-                Text("Kilometers you run")
+                Text(Localizables.Profile.totalKilometers)
                     .font(.footnote)
                 
                 HStack(alignment: .bottom, spacing: 2) {
                     Text("\(Int(viewModel.totalKilometers))")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                    Text("km")
+                    Text(Localizables.Common.kilometersUnit)
                         .baselineOffset(5)
                 }
             }
             Spacer()
             VStack(spacing: 8) {
-                Text("Workouts registered")
+                Text(Localizables.Profile.workoutsRegistered)
                     .font(.footnote)
                 
                 Text("\(viewModel.totalWorkouts)")

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import Localization
 
 struct ElevationView: View {
     
@@ -15,7 +16,7 @@ struct ElevationView: View {
     var body: some View {
         VStack(spacing: 24) {
             HStack {
-                Text("Elevation")
+                Text(Localizables.WorkoutDetail.Elevation.title)
                     .font(.body)
                     .fontWeight(.semibold)
                 Spacer()

@@ -8,6 +8,7 @@
 import SwiftUI
 import Domain
 import Common
+import Localization
 
 struct HeartRateSummaryView: View {
     
@@ -16,7 +17,7 @@ struct HeartRateSummaryView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Average heart rate")
+                Text(Localizables.WorkoutDetail.HeartRateSummary.average)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.heartRate(viewModel.session.heartRate))
@@ -24,7 +25,7 @@ struct HeartRateSummaryView: View {
             }
             
             HStack {
-                Text("Maximum heart rate")
+                Text(Localizables.WorkoutDetail.HeartRateSummary.maximum)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.heartRate(viewModel.session.maxHeartRate))

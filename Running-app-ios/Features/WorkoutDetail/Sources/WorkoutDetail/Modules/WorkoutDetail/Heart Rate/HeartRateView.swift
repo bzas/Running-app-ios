@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Domain
+import Localization
 
 struct HeartRateView: View {
 
@@ -14,7 +15,7 @@ struct HeartRateView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
-            SectionTitleView(title: "Heart Rate")
+            SectionTitleView(title: Localizables.WorkoutDetail.heartRateTitle)
 
             VStack(spacing: 32) {
                 HeartRateChartView()

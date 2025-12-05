@@ -9,6 +9,7 @@
 import SwiftUI
 import PhotosUI
 import Common
+import Localization
 
 struct ProfileGalleryView: View {
     
@@ -17,7 +18,7 @@ struct ProfileGalleryView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Gallery")
+            Text(Localizables.Common.gallery)
                 .font(.title3)
                 .fontWeight(.semibold)
             

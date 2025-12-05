@@ -8,6 +8,7 @@
 import SwiftUI
 import Common
 import Domain
+import Localization
 
 struct MetricsSummaryView: View {
     
@@ -17,7 +18,7 @@ struct MetricsSummaryView: View {
         HStack {
             if let cadence = session.cadence {
                 VStack(alignment: .leading){
-                    Text("Cadence")
+                    Text(Localizables.WorkoutDetail.Metrics.cadence)
                         .font(.caption2)
                     Text(DataFormatter.cadence(cadence))
                         .fontWeight(.semibold)
@@ -28,7 +29,7 @@ struct MetricsSummaryView: View {
             
             if let verticalOscillation = session.verticalOscillation {
                 VStack(alignment: .leading) {
-                    Text("Vertical Oscillation")
+                    Text(Localizables.WorkoutDetail.Metrics.verticalOscillation)
                         .font(.caption2)
                     Text(DataFormatter.verticalOscillation(verticalOscillation))
                         .fontWeight(.semibold)
@@ -38,7 +39,7 @@ struct MetricsSummaryView: View {
             
             if let groundContactTime = session.groundContactTime {
                 VStack(alignment: .leading) {
-                    Text("Ground Contact Time")
+                    Text(Localizables.WorkoutDetail.Metrics.groundContactTime)
                         .font(.caption2)
                     Text(DataFormatter.groundContactTime(groundContactTime))
                         .fontWeight(.semibold)

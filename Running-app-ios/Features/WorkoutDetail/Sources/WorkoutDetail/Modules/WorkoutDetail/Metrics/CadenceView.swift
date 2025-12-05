@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 import Common
+import Localization
 
 struct CadenceView: View {
     
@@ -16,7 +17,7 @@ struct CadenceView: View {
     var body: some View {
         VStack(spacing: 24) {
             HStack {
-                Text("Cadence")
+                Text(Localizables.WorkoutDetail.Metrics.cadence)
                     .font(.body)
                     .fontWeight(.semibold)
                 Spacer()

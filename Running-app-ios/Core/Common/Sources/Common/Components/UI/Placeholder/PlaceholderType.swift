@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 public enum PlaceholderType {
     case images,
@@ -23,18 +24,18 @@ public enum PlaceholderType {
     var title: String {
         switch self {
         case .images:
-            "No images yet"
+            Localizables.Common.Placeholder.Images.title
         case .workouts:
-            "No workouts yet"
+            Localizables.Common.Placeholder.Workouts.title
         }
     }
     
     var subtitle: String {
         switch self {
         case .images:
-            "Tap the plus button to add some"
+            Localizables.Common.Placeholder.Images.subtitle
         case .workouts:
-            "Import a .fit file to start"
+            Localizables.Common.Placeholder.Workouts.subtitle
         }
     }
     

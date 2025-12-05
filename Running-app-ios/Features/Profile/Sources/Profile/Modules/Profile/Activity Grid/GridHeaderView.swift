@@ -6,12 +6,23 @@
 //
 
 import SwiftUI
+import Localization
 
 struct GridHeaderView: View {
     
     private let months = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        Localizables.Profile.Months.jan,
+        Localizables.Profile.Months.feb,
+        Localizables.Profile.Months.mar,
+        Localizables.Profile.Months.apr,
+        Localizables.Profile.Months.may,
+        Localizables.Profile.Months.jun,
+        Localizables.Profile.Months.jul,
+        Localizables.Profile.Months.aug,
+        Localizables.Profile.Months.sep,
+        Localizables.Profile.Months.oct,
+        Localizables.Profile.Months.nov,
+        Localizables.Profile.Months.dec
     ]
     
     var body: some View {

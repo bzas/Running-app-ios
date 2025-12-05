@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 struct GridFooterView: View {
     
@@ -15,7 +16,7 @@ struct GridFooterView: View {
         HStack {
             DayCellLeyendView(cellSize: cellSize)
             Spacer()
-            GridNoteLabel(text: "Last year's activity")
+            GridNoteLabel(text: Localizables.Profile.activityGridFooter)
         }
         .padding(.horizontal)
         .padding(.top, 2)

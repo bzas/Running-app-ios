@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Common
+import Localization
 
 struct ElevationSummaryView: View {
     
@@ -15,7 +16,7 @@ struct ElevationSummaryView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Maximum altitude")
+                Text(Localizables.WorkoutDetail.Elevation.maxAltitude)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.elevation(viewModel.maxAltitude))
@@ -23,7 +24,7 @@ struct ElevationSummaryView: View {
             }
             
             HStack {
-                Text("Minimum altitude")
+                Text(Localizables.WorkoutDetail.Elevation.minAltitude)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Text(DataFormatter.elevation(viewModel.minAltitude))

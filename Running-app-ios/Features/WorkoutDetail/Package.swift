@@ -18,7 +18,8 @@ let package = Package(
     dependencies: [
         .package(path: "../Domain"),
         .package(path: "../Application"),
-        .package(path: "../Common")
+        .package(path: "../Common"),
+        .package(path: "../Localization")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -33,6 +34,10 @@ let package = Package(
                 .product(
                     name: "Common",
                     package: "Common"
+                ),
+                .product(
+                    name: "Localization",
+                    package: "Localization"
                 ),
                 .product(
                     name: "Application",

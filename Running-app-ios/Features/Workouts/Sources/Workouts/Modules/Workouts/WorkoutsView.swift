@@ -63,7 +63,7 @@ struct WorkoutsView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "plus")
                             .font(.footnote)
-                        Text("Add")
+                        Text(Localizables.Common.add)
                     }
                     .padding(.horizontal, 6)
                 }
