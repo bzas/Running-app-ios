@@ -17,6 +17,11 @@ public final class SearchViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var isLoading = true
     
+    // MARK: - Error handling
+    
+    @Published var shouldShowErrorAlert = false
+    @Published var errorTitle: String?
+    
     // MARK: - Use case
     
     private let sessionImportUseCase: SessionImportUseCase
@@ -36,7 +41,7 @@ public final class SearchViewModel: ObservableObject {
                 sessions = allSessions
                 isLoading = false
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -50,5 +55,10 @@ public final class SearchViewModel: ObservableObject {
         sessions = allSessions.filter { session in
             session.name.contains(searchText)
         }
+    }
+    
+    func showError(_ error: Error) {
+        errorTitle = error.localizedDescription
+        shouldShowErrorAlert.toggle()
     }
 }

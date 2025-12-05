@@ -11,17 +11,32 @@ import Domain
 struct UserConfigurationRootView: View {
     
     @ObservedObject var coordinator: UserConfigurationCoordinator
-    let savedUser: User?
-    let completion: (() -> Void)?
+    @StateObject var viewModel: UserConfigurationViewModel
+    
+    init(
+        coordinator: UserConfigurationCoordinator,
+        savedUser: User?,
+        completion: (() -> Void)?
+    ) {
+        self.coordinator = coordinator
+        
+        _viewModel = StateObject(
+            wrappedValue: coordinator.assembly.makeUserConfigurationViewModel(
+                savedUser: savedUser,
+                completion: completion
+            )
+        )
+    }
 
     var body: some View {
         NavigationStack {
-            UserConfigurationView(
-                viewModel: coordinator.assembly.makeUserConfigurationViewModel(
-                    savedUser: savedUser,
-                    completion: completion
-                )
-            )
+            UserConfigurationView(viewModel: viewModel)
+                .alert(
+                    viewModel.errorTitle ?? "Unknown error",
+                    isPresented: $viewModel.shouldShowErrorAlert
+                ) {
+                    Button("OK") { }
+                }
         }
     }
 }

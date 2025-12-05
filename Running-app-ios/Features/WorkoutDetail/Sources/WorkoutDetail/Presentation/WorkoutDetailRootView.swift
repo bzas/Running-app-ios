@@ -108,5 +108,11 @@ struct WorkoutDetailRootView: View {
                     )
                 )
         }
+        .alert(
+            viewModel.errorTitle ?? "Unknown error",
+            isPresented: $viewModel.shouldShowErrorAlert
+        ) {
+            Button("OK") { }
+        }
     }
 }

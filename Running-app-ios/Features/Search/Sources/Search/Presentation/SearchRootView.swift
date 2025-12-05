@@ -12,11 +12,19 @@ struct SearchRootView: View {
     
     @ObservedObject var coordinator: SearchCoordinator
     @Namespace var nameSpace
+    @StateObject var viewModel: SearchViewModel
+    
+    init(coordinator: SearchCoordinator) {
+        self.coordinator = coordinator
+        _viewModel = StateObject(
+            wrappedValue: coordinator.assembly.makeSearchViewModel()
+        )
+    }
     
     var body: some View {
         NavigationStack {
             SearchView(
-                viewModel: coordinator.assembly.makeSearchViewModel(),
+                viewModel: viewModel,
                 nameSpace: nameSpace,
                 onOpenSession: { coordinator.open($0) }
             )
@@ -26,6 +34,12 @@ struct SearchRootView: View {
                     nameSpace: nameSpace,
                     onDismiss: coordinator.dismiss
                 )
+            }
+            .alert(
+                viewModel.errorTitle ?? "Unknown error",
+                isPresented: $viewModel.shouldShowErrorAlert
+            ) {
+                Button("OK") { }
             }
         }
     }

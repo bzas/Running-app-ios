@@ -19,6 +19,11 @@ public final class ProfileViewModel: ObservableObject {
     @Published var sessions: [WorkoutSession] = []
     @Published var sessionDaysAndKmsOfYear: [DayAndKms] = []
     
+    // MARK: - Error handling
+    
+    @Published var shouldShowErrorAlert = false
+    @Published var errorTitle: String?
+    
     var totalKilometers: Double {
         sessions.map(\.distanceInKm).reduce(0, +)
     }
@@ -60,7 +65,7 @@ public final class ProfileViewModel: ObservableObject {
                 try await updateGalleryUseCase.deletePhoto(photo)
                 presentedPhoto = nil
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -106,7 +111,7 @@ extension ProfileViewModel {
                     DayAndKms(session: $0)
                 }
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -116,7 +121,7 @@ extension ProfileViewModel {
             do {
                 userInfo = try await getUserUseCase.currentUser()
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -126,8 +131,13 @@ extension ProfileViewModel {
             do {
                 photos = try await getGalleryUseCase.getAllPhotos()
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
+    }
+    
+    func showError(_ error: Error) {
+        errorTitle = error.localizedDescription
+        shouldShowErrorAlert.toggle()
     }
 }

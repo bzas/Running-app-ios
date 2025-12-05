@@ -59,6 +59,10 @@ final class GarminWorkoutSessionDTO {
             throw GarminError.missingSessionMessageError
         }
         
+        guard garminSession.getSport() == .running else {
+            throw GarminError.wrongSportDataError
+        }
+        
         let garminMapPoints = listener.fitMessages.recordMesgs.compactMap { record in
             GarminWorkoutSessionTrackPointDTO(record: record)
         }

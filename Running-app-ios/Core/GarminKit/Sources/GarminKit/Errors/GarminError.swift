@@ -5,7 +5,19 @@
 //  Created by Alfonso Boizas Crespo on 22/11/25.
 //
 
-enum GarminError: Error {
+import Foundation
+
+public enum GarminError: LocalizedError {
     case missingSessionMessageError,
-         trackPointLocalizationError
+         trackPointLocalizationError,
+         wrongSportDataError
+    
+    public var errorDescription: String? {
+        switch self {
+        case .wrongSportDataError:
+            "Sorry, the sport uploaded is not supported"
+        default:
+            "Sorry, an error occurred processing the .fit file"
+        }
+    }
 }

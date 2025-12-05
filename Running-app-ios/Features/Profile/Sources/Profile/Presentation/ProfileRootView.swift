@@ -75,5 +75,11 @@ public struct ProfileRootView: View {
                 viewModel.setup()
             }
         }
+        .alert(
+            viewModel.errorTitle ?? "Unknown error",
+            isPresented: $viewModel.shouldShowErrorAlert
+        ) {
+            Button("OK") { }
+        }
     }
 }

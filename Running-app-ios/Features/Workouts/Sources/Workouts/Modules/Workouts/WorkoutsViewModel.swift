@@ -8,12 +8,19 @@
 import Foundation
 import Domain
 import Application
+import GarminKit
+import Localization
 
 @MainActor
 public final class WorkoutsViewModel: ObservableObject {
     
     @Published var sessions: [WorkoutSession] = []
     @Published var isLoading = true
+    
+    // MARK: - Error handling
+    
+    @Published var shouldShowErrorAlert = false
+    @Published var errorTitle: String?
     
     // MARK: - Use cases
     
@@ -41,7 +48,7 @@ public final class WorkoutsViewModel: ObservableObject {
                 try await garminUseCase.importSession(from: file)
                 fetchAll()
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -52,7 +59,7 @@ public final class WorkoutsViewModel: ObservableObject {
                 sessions = try await sessionImportUseCase.fetchAllSessions()
                 isLoading = false
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -65,8 +72,13 @@ public final class WorkoutsViewModel: ObservableObject {
                     sessions.remove(at: offset)
                 }
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
+    }
+    
+    func showError(_ error: Error) {
+        errorTitle = error.localizedDescription
+        shouldShowErrorAlert.toggle()
     }
 }

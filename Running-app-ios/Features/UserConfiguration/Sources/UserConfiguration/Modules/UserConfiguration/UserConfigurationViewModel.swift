@@ -18,6 +18,11 @@ public final class UserConfigurationViewModel: ObservableObject {
     @Published var age = ""
     @Published var maxHeartRate = ""
     
+    // MARK: - Error handling
+    
+    @Published var shouldShowErrorAlert = false
+    @Published var errorTitle: String?
+    
     var savedUser: User?
     private let completion: (() -> Void)?
     
@@ -56,7 +61,7 @@ public final class UserConfigurationViewModel: ObservableObject {
             completion?()
             return true
         } catch {
-            print(error.localizedDescription)
+            showError(error)
             return false
         }
     }
@@ -87,5 +92,10 @@ private extension UserConfigurationViewModel {
                 maxHeartRate: maxHeartRate
             )
         }
+    }
+    
+    func showError(_ error: Error) {
+        errorTitle = error.localizedDescription
+        shouldShowErrorAlert.toggle()
     }
 }

@@ -86,7 +86,11 @@ private struct ShareablePhoto: Transferable {
         }
     }
 
-    enum ExportError: Error {
+    enum ExportError: LocalizedError {
         case exportFailed
+        
+        var errorDescription: String? {
+            "Sorry, an error occured while exporting the image, try again"
+        }
     }
 }

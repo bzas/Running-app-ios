@@ -24,6 +24,11 @@ public final class WorkoutDetailViewModel: ObservableObject {
     @Published var isMetricsInfoPresented = false
     var onDismiss: () -> Void
     
+    // MARK: - Error handling
+    
+    @Published var shouldShowErrorAlert = false
+    @Published var errorTitle: String?
+    
     // MARK: - Use case
     
     private var getUserUseCase: GetUserUseCase
@@ -100,7 +105,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
                     try await updateGalleryUseCase.updatePhotos(session)
                 }
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
             
             self.selectedPhoto = nil
@@ -116,7 +121,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
                 try await updateGalleryUseCase.updatePhotos(session)
                 presentedPhoto = nil
             } catch {
-                print(error.localizedDescription)
+                showError(error)
             }
         }
     }
@@ -126,11 +131,16 @@ public final class WorkoutDetailViewModel: ObservableObject {
 
 private extension WorkoutDetailViewModel {
     
+    func showError(_ error: Error) {
+        errorTitle = error.localizedDescription
+        shouldShowErrorAlert.toggle()
+    }
+    
     func reloadSessionInfo() async {
         do {
             session = try await sessionImportUseCase.fetchSession(with: session.id)
         } catch {
-            print(error.localizedDescription)
+            showError(error)
         }
     }
     
@@ -237,7 +247,7 @@ private extension WorkoutDetailViewModel {
             let currentUser = try await getUserUseCase.currentUser()
             self.heartRateZonesInfo = session.heartRateZonesInfo(user: currentUser)
         } catch {
-            print(error.localizedDescription)
+            showError(error)
         }
     }
     
