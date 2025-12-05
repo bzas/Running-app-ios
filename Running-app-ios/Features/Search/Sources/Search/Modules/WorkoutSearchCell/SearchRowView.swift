@@ -8,6 +8,7 @@
 import SwiftUI
 import Domain
 import Common
+import Localization
 
 struct SearchRowView: View {
     
@@ -22,6 +23,15 @@ struct SearchRowView: View {
             SearchCell(session: session)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(
+            String(
+                format: Localizables.Accessibility.workoutRow,
+                session.name,
+                DataFormatter.distance(session.distanceInKm),
+                DataFormatter.time(session.totalTime)
+            )
+        )
+        .accessibilityHint(Localizables.Accessibility.openWorkout)
         .matchedTransitionSource(
             id: TransitionManager.detailTransitionId(for: session.id),
             in: nameSpace

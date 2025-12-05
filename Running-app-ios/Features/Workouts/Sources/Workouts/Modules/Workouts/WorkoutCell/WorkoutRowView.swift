@@ -8,6 +8,7 @@
 import SwiftUI
 import Domain
 import Common
+import Localization
 
 struct WorkoutRowView: View {
     
@@ -22,6 +23,15 @@ struct WorkoutRowView: View {
             WorkoutCellView(session: session)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(
+            String(
+                format: Localizables.Accessibility.workoutRow,
+                session.name,
+                DataFormatter.distance(session.distanceInKm),
+                DataFormatter.time(session.totalTime)
+            )
+        )
+        .accessibilityHint(Localizables.Accessibility.openWorkout)
         .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
         .listRowSeparator(.hidden)
         .listRowBackground(Color.clear)

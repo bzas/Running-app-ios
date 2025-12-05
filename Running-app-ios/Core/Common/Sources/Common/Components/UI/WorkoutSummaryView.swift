@@ -51,5 +51,14 @@ public struct WorkoutSummaryView: View {
                     .fontWeight(.semibold)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            String(
+                format: Localizables.Accessibility.workoutSummary,
+                DataFormatter.pace(seconds: paceInSeconds),
+                DataFormatter.distance(distance),
+                DataFormatter.time(time)
+            )
+        )
     }
 }

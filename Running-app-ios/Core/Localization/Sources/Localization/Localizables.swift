@@ -61,6 +61,13 @@ public enum Localizables {
         }
     }
     
+    public enum Accessibility {
+        public static let loading = "accessibility_loading".localized
+        public static let openWorkout = "accessibility_open_workout".localized
+        public static let workoutRow = "accessibility_workout_row".localized
+        public static let workoutSummary = "accessibility_workout_summary".localized
+    }
+    
     public enum Search {
         public static let title = "search_title".localized
     }

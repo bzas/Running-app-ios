@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Localization
 
 public struct PlaceholderView: View {
     
@@ -29,6 +30,7 @@ public struct PlaceholderView: View {
                 .frame(width: 50, height: 50)
                 .rotationEffect(.degrees(rotate ? 360 : 0))
                 .foregroundStyle(.secondary)
+                .accessibilityLabel(Localizables.Accessibility.loading)
                 .onAppear {
                     withAnimation(.linear(duration: 1).repeatForever(autoreverses: false)) {
                         rotate = true
@@ -51,6 +53,8 @@ public struct PlaceholderView: View {
             }
             .foregroundStyle(.secondary)
             .padding(32)
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("\(type.title). \(type.subtitle)")
         }
     }
 }

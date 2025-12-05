@@ -56,6 +56,7 @@ The project is divided into independent modules:
 - Workout history and session details
 - Graphs (pace, heart rate, elevation, heart rate zones...etc)
 - Goals, personal records, stats
+- VoiceOver-ready UI (key lists, placeholders, and summaries have accessibility labels/hints)
 
 ## How it works
 
@@ -63,6 +64,14 @@ The project is divided into independent modules:
 - Browse sessions: workouts are listed with name, time, distance, pace and HR highlights. Tap one to open the detail view with charts (pace, HR, elevation), map route, splits per km, photos, and metadata.
 - Profile: See cumulative stats, activity grid, gallery, and HR zones tailored to the user.
 - Configure user: Set basic profile and HR zones; data is used to compute zones and personalized insights.
+
+## Quality & Testing
+
+- Unit tests across modules (Domain, Database, Application, Features...). Run from Xcode or via:
+
+```sh
+swift test
+```
 
 ## Requirements
 
