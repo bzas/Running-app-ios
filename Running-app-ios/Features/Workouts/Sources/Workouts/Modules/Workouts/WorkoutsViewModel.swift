@@ -24,14 +24,14 @@ public final class WorkoutsViewModel: ObservableObject {
     
     // MARK: - Use cases
     
-    private let garminUseCase: GarminImportUseCase
-    private let sessionImportUseCase: SessionImportUseCase
-    private let workoutDeletionUseCase: WorkoutDeletionUseCase
+    private let garminUseCase: GarminImportUseCaseProtocol
+    private let sessionImportUseCase: SessionImportUseCaseProtocol
+    private let workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
 
     public init(
-        garminUseCase: GarminImportUseCase,
-        sessionImportUseCase: SessionImportUseCase,
-        workoutDeletionUseCase: WorkoutDeletionUseCase
+        garminUseCase: GarminImportUseCaseProtocol,
+        sessionImportUseCase: SessionImportUseCaseProtocol,
+        workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
     ) {
         self.garminUseCase = garminUseCase
         self.sessionImportUseCase = sessionImportUseCase

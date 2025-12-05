@@ -7,19 +7,24 @@
 
 import Domain
 
-public actor UpdateGalleryUseCase {
+public protocol UpdateGalleryUseCaseProtocol: Sendable {
+    func updatePhotos(_ model: WorkoutSession) async throws
+    func deletePhoto(_ photo: SessionPhoto) async throws
+}
+
+actor UpdateGalleryUseCase: UpdateGalleryUseCaseProtocol {
     
     private let repository: WorkoutRepositoryProtocol
     
-    public init(repository: WorkoutRepositoryProtocol) {
+    init(repository: WorkoutRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func updatePhotos(_ model: WorkoutSession) async throws {
+    func updatePhotos(_ model: WorkoutSession) async throws {
         try await repository.updatePhotos(model)
     }
     
-    public func deletePhoto(_ photo: SessionPhoto) async throws {
+    func deletePhoto(_ photo: SessionPhoto) async throws {
         try await repository.deletePhoto(photo)
     }
 }

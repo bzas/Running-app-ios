@@ -20,7 +20,8 @@ let package = Package(
         .package(path: "../Application"),
         .package(path: "../Common"),
         .package(path: "../Localization"),
-        .package(path: "../UserConfiguration")
+        .package(path: "../UserConfiguration"),
+        .package(path: "../TestSupport")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -52,7 +53,13 @@ let package = Package(
         ),
         .testTarget(
             name: "ProfileTests",
-            dependencies: ["Profile"]
+            dependencies: [
+                "Profile",
+                .product(
+                    name: "TestSupport",
+                    package: "TestSupport"
+                )
+            ]
         ),
     ]
 )

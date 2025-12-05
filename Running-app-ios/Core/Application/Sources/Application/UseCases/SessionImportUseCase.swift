@@ -8,19 +8,24 @@
 import Domain
 import Foundation
 
-public actor SessionImportUseCase {
+public protocol SessionImportUseCaseProtocol: Sendable {
+    func fetchAllSessions() async throws -> [WorkoutSession]
+    func fetchSession(with sessionId: UUID) async throws -> WorkoutSession
+}
+
+actor SessionImportUseCase: SessionImportUseCaseProtocol {
     
     private let repository: WorkoutRepositoryProtocol
     
-    public init(repository: WorkoutRepositoryProtocol) {
+    init(repository: WorkoutRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func fetchAllSessions() async throws -> [WorkoutSession] {
+    func fetchAllSessions() async throws -> [WorkoutSession] {
         try await repository.fetchAll()
     }
     
-    public func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {
+    func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {
         try await repository.fetchSession(with: sessionId)
     }
 }

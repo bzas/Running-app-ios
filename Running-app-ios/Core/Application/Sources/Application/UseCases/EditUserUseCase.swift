@@ -7,15 +7,19 @@
 
 import Domain
 
-public actor EditUserUseCase {
+public protocol EditUserUseCaseProtocol: Sendable {
+    func update(_ user: User) async throws
+}
+
+actor EditUserUseCase: EditUserUseCaseProtocol {
     
     private let repository: UserRepositoryProtocol
     
-    public init(repository: UserRepositoryProtocol) {
+    init(repository: UserRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func update(_ user: User) async throws {
+    func update(_ user: User) async throws {
         try await repository.update(user)
     }
 }

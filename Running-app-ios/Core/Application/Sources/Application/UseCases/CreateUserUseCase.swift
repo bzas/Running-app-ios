@@ -7,15 +7,19 @@
 
 import Domain
 
-public actor CreateUserUseCase {
+public protocol CreateUserUseCaseProtocol: Sendable {
+    func save(_ user: User) async throws
+}
+
+actor CreateUserUseCase: CreateUserUseCaseProtocol {
     
     private let repository: UserRepositoryProtocol
     
-    public init(repository: UserRepositoryProtocol) {
+    init(repository: UserRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func save(_ user: User) async throws {
+    func save(_ user: User) async throws {
         try await repository.save(user)
     }
 }

@@ -9,19 +9,36 @@ import Foundation
 import Domain
 import Application
 
-public actor SessionImportUseCaseMock {
+public actor SessionImportUseCaseMock: SessionImportUseCaseProtocol {
     
     // MARK: - Tracking
+    
     public private(set) var fetchAllCallCount = 0
     public private(set) var fetchSessionCallCount = 0
     public private(set) var lastFetchedSessionId: UUID?
+    public let repository: WorkoutRepositoryProtocol
     
     // MARK: - Stubbing
+    
     public var fetchAllResult: [WorkoutSession] = []
     public var fetchSessionResult: WorkoutSession?
     public var errorToThrow: Error?
     
-    public init() {}
+    public init(repository: WorkoutRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    public func setFetchAllResult(_ sessions: [WorkoutSession]) {
+        fetchAllResult = sessions
+    }
+
+    public func setFetchSessionResult(_ session: WorkoutSession?) {
+        fetchSessionResult = session
+    }
+
+    public func setErrorToThrow(_ error: Error?) {
+        errorToThrow = error
+    }
     
     public func fetchAllSessions() async throws -> [WorkoutSession] {
         fetchAllCallCount += 1

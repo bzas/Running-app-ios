@@ -19,9 +19,16 @@ import SwiftUI
 final class AppAssembly {
     
     let container: DependencyContainer
+    let useCaseFactory: UseCaseFactory
     
-    public init() {
-        self.container = DependencyContainer()
+    init() {
+        let container = DependencyContainer()
+        self.container = container
+        self.useCaseFactory = UseCaseFactory(
+            userRepository: container.userRepository,
+            workoutRepository: container.workoutRepository,
+            garminService: container.garminService
+        )
     }
 }
 
@@ -30,9 +37,9 @@ final class AppAssembly {
 extension AppAssembly: WorkoutsAssemblyProtocol {
     
     public func makeWorkoutsViewModel() -> WorkoutsViewModel {
-        let garminUseCase = makeGarminUseCase()
-        let sessionImportUseCase = makeSessionImportUseCase()
-        let workoutDeletionUseCase = makeWorkoutDeletionUseCase()
+        let garminUseCase = useCaseFactory.makeGarminImportUseCase()
+        let sessionImportUseCase = useCaseFactory.makeSessionImportUseCase()
+        let workoutDeletionUseCase = useCaseFactory.makeWorkoutDeletionUseCase()
         
         return WorkoutsViewModel(
             garminUseCase: garminUseCase,
@@ -47,10 +54,10 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
 extension AppAssembly: ProfileAssemblyProtocol {
     
     public func makeProfileViewModel() -> ProfileViewModel {
-        let getGalleryUseCase = makeGetGalleryUseCase()
-        let updateGalleryUseCase = makeUpdateGalleryUseCase()
-        let getUserUseCase = makeGetUserUseCase()
-        let sessionImportUseCase = makeSessionImportUseCase()
+        let getGalleryUseCase = useCaseFactory.makeGetGalleryUseCase()
+        let updateGalleryUseCase = useCaseFactory.makeUpdateGalleryUseCase()
+        let getUserUseCase = useCaseFactory.makeGetUserUseCase()
+        let sessionImportUseCase = useCaseFactory.makeSessionImportUseCase()
 
         return ProfileViewModel(
             getGalleryUseCase: getGalleryUseCase,
@@ -69,8 +76,8 @@ extension AppAssembly: UserConfigurationAssemblyProtocol {
         savedUser: User?,
         completion: (() -> Void)?
     ) -> UserConfigurationViewModel {
-        let createUserUseCase = makeCreateUserUseCase()
-        let editUserUseCase = makeEditUserUseCase()
+        let createUserUseCase = useCaseFactory.makeCreateUserUseCase()
+        let editUserUseCase = useCaseFactory.makeEditUserUseCase()
         
         return UserConfigurationViewModel(
             createUserUseCase: createUserUseCase,
@@ -86,7 +93,7 @@ extension AppAssembly: UserConfigurationAssemblyProtocol {
 extension AppAssembly: SearchAssemblyProtocol {
     
     public func makeSearchViewModel() -> SearchViewModel {
-        let sessionImportUseCase = makeSessionImportUseCase()
+        let sessionImportUseCase = useCaseFactory.makeSessionImportUseCase()
 
         return SearchViewModel(
             sessionImportUseCase: sessionImportUseCase
@@ -102,9 +109,9 @@ extension AppAssembly: WorkoutDetailAssemblyProtocol {
         for session: WorkoutSession,
         onDismiss: @escaping () -> Void
     ) -> WorkoutDetailViewModel {
-        let getUserUseCase = makeGetUserUseCase()
-        let updateGalleryUseCase = makeUpdateGalleryUseCase()
-        let sessionImportUseCase = makeSessionImportUseCase()
+        let getUserUseCase = useCaseFactory.makeGetUserUseCase()
+        let updateGalleryUseCase = useCaseFactory.makeUpdateGalleryUseCase()
+        let sessionImportUseCase = useCaseFactory.makeSessionImportUseCase()
 
         return WorkoutDetailViewModel(
             session: session,
@@ -112,60 +119,6 @@ extension AppAssembly: WorkoutDetailAssemblyProtocol {
             updateGalleryUseCase: updateGalleryUseCase,
             sessionImportUseCase: sessionImportUseCase,
             onDismiss: onDismiss
-        )
-    }
-}
-
-// MARK: - Use Case creation
-
-private extension AppAssembly {
-    
-    func makeGarminUseCase() -> GarminImportUseCase {
-        GarminImportUseCase(
-            garminService: container.garminService,
-            repository: container.workoutRepository
-        )
-    }
-    
-    func makeSessionImportUseCase() -> SessionImportUseCase {
-        SessionImportUseCase(
-            repository: container.workoutRepository
-        )
-    }
-    
-    func makeCreateUserUseCase() -> CreateUserUseCase {
-        CreateUserUseCase(
-            repository: container.userRepository
-        )
-    }
-    
-    func makeEditUserUseCase() -> EditUserUseCase {
-        EditUserUseCase(
-            repository: container.userRepository
-        )
-    }
-    
-    func makeGetUserUseCase() -> GetUserUseCase {
-        GetUserUseCase(
-            repository: container.userRepository
-        )
-    }
-    
-    func makeWorkoutDeletionUseCase() -> WorkoutDeletionUseCase {
-        WorkoutDeletionUseCase(
-            repository: container.workoutRepository
-        )
-    }
-    
-    func makeUpdateGalleryUseCase() -> UpdateGalleryUseCase {
-        UpdateGalleryUseCase(
-            repository: container.workoutRepository
-        )
-    }
-    
-    func makeGetGalleryUseCase() -> GetGalleryUseCase {
-        GetGalleryUseCase(
-            repository: container.workoutRepository
         )
     }
 }

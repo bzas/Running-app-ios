@@ -7,15 +7,19 @@
 
 import Domain
 
-public actor GetGalleryUseCase {
+public protocol GetGalleryUseCaseProtocol: Sendable {
+    func getAllPhotos() async throws -> [SessionPhoto]
+}
+
+actor GetGalleryUseCase: GetGalleryUseCaseProtocol {
     
     private let repository: WorkoutRepositoryProtocol
     
-    public init(repository: WorkoutRepositoryProtocol) {
+    init(repository: WorkoutRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func getAllPhotos() async throws -> [SessionPhoto] {
+    func getAllPhotos() async throws -> [SessionPhoto] {
         try await repository.fetchAllPhotos()
     }
 }

@@ -9,16 +9,29 @@ import Foundation
 import Domain
 import Application
 
-public actor GetUserUseCaseMock {
+public actor GetUserUseCaseMock: GetUserUseCaseProtocol {
     
     // MARK: - Tracking
+    
     public private(set) var currentUserCallCount = 0
+    public let repository: UserRepositoryProtocol
     
     // MARK: - Stubbing
+    
     public var currentUserResult: User?
     public var errorToThrow: Error?
     
-    public init() {}
+    public init(repository: UserRepositoryProtocol) {
+        self.repository = repository
+    }
+
+    public func setCurrentUserResult(_ user: User?) {
+        currentUserResult = user
+    }
+
+    public func setErrorToThrow(_ error: Error?) {
+        errorToThrow = error
+    }
     
     public func currentUser() async throws -> User {
         currentUserCallCount += 1

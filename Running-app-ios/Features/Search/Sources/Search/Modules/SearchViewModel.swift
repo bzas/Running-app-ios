@@ -24,10 +24,10 @@ public final class SearchViewModel: ObservableObject {
     
     // MARK: - Use case
     
-    private let sessionImportUseCase: SessionImportUseCase
+    private let sessionImportUseCase: SessionImportUseCaseProtocol
     
     public init(
-        sessionImportUseCase: SessionImportUseCase
+        sessionImportUseCase: SessionImportUseCaseProtocol
     ) {
         self.sessionImportUseCase = sessionImportUseCase
     }

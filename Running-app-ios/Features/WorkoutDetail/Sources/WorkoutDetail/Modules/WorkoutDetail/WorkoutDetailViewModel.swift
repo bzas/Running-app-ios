@@ -31,9 +31,9 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     // MARK: - Use case
     
-    private var getUserUseCase: GetUserUseCase
-    private var updateGalleryUseCase: UpdateGalleryUseCase
-    private var sessionImportUseCase: SessionImportUseCase
+    private var getUserUseCase: GetUserUseCaseProtocol
+    private var updateGalleryUseCase: UpdateGalleryUseCaseProtocol
+    private var sessionImportUseCase: SessionImportUseCaseProtocol
 
     // MARK: - Gallery
     
@@ -72,9 +72,9 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     public init(
         session: WorkoutSession,
-        getUserUseCase: GetUserUseCase,
-        updateGalleryUseCase: UpdateGalleryUseCase,
-        sessionImportUseCase: SessionImportUseCase,
+        getUserUseCase: GetUserUseCaseProtocol,
+        updateGalleryUseCase: UpdateGalleryUseCaseProtocol,
+        sessionImportUseCase: SessionImportUseCaseProtocol,
         onDismiss: @escaping () -> Void
     ) {
         self.session = session

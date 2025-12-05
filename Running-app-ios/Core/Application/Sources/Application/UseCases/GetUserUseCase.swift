@@ -7,15 +7,19 @@
 
 import Domain
 
-public actor GetUserUseCase {
+public protocol GetUserUseCaseProtocol: Sendable {
+    func currentUser() async throws -> User
+}
+
+actor GetUserUseCase: GetUserUseCaseProtocol {
     
     private let repository: UserRepositoryProtocol
     
-    public init(repository: UserRepositoryProtocol) {
+    init(repository: UserRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func currentUser() async throws -> User {
+    func currentUser() async throws -> User {
         try await repository.fetchCurrent()
     }
 }

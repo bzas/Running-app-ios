@@ -41,16 +41,16 @@ public final class ProfileViewModel: ObservableObject {
 
     // MARK: - Use cases
     
-    private let getGalleryUseCase: GetGalleryUseCase
-    private let updateGalleryUseCase: UpdateGalleryUseCase
-    private let getUserUseCase: GetUserUseCase
-    private let sessionImportUseCase: SessionImportUseCase
+    private let getGalleryUseCase: GetGalleryUseCaseProtocol
+    private let updateGalleryUseCase: UpdateGalleryUseCaseProtocol
+    private let getUserUseCase: GetUserUseCaseProtocol
+    private let sessionImportUseCase: SessionImportUseCaseProtocol
     
     public init(
-        getGalleryUseCase: GetGalleryUseCase,
-        updateGalleryUseCase: UpdateGalleryUseCase,
-        getUserUseCase: GetUserUseCase,
-        sessionImportUseCase: SessionImportUseCase
+        getGalleryUseCase: GetGalleryUseCaseProtocol,
+        updateGalleryUseCase: UpdateGalleryUseCaseProtocol,
+        getUserUseCase: GetUserUseCaseProtocol,
+        sessionImportUseCase: SessionImportUseCaseProtocol
     ) {
         self.getGalleryUseCase = getGalleryUseCase
         self.updateGalleryUseCase = updateGalleryUseCase

@@ -7,15 +7,19 @@
 
 import Domain
 
-public actor WorkoutDeletionUseCase {
+public protocol WorkoutDeletionUseCaseProtocol: Sendable {
+    func delete(_ session: WorkoutSession) async throws
+}
+
+actor WorkoutDeletionUseCase: WorkoutDeletionUseCaseProtocol {
     
     private let repository: WorkoutRepositoryProtocol
     
-    public init(repository: WorkoutRepositoryProtocol) {
+    init(repository: WorkoutRepositoryProtocol) {
         self.repository = repository
     }
     
-    public func delete(_ session: WorkoutSession) async throws {
+    func delete(_ session: WorkoutSession) async throws {
         try await repository.delete(session)
     }
 }

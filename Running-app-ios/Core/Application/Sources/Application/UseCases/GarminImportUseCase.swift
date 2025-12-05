@@ -10,12 +10,16 @@ import Domain
 import GarminKit
 import Foundation
 
-public actor GarminImportUseCase {
+public protocol GarminImportUseCaseProtocol: Sendable {
+    func importSession(from file: URL) async throws
+}
+
+actor GarminImportUseCase: GarminImportUseCaseProtocol {
     
     private let garminService: GarminServiceProtocol
     private let repository: WorkoutRepositoryProtocol
 
-    public init(
+    init(
         garminService: GarminServiceProtocol,
         repository: WorkoutRepositoryProtocol
     ) {
@@ -23,7 +27,7 @@ public actor GarminImportUseCase {
         self.repository = repository
     }
     
-    public func importSession(from file: URL) async throws {
+    func importSession(from file: URL) async throws {
         _ = file.startAccessingSecurityScopedResource()
         let data = try Data(contentsOf: file)
         file.stopAccessingSecurityScopedResource()

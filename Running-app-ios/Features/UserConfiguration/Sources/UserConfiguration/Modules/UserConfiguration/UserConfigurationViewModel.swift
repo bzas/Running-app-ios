@@ -28,12 +28,12 @@ public final class UserConfigurationViewModel: ObservableObject {
     
     // MARK: Use cases
  
-    private let createUserUseCase: CreateUserUseCase
-    private let editUserUseCase: EditUserUseCase
+    private let createUserUseCase: CreateUserUseCaseProtocol
+    private let editUserUseCase: EditUserUseCaseProtocol
 
     public init(
-        createUserUseCase: CreateUserUseCase,
-        editUserUseCase: EditUserUseCase,
+        createUserUseCase: CreateUserUseCaseProtocol,
+        editUserUseCase: EditUserUseCaseProtocol,
         savedUser: User?,
         completion: (() -> Void)?
     ) {
