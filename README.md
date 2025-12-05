@@ -1,7 +1,7 @@
-# Renn - Running (Work in Progress)
-iOS application (SwiftUI) for running data and stats. This project is in its initial phase and currently displays basic views
+# 🏃‍♂️ Renn - Running
+iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
 
-## Architecture
+## 🧱 Architecture
 
 The app follows a modular Clean Architecture combined with MVVM and a Coordinator system to ensure scalability, testability, and maintainability. Each layer has a clear responsibility and communicates only through well-defined interfaces.
 
@@ -40,15 +40,15 @@ The project is divided into independent modules:
     - Mocks for repositories and services
     - Shared helpers for unit tests across packages
 
-## Features
+## 📱 Features
 
 <p align="left">
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Detail.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Profile.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/HeartRate.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/DetailInfo.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Metrics.PNG" width="275" />
-<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Workouts.PNG" width="275" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Detail.PNG" width="250" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Profile.PNG" width="250" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/HeartRate.PNG" width="250" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/DetailInfo.PNG" width="250" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Metrics.PNG" width="250" />
+<img src="https://github.com/bzas/bzas/blob/main/images/Renn/Workouts.PNG" width="250" />
 </p>
 
 - Garmin integration for reading fitness data
@@ -58,14 +58,23 @@ The project is divided into independent modules:
 - Goals, personal records, stats
 - VoiceOver-ready UI (key lists, placeholders, and summaries have accessibility labels/hints)
 
-## How it works
+## 🔎 How it works
 
 - Import a `.fit` file from Garmin: open the Workouts tab, tap the `+` button (top right) and pick a `.fit` file. The Garmin importer parses the FIT data (using `GarminKit`), persists it via SwiftData, and updates derived metrics (pace per km, HR zones, route coordinates, photos).
 - Browse sessions: workouts are listed with name, time, distance, pace and HR highlights. Tap one to open the detail view with charts (pace, HR, elevation), map route, splits per km, photos, and metadata.
 - Profile: See cumulative stats, activity grid, gallery, and HR zones tailored to the user.
 - Configure user: Set basic profile and HR zones; data is used to compute zones and personalized insights.
 
-## Quality & Testing
+## 🧭 Decisions and takeaways
+
+- Coordinators own navigation and injection so view models stay about state, not routing; makes Views reusable in different parts.
+- UseCases per feature (Application layer) define what the app does; repositories are passed in via protocols, which keeps tests fast and UIs decoupled from data sources.
+- FIT parsing lives in `GarminKit` with DTO-to-domain mappers so future sources (Apple Health, Coros...etc) can slot in without touching UI.
+- SwiftData picked over Core Data/GRDB for quick local persistence; mapper layer shields domain from persistence models and enforces validation at the boundary.
+- Derived metrics (splits, zones, pace per km) are computed on import, cached, and reused by charts to avoid recomputation in the UI.
+- Accessibility and localization are treated as first-class: reusable components come with labels/hints/strings so features inherit them by default.
+
+## ✅ Quality & Testing
 
 - Unit tests across modules (Domain, Database, Application, Features...). Run from Xcode or via:
 
@@ -73,7 +82,7 @@ The project is divided into independent modules:
 swift test
 ```
 
-## Requirements
+## 📦 Requirements
 
 - Xcode 26 or higher
 - iOS 26 or higher
