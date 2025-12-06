@@ -44,10 +44,6 @@ let package = Package(
                     package: "GarminKit"
                 )
             ]
-        ),
-        .testTarget(
-            name: "TestSupportTests",
-            dependencies: ["TestSupport"]
         )
     ]
 )

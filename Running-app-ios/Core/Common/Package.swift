@@ -29,10 +29,6 @@ let package = Package(
                     package: "Localization"
                 )
             ]
-        ),
-        .testTarget(
-            name: "CommonTests",
-            dependencies: ["Common"]
-        ),
+        )
     ]
 )
