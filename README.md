@@ -1,7 +1,7 @@
 # 🏃‍♂️ Renn - Running
 ![CI](https://github.com/bzas/Running-app-ios/actions/workflows/ci.yml/badge.svg?branch=develop)
-[![codecov](https://codecov.io/gh/bzas/Running-app-ios/branch/develop/graph/badge.svg)](https://codecov.io/gh/bzas/Running-app-ios)
-
+  [![Unit Tests Coverage](https://img.shields.io/codecov/c/gh/bzas/Running-app-ios?branch=develop&label=Unit%20Tests%20Coverage)](https://codecov.io/gh/bzas/Running-app-ios)
+  
 iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
 
 ## 🧱 Architecture

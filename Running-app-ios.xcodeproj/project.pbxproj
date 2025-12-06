@@ -10,6 +10,18 @@
 		48301F2F2EC0F4A400FAE65A /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 48301F2E2EC0F4A400FAE65A /* Workouts */; };
 		4837E7062ECF878200EBFEC7 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = 4837E7052ECF878200EBFEC7 /* Search */; };
 		4839DBE12EC8C525002FBE52 /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 4839DBE02EC8C525002FBE52 /* Common */; };
+		485412F82EE484ED00F877ED /* Application in Frameworks */ = {isa = PBXBuildFile; productRef = 485412F72EE484ED00F877ED /* Application */; };
+		485412FA2EE484ED00F877ED /* Common in Frameworks */ = {isa = PBXBuildFile; productRef = 485412F92EE484ED00F877ED /* Common */; };
+		485412FC2EE484ED00F877ED /* Database in Frameworks */ = {isa = PBXBuildFile; productRef = 485412FB2EE484ED00F877ED /* Database */; };
+		485412FE2EE484ED00F877ED /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = 485412FD2EE484ED00F877ED /* Domain */; };
+		485413002EE484ED00F877ED /* GarminKit in Frameworks */ = {isa = PBXBuildFile; productRef = 485412FF2EE484ED00F877ED /* GarminKit */; };
+		485413022EE484ED00F877ED /* Localization in Frameworks */ = {isa = PBXBuildFile; productRef = 485413012EE484ED00F877ED /* Localization */; };
+		485413042EE484ED00F877ED /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 485413032EE484ED00F877ED /* Profile */; };
+		485413062EE484ED00F877ED /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = 485413052EE484ED00F877ED /* Search */; };
+		485413082EE484ED00F877ED /* TestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 485413072EE484ED00F877ED /* TestSupport */; };
+		4854130A2EE484ED00F877ED /* UserConfiguration in Frameworks */ = {isa = PBXBuildFile; productRef = 485413092EE484ED00F877ED /* UserConfiguration */; };
+		4854130C2EE484ED00F877ED /* WorkoutDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 4854130B2EE484ED00F877ED /* WorkoutDetail */; };
+		4854130E2EE484ED00F877ED /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 4854130D2EE484ED00F877ED /* Workouts */; };
 		4867860D2EDCB05700CD696E /* UserConfiguration in Frameworks */ = {isa = PBXBuildFile; productRef = 4867860C2EDCB05700CD696E /* UserConfiguration */; };
 		4883AE2C2ED0F13E00AAE54A /* WorkoutDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */; };
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
@@ -97,6 +109,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				485413042EE484ED00F877ED /* Profile in Frameworks */,
+				485412F82EE484ED00F877ED /* Application in Frameworks */,
+				4854130A2EE484ED00F877ED /* UserConfiguration in Frameworks */,
+				485413002EE484ED00F877ED /* GarminKit in Frameworks */,
+				485412FA2EE484ED00F877ED /* Common in Frameworks */,
+				485413062EE484ED00F877ED /* Search in Frameworks */,
+				4854130E2EE484ED00F877ED /* Workouts in Frameworks */,
+				485412FE2EE484ED00F877ED /* Domain in Frameworks */,
+				4854130C2EE484ED00F877ED /* WorkoutDetail in Frameworks */,
+				485412FC2EE484ED00F877ED /* Database in Frameworks */,
+				485413022EE484ED00F877ED /* Localization in Frameworks */,
+				485413082EE484ED00F877ED /* TestSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +208,18 @@
 			);
 			name = "Running-app-iosTests";
 			packageProductDependencies = (
+				485412F72EE484ED00F877ED /* Application */,
+				485412F92EE484ED00F877ED /* Common */,
+				485412FB2EE484ED00F877ED /* Database */,
+				485412FD2EE484ED00F877ED /* Domain */,
+				485412FF2EE484ED00F877ED /* GarminKit */,
+				485413012EE484ED00F877ED /* Localization */,
+				485413032EE484ED00F877ED /* Profile */,
+				485413052EE484ED00F877ED /* Search */,
+				485413072EE484ED00F877ED /* TestSupport */,
+				485413092EE484ED00F877ED /* UserConfiguration */,
+				4854130B2EE484ED00F877ED /* WorkoutDetail */,
+				4854130D2EE484ED00F877ED /* Workouts */,
 			);
 			productName = "Running-app-iosTests";
 			productReference = 481CAD2A2EBFDD1700DEDDEB /* Running-app-iosTests.xctest */;
@@ -563,6 +599,54 @@
 		4839DBE02EC8C525002FBE52 /* Common */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Common;
+		};
+		485412F72EE484ED00F877ED /* Application */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Application;
+		};
+		485412F92EE484ED00F877ED /* Common */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Common;
+		};
+		485412FB2EE484ED00F877ED /* Database */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Database;
+		};
+		485412FD2EE484ED00F877ED /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		485412FF2EE484ED00F877ED /* GarminKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GarminKit;
+		};
+		485413012EE484ED00F877ED /* Localization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Localization;
+		};
+		485413032EE484ED00F877ED /* Profile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Profile;
+		};
+		485413052EE484ED00F877ED /* Search */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Search;
+		};
+		485413072EE484ED00F877ED /* TestSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TestSupport;
+		};
+		485413092EE484ED00F877ED /* UserConfiguration */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = UserConfiguration;
+		};
+		4854130B2EE484ED00F877ED /* WorkoutDetail */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = WorkoutDetail;
+		};
+		4854130D2EE484ED00F877ED /* Workouts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Workouts;
 		};
 		4867860C2EDCB05700CD696E /* UserConfiguration */ = {
 			isa = XCSwiftPackageProductDependency;
