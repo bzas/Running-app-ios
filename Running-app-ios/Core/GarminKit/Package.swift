@@ -40,7 +40,10 @@ let package = Package(
         ),
         .testTarget(
             name: "GarminKitTests",
-            dependencies: ["GarminKit"]
+            dependencies: ["GarminKit"],
+            resources: [
+                .process("Fixtures")
+            ]
         ),
     ]
 )

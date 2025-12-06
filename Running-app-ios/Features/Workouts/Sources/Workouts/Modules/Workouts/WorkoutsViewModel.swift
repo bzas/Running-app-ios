@@ -48,6 +48,7 @@ public final class WorkoutsViewModel: ObservableObject {
                 try await garminUseCase.importSession(from: file)
                 fetchAll()
             } catch {
+                isLoading = false
                 showError(error)
             }
         }
@@ -59,6 +60,7 @@ public final class WorkoutsViewModel: ObservableObject {
                 sessions = try await sessionImportUseCase.fetchAllSessions()
                 isLoading = false
             } catch {
+                isLoading = false
                 showError(error)
             }
         }

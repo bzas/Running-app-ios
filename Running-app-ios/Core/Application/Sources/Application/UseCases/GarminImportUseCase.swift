@@ -28,10 +28,16 @@ actor GarminImportUseCase: GarminImportUseCaseProtocol {
     }
     
     func importSession(from file: URL) async throws {
-        _ = file.startAccessingSecurityScopedResource()
-        let data = try Data(contentsOf: file)
-        file.stopAccessingSecurityScopedResource()
+        let didAccess = file.startAccessingSecurityScopedResource()
+        guard didAccess else {
+            throw CocoaError(.fileReadNoPermission)
+        }
         
+        defer {
+            file.stopAccessingSecurityScopedResource()
+        }
+        
+        let data = try Data(contentsOf: file)
         let workoutSession = try await garminService.fetchFitFile(from: data)
         try await repository.save(workoutSession)
     }
