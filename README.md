@@ -1,4 +1,7 @@
 # 🏃‍♂️ Renn - Running
+![CI](https://github.com/bzas/Running-app-ios/actions/workflows/ci.yml/badge.svg?branch=develop)
+[![codecov](https://codecov.io/gh/bzas/Running-app-ios/branch/develop/graph/badge.svg)](https://codecov.io/gh/bzas/Running-app-ios)
+
 iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
 
 ## 🧱 Architecture
@@ -81,6 +84,12 @@ The project is divided into independent modules:
 ```sh
 swift test
 ```
+
+## 🚦 CI/CD
+
+- GitHub Actions builds and tests the app on pushes/PRs to `main` and `develop` (`.github/workflows/ci.yml`).
+- Tests run with coverage enabled and upload the `.xcresult` bundle as an artifact; coverage is published to Codecov (see badge arriba).
+- Para repos privados, añade el secreto `CODECOV_TOKEN` en Settings → Secrets → Actions. For public repos, no token is needed.
 
 ## 📦 Requirements
 
