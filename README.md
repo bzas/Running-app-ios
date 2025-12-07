@@ -4,44 +4,60 @@
   
 iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
 
+### Key technologies
+
+Clean Architecture · Coordinators · MVVM · SwiftUI · Swift 6 · SwiftData · MapKit · FITSwiftSDK (Garmin `.fit`) · GitHub Actions
+
 ## 🧱 Architecture
 
 The app follows a modular Clean Architecture combined with MVVM and a Coordinator system to ensure scalability, testability, and maintainability. Each layer has a clear responsibility and communicates only through well-defined interfaces.
 
 <img src="https://github.com/bzas/bzas/blob/main/images/Renn/Architecture.svg" width="600" />
 
-The project is divided into independent modules:
-- App:
-    - Main app target, AppCoordinator, AppAssembly and DependencyContainer
-    - It's main responsability is the creation and wiring of Coordinators, ViewModels, and global services
-    - It consumes UseCases provided by the Application layer and injects them into the UI
-- Domain:
-    - Domain entities and repository protocols used by UseCases
-    - This layer has no dependency on UI, database, or frameworks
-- Application:
-    - Contains the UseCase definition and their dependencies
-    - This layer defines application-level actions (e.g. importing a FIT file, loading workouts, managing the user)
-    - It knows what operations the app performs but doesn’t contain UI code
-- Database:
-    - Data models and mappers
-    - Repository implementations (conforming to domain protocols)
-    - Local persistence (SwiftData)
-    - This layer transforms external data into Domain models
-- GarminKit:
-    - Handles parsing and mapping of Garmin .fit files into Database models
-    - Based on FITSwiftSDK
-    - Garmin DTO models
-- Features: (Workouts, Profile, UserConfiguration, Search, WorkoutDetail)
-    - Its own Coordinator
-    - A RootView
-    - An Assembly protocol
-    - Local ViewModels
-    - Features remain isolated and only depend on Domain + their UseCases.
-- Localization: String localizations
-- Common: Reusable components, entities....etc
-- TestSupport:
-    - Mocks for repositories and services
-    - Shared helpers for unit tests across packages
+<details>
+  <summary><strong>🗂️ Project structure</strong></summary>
+
+
+### App
+- Main app target, `AppCoordinator`, `AppAssembly` and `DependencyContainer`
+- It's main responsability is the creation and wiring of Coordinators, ViewModels, and global services
+- It consumes UseCases provided by the Application layer and injects them into the UI
+
+### Domain
+- Domain entities and repository protocols used by UseCases
+- This layer has no dependency on UI, database, or frameworks
+
+### Application
+- Contains the UseCase definition and their dependencies
+- This layer defines application-level actions (e.g. importing a `.fit` file, loading workouts, managing the user)
+- It knows what operations the app performs but doesn’t contain UI code
+
+### Database
+- Data models and mappers
+- Repository implementations (conforming to domain protocols)
+- Local persistence (SwiftData)
+- This layer transforms external data into Domain models
+
+### GarminKit
+- Handles parsing and mapping of Garmin `.fit` files into Database models
+- Based on `FITSwiftSDK`
+- Garmin DTO models
+
+### Features
+- Workouts, Profile, UserConfiguration, Search, WorkoutDetail
+- Each has its own Coordinator, RootView, Assembly protocol, and local ViewModels
+- Features remain isolated and only depend on Domain + their UseCases.
+
+### Localization
+- String localizations
+
+### Common
+- Reusable components, entities....etc
+
+### TestSupport
+- Mocks for repositories and services
+- Shared helpers for unit tests across packages
+</details>
 
 ## 📱 Features
 
@@ -88,8 +104,7 @@ swift test
 ## 🚦 CI/CD
 
 - GitHub Actions builds and tests the app on pushes/PRs to `main` and `develop` (`.github/workflows/ci.yml`).
-- Tests run with coverage enabled and upload the `.xcresult` bundle as an artifact; coverage is published to Codecov (see badge arriba).
-- Para repos privados, añade el secreto `CODECOV_TOKEN` en Settings → Secrets → Actions. For public repos, no token is needed.
+- Tests run with coverage enabled and upload the `.xcresult` bundle as an artifact; coverage is published to Codecov (see badge).
 
 ## 📦 Requirements
 
