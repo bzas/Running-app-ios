@@ -9,6 +9,7 @@ import GarminKit
 import Domain
 import Database
 import SwiftData
+import HealthKitService
 
 final class DependencyContainer {
     
@@ -38,10 +39,12 @@ final class DependencyContainer {
     // MARK: - Services
     
     let garminService: GarminServiceProtocol
+    let healthKitService: HealthKitServiceProtocol
     
     init() {
         self.workoutRepository = WorkoutRepository(modelContainer: modelContainer)
         self.userRepository = UserRepository(modelContainer: modelContainer)
         self.garminService = GarminService()
+        self.healthKitService = HealthKitService()
     }
 }

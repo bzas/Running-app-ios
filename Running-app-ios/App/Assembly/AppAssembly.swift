@@ -27,7 +27,8 @@ final class AppAssembly {
         self.useCaseFactory = UseCaseFactory(
             userRepository: container.userRepository,
             workoutRepository: container.workoutRepository,
-            garminService: container.garminService
+            garminService: container.garminService,
+            healthKitService: container.healthKitService
         )
     }
 }

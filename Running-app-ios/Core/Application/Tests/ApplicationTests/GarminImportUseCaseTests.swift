@@ -61,14 +61,11 @@ struct GarminImportUseCaseTests {
 // MARK: - Helpers
 
 private extension GarminImportUseCaseTests {
+    
     func writeTempFile(with data: Data) throws -> URL {
         let url = FileManager.default.temporaryDirectory
             .appendingPathComponent(UUID().uuidString)
         try data.write(to: url)
         return url
-    }
-
-    enum MockError: Error {
-        case sample
     }
 }

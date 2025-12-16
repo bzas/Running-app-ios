@@ -19,6 +19,7 @@ let package = Package(
         .package(path: "../Domain"),
         .package(path: "../Database"),
         .package(path: "../Application"),
+        .package(path: "../HealthKitService"),
         .package(path: "../GarminKit")
     ],
     targets: [
@@ -30,6 +31,10 @@ let package = Package(
                 .product(
                     name: "Domain",
                     package: "Domain"
+                ),
+                .product(
+                    name: "HealthKitService",
+                    package: "HealthKitService"
                 ),
                 .product(
                     name: "Database",

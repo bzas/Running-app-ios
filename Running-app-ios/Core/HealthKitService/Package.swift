@@ -4,41 +4,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "Database",
+    name: "HealthKitService",
     platforms: [
         .iOS(.v26)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Database",
-            targets: ["Database"]
+            name: "HealthKitService",
+            targets: ["HealthKitService"]
         ),
-    ],
-    dependencies: [
-        .package(path: "../Domain"),
-        .package(path: "../TestSupport")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Database",
-            dependencies: [
-                .product(
-                    name: "Domain",
-                    package: "Domain"
-                )
-            ]
+            name: "HealthKitService"
         ),
         .testTarget(
-            name: "DatabaseTests",
-            dependencies: [
-                .product(
-                    name: "TestSupport",
-                    package: "TestSupport"
-                )
-            ]
+            name: "HealthKitServiceTests",
+            dependencies: ["HealthKitService"]
         ),
     ]
 )

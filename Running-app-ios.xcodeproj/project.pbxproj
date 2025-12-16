@@ -22,6 +22,7 @@
 		4854130A2EE484ED00F877ED /* UserConfiguration in Frameworks */ = {isa = PBXBuildFile; productRef = 485413092EE484ED00F877ED /* UserConfiguration */; };
 		4854130C2EE484ED00F877ED /* WorkoutDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 4854130B2EE484ED00F877ED /* WorkoutDetail */; };
 		4854130E2EE484ED00F877ED /* Workouts in Frameworks */ = {isa = PBXBuildFile; productRef = 4854130D2EE484ED00F877ED /* Workouts */; };
+		4860DF432EF20917006559A0 /* HealthKitService in Frameworks */ = {isa = PBXBuildFile; productRef = 4860DF422EF20917006559A0 /* HealthKitService */; };
 		4867860D2EDCB05700CD696E /* UserConfiguration in Frameworks */ = {isa = PBXBuildFile; productRef = 4867860C2EDCB05700CD696E /* UserConfiguration */; };
 		4883AE2C2ED0F13E00AAE54A /* WorkoutDetail in Frameworks */ = {isa = PBXBuildFile; productRef = 4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */; };
 		4899F6BE2EC0D93E00E84AD6 /* Profile in Frameworks */ = {isa = PBXBuildFile; productRef = 4899F6BD2EC0D93E00E84AD6 /* Profile */; };
@@ -57,6 +58,7 @@
 				Core/Database,
 				Core/Domain,
 				Core/GarminKit,
+				Core/HealthKitService,
 				Core/Localization,
 				Core/TestSupport,
 				Features/Profile,
@@ -97,6 +99,7 @@
 				48F29E482EC7C7AA0072DD69 /* Database in Frameworks */,
 				4839DBE12EC8C525002FBE52 /* Common in Frameworks */,
 				4883AE2C2ED0F13E00AAE54A /* WorkoutDetail in Frameworks */,
+				4860DF432EF20917006559A0 /* HealthKitService in Frameworks */,
 				48EBEEFF2EDA24E100E9EA17 /* TestSupport in Frameworks */,
 				4867860D2EDCB05700CD696E /* UserConfiguration in Frameworks */,
 				48F29E452EC7C6CF0072DD69 /* Application in Frameworks */,
@@ -185,6 +188,7 @@
 				4883AE2B2ED0F13E00AAE54A /* WorkoutDetail */,
 				48EBEEFE2EDA24E100E9EA17 /* TestSupport */,
 				4867860C2EDCB05700CD696E /* UserConfiguration */,
+				4860DF422EF20917006559A0 /* HealthKitService */,
 			);
 			productName = "Running-app-ios";
 			productReference = 481CAD1B2EBFDD1400DEDDEB /* Running-app-ios.app */;
@@ -436,6 +440,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Running-app-ios/Running-app-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3BFY9G26SK;
@@ -476,6 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Running-app-ios/Running-app-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3BFY9G26SK;
@@ -647,6 +653,10 @@
 		4854130D2EE484ED00F877ED /* Workouts */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Workouts;
+		};
+		4860DF422EF20917006559A0 /* HealthKitService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HealthKitService;
 		};
 		4867860C2EDCB05700CD696E /* UserConfiguration */ = {
 			isa = XCSwiftPackageProductDependency;

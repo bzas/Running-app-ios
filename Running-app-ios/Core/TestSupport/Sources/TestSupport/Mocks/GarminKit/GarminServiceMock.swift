@@ -33,8 +33,4 @@ public actor GarminServiceMock: GarminServiceProtocol {
     public func setError(_ error: Error?) {
         self.error = error
     }
-
-    public enum MockError: Error {
-        case noResult
-    }
 }

@@ -18,6 +18,7 @@ let package = Package(
     dependencies: [
         .package(path: "../GarminKit"),
         .package(path: "../Database"),
+        .package(path: "../HealthKitService"),
         .package(path: "../Domain"),
         .package(path: "../TestSupport")
     ],
@@ -32,6 +33,10 @@ let package = Package(
                     package: "GarminKit"
                 ),
                 .product(
+                    name: "HealthKitService",
+                    package: "HealthKitService"
+                ),
+                .product(
                     name: "Database",
                     package: "Database"
                 ),
@@ -44,7 +49,6 @@ let package = Package(
         .testTarget(
             name: "ApplicationTests",
             dependencies: [
-                "Application",
                 .product(
                     name: "TestSupport",
                     package: "TestSupport"
