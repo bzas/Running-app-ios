@@ -27,15 +27,18 @@ public final class WorkoutsViewModel: ObservableObject {
     private let garminUseCase: GarminImportUseCaseProtocol
     private let sessionImportUseCase: SessionImportUseCaseProtocol
     private let workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
+    private let requestHealthKitAccessUseCase: RequestHealthAccessUseCaseProtocol
 
     public init(
         garminUseCase: GarminImportUseCaseProtocol,
         sessionImportUseCase: SessionImportUseCaseProtocol,
-        workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
+        workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol,
+        requestHealthKitAccessUseCase: RequestHealthAccessUseCaseProtocol
     ) {
         self.garminUseCase = garminUseCase
         self.sessionImportUseCase = sessionImportUseCase
         self.workoutDeletionUseCase = workoutDeletionUseCase
+        self.requestHealthKitAccessUseCase = requestHealthKitAccessUseCase
         
         fetchAll()
     }
@@ -82,5 +85,11 @@ public final class WorkoutsViewModel: ObservableObject {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+    }
+    
+    func requestHealthKitAccess() {
+        Task {
+            try? await requestHealthKitAccessUseCase.requestUserPermission()
+        }
     }
 }

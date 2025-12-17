@@ -41,11 +41,13 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
         let garminUseCase = useCaseFactory.makeGarminImportUseCase()
         let sessionImportUseCase = useCaseFactory.makeSessionImportUseCase()
         let workoutDeletionUseCase = useCaseFactory.makeWorkoutDeletionUseCase()
+        let requestHealthAccessUseCase = useCaseFactory.makeRequestHealthAccessUseCase()
         
         return WorkoutsViewModel(
             garminUseCase: garminUseCase,
             sessionImportUseCase: sessionImportUseCase,
-            workoutDeletionUseCase: workoutDeletionUseCase
+            workoutDeletionUseCase: workoutDeletionUseCase,
+            requestHealthKitAccessUseCase: requestHealthAccessUseCase
         )
     }
 }

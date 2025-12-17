@@ -36,6 +36,9 @@ public struct WorkoutsRootView: View {
                     onDismiss: coordinator.dismiss
                 )
             }
+            .onAppear {
+                viewModel.requestHealthKitAccess()
+            }
             .fileImporter(
                 isPresented: $coordinator.isPresentingFilePicker,
                 allowedContentTypes: [.data]
