@@ -6,11 +6,17 @@
 //
 
 import HealthKitService
+import Domain
 
 public actor HealthKitServiceMock: HealthKitServiceProtocol {
 
     public var requestUserPermissionCallCount = 0
+    public private(set) var fetchWorkoutsCallCount = 0
+    public private(set) var fetchWorkoutsLimits: [Int] = []
     public var errorToThrow: Error?
+    
+    private var fetchWorkoutsResult: [WorkoutSession] = []
+    private var fetchWorkoutsError: Error?
     
     public init(
         requestUserPermissionCallCount: Int = 0,
@@ -23,6 +29,14 @@ public actor HealthKitServiceMock: HealthKitServiceProtocol {
     public func setError(_ error: Error?) {
         errorToThrow = error
     }
+    
+    public func setFetchWorkoutsResult(_ workouts: [WorkoutSession]) {
+        fetchWorkoutsResult = workouts
+    }
+    
+    public func setFetchWorkoutsError(_ error: Error?) {
+        fetchWorkoutsError = error
+    }
 
     public func requestUserPermission() async throws {
         requestUserPermissionCallCount += 1
@@ -30,5 +44,16 @@ public actor HealthKitServiceMock: HealthKitServiceProtocol {
         if let errorToThrow {
             throw errorToThrow
         }
+    }
+    
+    public func fetchWorkouts(limit: Int) async throws -> [WorkoutSession] {
+        fetchWorkoutsCallCount += 1
+        fetchWorkoutsLimits.append(limit)
+
+        if let fetchWorkoutsError {
+            throw fetchWorkoutsError
+        }
+        
+        return fetchWorkoutsResult
     }
 }

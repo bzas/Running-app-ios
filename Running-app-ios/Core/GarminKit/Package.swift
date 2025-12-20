@@ -35,7 +35,7 @@ let package = Package(
                 .product(
                     name: "Domain",
                     package: "Domain"
-                ),
+                )
             ]
         ),
         .testTarget(

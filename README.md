@@ -2,11 +2,11 @@
 ![CI](https://github.com/bzas/Running-app-ios/actions/workflows/ci.yml/badge.svg?branch=develop)
   [![Unit Tests Coverage](https://img.shields.io/codecov/c/gh/bzas/Running-app-ios?branch=develop&label=Unit%20Tests%20Coverage)](https://codecov.io/gh/bzas/Running-app-ios)
   
-iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
+iOS application (SwiftUI, Clean Architecture, Coordinators, MVVM) for running data and stats. It imports Garmin `.fit` files and supports HealthKit workouts, stores workouts with SwiftData, and presents charts/routes while keeping navigation and data flow split into small, testable modules (Workouts, Profile, UserConfiguration, Search, WorkoutDetail) wired through coordinators and use cases.
 
 ### Key technologies
 
-Clean Architecture · Coordinators · MVVM · SwiftUI · Swift 6 · SwiftData · MapKit · FITSwiftSDK (Garmin `.fit`) · GitHub Actions
+Clean Architecture · HealthKit · Coordinators · MVVM · SwiftUI · Swift 6 · SwiftData · MapKit · FITSwiftSDK (Garmin `.fit`) · GitHub Actions
 
 ## 🧱 Architecture
 
@@ -37,6 +37,10 @@ The app follows a modular Clean Architecture combined with MVVM and a Coordinato
 - Repository implementations (conforming to domain protocols)
 - Local persistence (SwiftData)
 - This layer transforms external data into Domain models
+
+### HealthKitService
+- HealthKit access and workout querying
+- Maps HealthKit workouts into Domain sessions
 
 ### GarminKit
 - Handles parsing and mapping of Garmin `.fit` files into Database models
@@ -71,6 +75,7 @@ The app follows a modular Clean Architecture combined with MVVM and a Coordinato
 </p>
 
 - Garmin integration for reading fitness data
+- HealthKit integration for importing workouts
 - Route mapping (MapKit) and real-time route tracking
 - Workout history and session details
 - Graphs (pace, heart rate, elevation, heart rate zones...etc)
