@@ -82,4 +82,17 @@ public struct UseCaseFactory {
             healthKitService: healthKitService
         )
     }
+    
+    public func makeGetHealthWorkoutsUseCase() -> GetHealthWorkoutsUseCaseProtocol {
+        GetHealthWorkoutsUseCase(
+            healthKitService: healthKitService
+        )
+    }
+    
+    public func makeImportHealthWorkoutUseCase() -> ImportHealthWorkoutUseCaseProtocol {
+        ImportHealthWorkoutUseCase(
+            healthKitService: healthKitService,
+            repository: workoutRepository
+        )
+    }
 }

@@ -18,17 +18,20 @@ struct WorkoutsView: View {
     let nameSpace: Namespace.ID
     private let onOpenSession: (WorkoutSession) -> Void
     private let onOpenFilePicker: () -> Void
-    
+    private let onOpenAppleWorkouts: () -> Void
+
     public init(
         viewModel: WorkoutsViewModel,
         nameSpace: Namespace.ID,
         onOpenSession: @escaping (WorkoutSession) -> Void,
-        onOpenFilePicker: @escaping () -> Void
+        onOpenFilePicker: @escaping () -> Void,
+        onOpenAppleWorkouts: @escaping () -> Void
     ) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.nameSpace = nameSpace
         self.onOpenSession = onOpenSession
         self.onOpenFilePicker = onOpenFilePicker
+        self.onOpenAppleWorkouts = onOpenAppleWorkouts
     }
     
     public var body: some View {
@@ -57,8 +60,17 @@ struct WorkoutsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    onOpenFilePicker()
+                Menu {
+                    Button {
+                        onOpenFilePicker()
+                    } label: {
+                        Label("Garmin .fit file", systemImage: "document.fill")
+                    }
+                    Button {
+                        onOpenAppleWorkouts()
+                    } label: {
+                        Label("Apple Health", systemImage: "heart.fill")
+                    }
                 } label: {
                     HStack(spacing: 12) {
                         Image(systemName: "plus")
@@ -67,6 +79,10 @@ struct WorkoutsView: View {
                     }
                     .padding(.horizontal, 6)
                 }
+                .matchedTransitionSource(
+                    id: TransitionManager.appleWorkoutsTransitionId(),
+                    in: nameSpace
+                )
             }
         }
     }

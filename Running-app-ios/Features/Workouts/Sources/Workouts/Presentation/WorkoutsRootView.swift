@@ -27,7 +27,8 @@ public struct WorkoutsRootView: View {
                 viewModel: viewModel,
                 nameSpace: nameSpace,
                 onOpenSession: { coordinator.open($0) },
-                onOpenFilePicker: { coordinator.openFilePicker() }
+                onOpenFilePicker: { coordinator.openFilePicker() },
+                onOpenAppleWorkouts: { coordinator.openAppleHealthWorkouts() }
             )
             .fullScreenCover(item: $coordinator.selectedSession) { session in
                 coordinator.workoutDetailCoordinator.rootView(
@@ -55,6 +56,14 @@ public struct WorkoutsRootView: View {
                 isPresented: $viewModel.shouldShowErrorAlert
             ) {
                 Button("OK") { }
+            }
+            .sheet(isPresented: $coordinator.isPresentingHealthWorkouts) {
+                AppleHealthWorkoutsView(
+                    viewModel: coordinator.assembly.makeAppleHealthWorkoutsViewModel(
+                        delegate: viewModel
+                    ),
+                    nameSpace: nameSpace
+                )
             }
         }
     }

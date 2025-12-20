@@ -50,6 +50,19 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
             requestHealthKitAccessUseCase: requestHealthAccessUseCase
         )
     }
+    
+    public func makeAppleHealthWorkoutsViewModel(
+        delegate: AppleHealthImportDelegate?
+    ) -> AppleHealthWorkoutsViewModel {
+        let getHealthWorkoutsUseCase = useCaseFactory.makeGetHealthWorkoutsUseCase()
+        let importHealthWorkoutUseCaseProtocol = useCaseFactory.makeImportHealthWorkoutUseCase()
+        
+        return AppleHealthWorkoutsViewModel(
+            getHealthWorkoutsUseCase: getHealthWorkoutsUseCase,
+            importHealthWorkoutUseCase: importHealthWorkoutUseCaseProtocol,
+            delegate: delegate
+        )
+    }
 }
 
 // MARK: - ProfileAssemblyProtocol conformance

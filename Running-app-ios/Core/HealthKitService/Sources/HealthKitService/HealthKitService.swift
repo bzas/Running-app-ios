@@ -13,7 +13,9 @@ public actor HealthKitService: HealthKitServiceProtocol {
 
         let typesToShare: Set<HKSampleType> = []
         let typesToRead: Set = [
-            HKQuantityType.workoutType()
+            HKQuantityType.workoutType(),
+            HKSeriesType.workoutRoute(),
+            HKQuantityType(.heartRate)
         ]
 
         if HKHealthStore.isHealthDataAvailable() {
@@ -42,6 +44,42 @@ public actor HealthKitService: HealthKitServiceProtocol {
             HKHealthStore().execute(query)
         }
         
-        return workouts.map { $0.toDomain() }
+        let watchWorkouts = workouts.filter { workout in
+            if let model = workout.device?.model {
+                return model.localizedCaseInsensitiveContains("watch")
+            }
+            
+            if let productType = workout.sourceRevision.productType {
+                return productType.localizedCaseInsensitiveContains("watch")
+            }
+            
+            return false
+        }
+        
+        return watchWorkouts.map { $0.toLightWeightDomain() }
+    }
+    
+    public func fetchFullWorkout(lightWeightSession: WorkoutSession) async throws -> WorkoutSession {
+        let predicate = HKQuery.predicateForObject(with: lightWeightSession.id)
+        let healthStore = HKHealthStore()
+        let workouts: [HKWorkout] = try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: HKObjectType.workoutType(),
+                predicate: predicate,
+                limit: 1,
+                sortDescriptors: nil
+            ) { _, samples, error in
+                if let error { return continuation.resume(throwing: error) }
+                let workouts = (samples as? [HKWorkout]) ?? []
+                continuation.resume(returning: workouts)
+            }
+            healthStore.execute(query)
+        }
+        
+        guard let workout = workouts.first else {
+            return lightWeightSession
+        }
+        
+        return try await workout.toDomain(healthStore: healthStore, lightWeightParsing: false)
     }
 }

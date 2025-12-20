@@ -17,6 +17,7 @@ public final class WorkoutsCoordinator: ObservableObject {
 
     @Published var selectedSession: WorkoutSession? = nil
     @Published var isPresentingFilePicker = false
+    @Published var isPresentingHealthWorkouts = false
     
     public init(assembly: WorkoutsAssemblyProtocol & WorkoutDetailAssemblyProtocol) {
         self.assembly = assembly
@@ -39,6 +40,10 @@ extension WorkoutsCoordinator {
     
     func openFilePicker() {
         isPresentingFilePicker.toggle()
+    }
+    
+    func openAppleHealthWorkouts() {
+        isPresentingHealthWorkouts.toggle()
     }
 
     func dismiss() {

@@ -14,9 +14,13 @@ public actor HealthKitServiceMock: HealthKitServiceProtocol {
     public private(set) var fetchWorkoutsCallCount = 0
     public private(set) var fetchWorkoutsLimits: [Int] = []
     public var errorToThrow: Error?
+    public private(set) var fetchFullWorkoutCallCount = 0
+    public private(set) var fetchFullWorkoutInputs: [WorkoutSession] = []
     
     private var fetchWorkoutsResult: [WorkoutSession] = []
     private var fetchWorkoutsError: Error?
+    private var fetchFullWorkoutResult: WorkoutSession?
+    private var fetchFullWorkoutError: Error?
     
     public init(
         requestUserPermissionCallCount: Int = 0,
@@ -37,6 +41,14 @@ public actor HealthKitServiceMock: HealthKitServiceProtocol {
     public func setFetchWorkoutsError(_ error: Error?) {
         fetchWorkoutsError = error
     }
+    
+    public func setFetchFullWorkoutResult(_ session: WorkoutSession?) {
+        fetchFullWorkoutResult = session
+    }
+    
+    public func setFetchFullWorkoutError(_ error: Error?) {
+        fetchFullWorkoutError = error
+    }
 
     public func requestUserPermission() async throws {
         requestUserPermissionCallCount += 1
@@ -55,5 +67,16 @@ public actor HealthKitServiceMock: HealthKitServiceProtocol {
         }
         
         return fetchWorkoutsResult
+    }
+    
+    public func fetchFullWorkout(lightWeightSession: WorkoutSession) async throws -> WorkoutSession {
+        fetchFullWorkoutCallCount += 1
+        fetchFullWorkoutInputs.append(lightWeightSession)
+        
+        if let fetchFullWorkoutError {
+            throw fetchFullWorkoutError
+        }
+        
+        return fetchFullWorkoutResult ?? lightWeightSession
     }
 }

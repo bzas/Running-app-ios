@@ -32,4 +32,8 @@ public final class TransitionManager {
     public static func detailImageTransitionId(for id: UUID) -> String {
         "detailImageTransitionId-\(id.uuidString)"
     }
+    
+    public static func appleWorkoutsTransitionId() -> String {
+        "appleWorkoutsTransitionId"
+    }
 }

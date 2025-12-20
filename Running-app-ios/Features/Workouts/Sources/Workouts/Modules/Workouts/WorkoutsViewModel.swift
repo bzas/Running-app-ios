@@ -93,3 +93,12 @@ public final class WorkoutsViewModel: ObservableObject {
         }
     }
 }
+
+// MARK: - AppleHealthImportDelegate conformance
+
+extension WorkoutsViewModel: AppleHealthImportDelegate {
+    
+    public func didImportNewWorkout() {
+        fetchAll()
+    }
+}

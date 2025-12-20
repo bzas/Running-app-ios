@@ -11,4 +11,7 @@ import WorkoutDetail
 public protocol WorkoutsAssemblyProtocol {
     
     func makeWorkoutsViewModel() -> WorkoutsViewModel
+    func makeAppleHealthWorkoutsViewModel(
+        delegate: AppleHealthImportDelegate?
+    ) -> AppleHealthWorkoutsViewModel
 }

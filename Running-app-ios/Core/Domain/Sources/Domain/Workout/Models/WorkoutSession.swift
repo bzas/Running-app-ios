@@ -40,19 +40,19 @@ public struct WorkoutSession: Identifiable, Sendable {
     public init(
         id: UUID = UUID(),
         timestamp: Date?,
-        heartRate: Int?,
-        maxHeartRate: Int?,
-        minHeartRate: Int?,
-        cadence: Int?,
-        speed: Double,
+        heartRate: Int? = nil,
+        maxHeartRate: Int? = nil,
+        minHeartRate: Int? = nil,
+        cadence: Int? = nil,
+        speed: Double = 0,
         distance: Double,
         totalTime: Double,
-        latitude: Double?,
-        longitude: Double?,
-        sessionTrackPoints: [WorkoutSessionTrackPoint],
-        photos: [SessionPhoto],
-        verticalOscillation: Double?,
-        groundContactTime: Int?
+        latitude: Double? = nil,
+        longitude: Double? = nil,
+        sessionTrackPoints: [WorkoutSessionTrackPoint] = [],
+        photos: [SessionPhoto] = [],
+        verticalOscillation: Double? = nil,
+        groundContactTime: Int? = nil
     ) {
         self.id = id
         self.timestamp = timestamp

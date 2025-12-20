@@ -5,5 +5,3 @@ import Testing
 struct HealthKitServiceTests {
  
 }
-
-

@@ -10,4 +10,5 @@ import Domain
 public protocol HealthKitServiceProtocol: Sendable {
     func requestUserPermission() async throws
     func fetchWorkouts(limit: Int) async throws -> [WorkoutSession]
+    func fetchFullWorkout(lightWeightSession: WorkoutSession) async throws -> WorkoutSession
 }
