@@ -20,8 +20,6 @@ public extension WorkoutSession {
             speed: 3.8,
             distance: 10_000,
             totalTime: 2_700,
-            latitude: 40.4168,
-            longitude: -3.7038,
             sessionTrackPoints: [.mock],
             photos: [SessionPhoto(data: Data("test-photo".utf8))],
             verticalOscillation: 8.2,

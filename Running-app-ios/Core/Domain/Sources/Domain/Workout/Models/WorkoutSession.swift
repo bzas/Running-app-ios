@@ -20,8 +20,6 @@ public struct WorkoutSession: Identifiable, Sendable {
     public var speed: Double
     public var distance: Double
     public var totalTime: Double
-    public var latitude: Double?
-    public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPoint]
     public var photos: [SessionPhoto]
     public var sessionKmTrackPoints: [WorkoutSessionTrackPoint] = []
@@ -47,8 +45,6 @@ public struct WorkoutSession: Identifiable, Sendable {
         speed: Double = 0,
         distance: Double,
         totalTime: Double,
-        latitude: Double? = nil,
-        longitude: Double? = nil,
         sessionTrackPoints: [WorkoutSessionTrackPoint] = [],
         photos: [SessionPhoto] = [],
         verticalOscillation: Double? = nil,
@@ -63,8 +59,6 @@ public struct WorkoutSession: Identifiable, Sendable {
         self.speed = speed
         self.distance = distance
         self.totalTime = totalTime
-        self.latitude = latitude
-        self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
         self.photos = photos
         self.verticalOscillation = verticalOscillation
@@ -158,11 +152,20 @@ private extension WorkoutSession {
                 )
             )
         }
-
+        
+        if let lastPoint = sessionTrackPoints.last,
+           let lastKmPoint = sessionKmTrackPoints.last {
+            let distance = lastPoint.distance - lastKmPoint.distance
+            let seconds = WorkoutSessionTrackPoint.secondsBetween(
+                previous: lastKmPoint,
+                current: lastPoint
+            )
+            
+            secondsPerKm.append(
+                (seconds / distance) * 1000
+            )
+        }
+        
         return secondsPerKm
-    }
-    
-    func computeHeartRateZones() -> [SessionHeartRateZone] {
-        []
     }
 }

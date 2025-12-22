@@ -22,8 +22,6 @@ struct WorkoutSessionDataModelTests {
         #expect(domainModel.totalTime == model.totalTime)
         #expect(domainModel.photos.count == model.photos.count)
         #expect(domainModel.sessionTrackPoints.count == model.sessionTrackPoints.count)
-        #expect(domainModel.latitude == model.latitude)
-        #expect(domainModel.longitude == model.longitude)
     }
 
     @Test func testInstantiateFromDomainObject() throws {
@@ -37,7 +35,5 @@ struct WorkoutSessionDataModelTests {
         #expect(model.sessionTrackPoints.count == domainObject.sessionTrackPoints.count)
         #expect(model.maxHeartRate == domainObject.maxHeartRate)
         #expect(model.minHeartRate == domainObject.minHeartRate)
-        #expect(model.latitude == domainObject.latitude)
-        #expect(model.longitude == domainObject.longitude)
     }
 }

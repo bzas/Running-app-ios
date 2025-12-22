@@ -24,7 +24,7 @@ struct GetHealthWorkoutsUseCaseTests {
         let callCount = await healthKitService.fetchWorkoutsCallCount
         let limits = await healthKitService.fetchWorkoutsLimits
         #expect(callCount == 1)
-        #expect(limits == [50])
+        #expect(limits == [1000])
     }
     
     @Test func testFetchWorkoutsFailure() async throws {

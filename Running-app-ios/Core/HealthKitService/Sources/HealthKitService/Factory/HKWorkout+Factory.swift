@@ -30,15 +30,20 @@ extension HKWorkout {
         
         let locations = try await routeLocations(healthStore: healthStore)
         let heartRateSamples = try await heartRateSamples(healthStore: healthStore)
+        let cadenceSamples = try await cadenceSamples(healthStore: healthStore)
         let trackPoints = trackPoints(
             from: locations,
-            heartRateSamples: heartRateSamples
+            heartRateSamples: heartRateSamples,
+            cadenceSamples: cadenceSamples
         )
         
         let distance = totalDistance?.doubleValue(for: .meter()) ?? 0
         let duration = max(self.duration, 0)
         let speed = duration > 0 ? distance / duration : 0
         let heartRateStats = heartRateValues()
+        let verticalOscillation = verticalOscillationValue()
+        let groundContactTime = groundContactTimeValue()
+        let cadence = cadenceValue(duration: duration)
         
         return WorkoutSession(
             id: uuid,
@@ -46,16 +51,14 @@ extension HKWorkout {
             heartRate: heartRateStats.average,
             maxHeartRate: heartRateStats.maximum,
             minHeartRate: heartRateStats.minimum,
-            cadence: nil,
+            cadence: cadence,
             speed: speed,
             distance: distance,
             totalTime: duration,
-            latitude: nil,
-            longitude: nil,
             sessionTrackPoints: trackPoints,
             photos: [],
-            verticalOscillation: nil,
-            groundContactTime: nil
+            verticalOscillation: verticalOscillation,
+            groundContactTime: groundContactTime
         )
     }
 }
@@ -80,6 +83,26 @@ private extension HKWorkout {
             maximum: maximum,
             minimum: minimum
         )
+    }
+
+    func verticalOscillationValue() -> Double? {
+        let unit = HKUnit.meterUnit(with: .centi)
+        return statisticsValue(.runningVerticalOscillation, unit: unit) { $0.averageQuantity() }
+    }
+    
+    func groundContactTimeValue() -> Int? {
+        let unit = HKUnit.secondUnit(with: .milli)
+        let value = statisticsValue(.runningGroundContactTime, unit: unit) { $0.averageQuantity() }
+        return intValue(value)
+    }
+    
+    func cadenceValue(duration: Double) -> Int? {
+        guard duration > 0 else { return nil }
+        let unit = HKUnit.count()
+        let steps = statisticsValue(.stepCount, unit: unit) { $0.sumQuantity() }
+        guard let steps else { return nil }
+        let cadence = steps / duration * 60
+        return intValue(cadence)
     }
     
     func statisticsValue(
@@ -153,6 +176,29 @@ private extension HKWorkout {
             healthStore.execute(query)
         }
     }
+
+    func cadenceSamples(healthStore: HKHealthStore) async throws -> [HKQuantitySample] {
+        guard let type = HKQuantityType.quantityType(forIdentifier: .stepCount) else {
+            return []
+        }
+        
+        let predicate = HKQuery.predicateForObjects(from: self)
+        let sort = NSSortDescriptor(key: HKSampleSortIdentifierStartDate, ascending: true)
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: type,
+                predicate: predicate,
+                limit: HKObjectQueryNoLimit,
+                sortDescriptors: [sort]
+            ) { _, samples, error in
+                if let error { return continuation.resume(throwing: error) }
+                let samples = (samples as? [HKQuantitySample]) ?? []
+                continuation.resume(returning: samples)
+            }
+            healthStore.execute(query)
+        }
+    }
     
     func locations(
         for route: HKWorkoutRoute,
@@ -188,20 +234,23 @@ private extension HKWorkout {
     }
     
     func trackPoints(from locations: [CLLocation]) -> [WorkoutSessionTrackPoint] {
-        trackPoints(from: locations, heartRateSamples: [])
+        trackPoints(from: locations, heartRateSamples: [], cadenceSamples: [])
     }
 
     func trackPoints(
         from locations: [CLLocation],
-        heartRateSamples: [HKQuantitySample]
+        heartRateSamples: [HKQuantitySample],
+        cadenceSamples: [HKQuantitySample]
     ) -> [WorkoutSessionTrackPoint] {
         guard !locations.isEmpty else { return [] }
         
         let unit = HKUnit.count().unitDivided(by: .minute())
         var distance: Double = 0
         var previousLocation: CLLocation?
-        var sampleIndex = 0
-        let sortedSamples = heartRateSamples
+        var heartRateIndex = 0
+        var cadenceIndex = 0
+        let sortedHeartRateSamples = heartRateSamples
+        let sortedCadenceSamples = cadenceSamples
         
         return locations.map { location in
             if let previousLocation {
@@ -209,22 +258,46 @@ private extension HKWorkout {
             }
             previousLocation = location
             
-            while sampleIndex + 1 < sortedSamples.count,
-                  sortedSamples[sampleIndex + 1].startDate <= location.timestamp {
-                sampleIndex += 1
+            while heartRateIndex + 1 < sortedHeartRateSamples.count,
+                  sortedHeartRateSamples[heartRateIndex + 1].startDate <= location.timestamp {
+                heartRateIndex += 1
+            }
+            
+            while cadenceIndex + 1 < sortedCadenceSamples.count,
+                  sortedCadenceSamples[cadenceIndex + 1].startDate <= location.timestamp {
+                cadenceIndex += 1
             }
             
             let heartRate: Int?
-            if !sortedSamples.isEmpty,
-               sortedSamples[sampleIndex].startDate <= location.timestamp {
+            if !sortedHeartRateSamples.isEmpty,
+               sortedHeartRateSamples[heartRateIndex].startDate <= location.timestamp {
                 heartRate = Int(
-                    sortedSamples[sampleIndex]
+                    sortedHeartRateSamples[heartRateIndex]
                         .quantity
                         .doubleValue(for: unit)
                         .rounded()
                 )
             } else {
                 heartRate = nil
+            }
+
+            let cadence: Int?
+            if !sortedCadenceSamples.isEmpty {
+                let sample = sortedCadenceSamples[cadenceIndex]
+                if sample.startDate <= location.timestamp,
+                   sample.endDate >= location.timestamp {
+                    let seconds = sample.endDate.timeIntervalSince(sample.startDate)
+                    if seconds > 0 {
+                        let steps = sample.quantity.doubleValue(for: .count())
+                        cadence = Int((steps / seconds * 60).rounded())
+                    } else {
+                        cadence = nil
+                    }
+                } else {
+                    cadence = nil
+                }
+            } else {
+                cadence = nil
             }
             
             return WorkoutSessionTrackPoint(
@@ -234,7 +307,7 @@ private extension HKWorkout {
                 distance: distance,
                 heartRate: heartRate,
                 timestamp: location.timestamp,
-                cadence: nil
+                cadence: cadence
             )
         }
     }

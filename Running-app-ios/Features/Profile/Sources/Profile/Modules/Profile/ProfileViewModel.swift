@@ -25,12 +25,14 @@ public final class ProfileViewModel: ObservableObject {
     @Published var errorTitle: String?
     
     var totalKilometers: Double {
-        sessions.map(\.distanceInKm).reduce(0, +)
+        lastYearSessions.map(\.distanceInKm).reduce(0, +)
     }
     
     var totalWorkouts: Int {
-        sessions.count
+        lastYearSessions.count
     }
+    
+    private var lastYearSessions: [WorkoutSession] = []
     
     // MARK: - Presentation
     
@@ -96,6 +98,7 @@ extension ProfileViewModel {
         isShowingEditUser = false
         sessionDaysAndKmsOfYear = []
         sessions = []
+        lastYearSessions = []
         photos = []
         
         fetchSessions()
@@ -107,7 +110,15 @@ extension ProfileViewModel {
         Task {
             do {
                 sessions = try await sessionImportUseCase.fetchAllSessions()
-                sessionDaysAndKmsOfYear = sessions.compactMap {
+                
+                let calendar = Calendar.current
+                let currentYear = calendar.component(.year, from: Date())
+                lastYearSessions = sessions.filter { session in
+                    guard let timestamp = session.timestamp else { return false }
+                    return calendar.component(.year, from: timestamp) == currentYear
+                }
+                
+                sessionDaysAndKmsOfYear = lastYearSessions.compactMap {
                     DayAndKms(session: $0)
                 }
             } catch {

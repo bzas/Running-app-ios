@@ -15,11 +15,17 @@ public actor HealthKitService: HealthKitServiceProtocol {
         let typesToRead: Set = [
             HKQuantityType.workoutType(),
             HKSeriesType.workoutRoute(),
-            HKQuantityType(.heartRate)
+            HKQuantityType(.heartRate),
+            HKQuantityType(.stepCount),
+            HKQuantityType(.runningVerticalOscillation),
+            HKQuantityType(.runningGroundContactTime)
         ]
-
+        
         if HKHealthStore.isHealthDataAvailable() {
-            try await healthStore.requestAuthorization(toShare: typesToShare, read: typesToRead)
+            try await healthStore.requestAuthorization(
+                toShare: typesToShare,
+                read: typesToRead
+            )
         } else {
             // Throw error
         }

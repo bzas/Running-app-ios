@@ -21,8 +21,6 @@ public final class WorkoutSessionDataModel: Identifiable {
     public var speed: Double?
     public var distance: Double?
     public var totalTime: Double?
-    public var latitude: Double?
-    public var longitude: Double?
     public var sessionTrackPoints: [WorkoutSessionTrackPointDataModel]
     @Attribute(.externalStorage) public var photos: [SessionPhotoDataModel]
     public var verticalOscillation: Double?
@@ -38,8 +36,6 @@ public final class WorkoutSessionDataModel: Identifiable {
         speed: Double?,
         distance: Double?,
         totalTime: Double?,
-        latitude: Double?,
-        longitude: Double?,
         sessionTrackPoints: [WorkoutSessionTrackPointDataModel],
         photos: [SessionPhotoDataModel],
         verticalOscillation: Double?,
@@ -54,8 +50,6 @@ public final class WorkoutSessionDataModel: Identifiable {
         self.speed = speed
         self.distance = distance
         self.totalTime = totalTime
-        self.latitude = latitude
-        self.longitude = longitude
         self.sessionTrackPoints = sessionTrackPoints
         self.photos = photos
         self.verticalOscillation = verticalOscillation
@@ -73,8 +67,6 @@ public final class WorkoutSessionDataModel: Identifiable {
             speed: domain.speed,
             distance: domain.distance,
             totalTime: domain.totalTime,
-            latitude: domain.latitude,
-            longitude: domain.longitude,
             sessionTrackPoints: domain.sessionTrackPoints.compactMap {
                 try? WorkoutSessionTrackPointDataModel(from: $0)
             },
@@ -102,8 +94,6 @@ public extension WorkoutSessionDataModel {
             speed: speed ?? 0,
             distance: distance ?? 0,
             totalTime: totalTime ?? 0,
-            latitude: latitude,
-            longitude: longitude,
             sessionTrackPoints: try sortedTrackPoints.map {
                 try $0.toDomain()
             },
