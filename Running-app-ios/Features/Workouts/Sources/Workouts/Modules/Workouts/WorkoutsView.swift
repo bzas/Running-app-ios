@@ -64,7 +64,7 @@ struct WorkoutsView: View {
                     Button {
                         onOpenFilePicker()
                     } label: {
-                        Label("Garmin .fit file", systemImage: "document.fill")
+                        Label(Localizables.Workouts.garminFitFile, systemImage: "document.fill")
                     }
                     Button {
                         onOpenAppleWorkouts()

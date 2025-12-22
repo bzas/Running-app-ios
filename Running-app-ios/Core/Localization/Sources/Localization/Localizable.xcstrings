@@ -1,873 +1,907 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "common_add": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "accessibility_loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando"
           }
         }
       }
     },
-    "common_distance": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distance"
+    "accessibility_open_workout" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opens workout details"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distancia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre los detalles del entrenamiento"
           }
         }
       }
     },
-    "common_edit": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edit"
+    "accessibility_workout_row" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Workout: %@. Distance: %@. Duration: %@."
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrenamiento: %@. Distancia: %@. Duración: %@."
           }
         }
       }
     },
-    "common_gallery": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gallery"
+    "accessibility_workout_summary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pace %@, Distance %@, Time %@"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Galería"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ritmo %@, Distancia %@, Tiempo %@"
           }
         }
       }
     },
-    "common_kilometers_unit": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km"
+    "common_add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir"
           }
         }
       }
     },
-    "common_maximum_heart_rate": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maximum heart rate"
+    "common_bpm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bpm"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Frecuencia cardiaca máxima"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ppm"
           }
         }
       }
     },
-    "common_pace": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pace"
+    "common_distance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ritmo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distancia"
           }
         }
       }
     },
-    "common_save": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
+    "common_edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guardar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
           }
         }
       }
     },
-    "common_time": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
+    "common_gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gallery"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tiempo"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galería"
           }
         }
       }
     },
-    "placeholder_images_subtitle": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tap the plus button to add some"
+    "common_kilometers_unit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulsa el botón + para añadir"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km"
           }
         }
       }
     },
-    "placeholder_images_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No images yet"
+    "common_maximum_heart_rate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum heart rate"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aún no hay imágenes"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frecuencia cardiaca máxima"
           }
         }
       }
     },
-    "placeholder_workouts_subtitle": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Import a .fit file to start"
+    "common_pace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pace"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Importa un archivo .fit para empezar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ritmo"
           }
         }
       }
     },
-    "placeholder_workouts_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No workouts yet"
+    "common_save" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aún no hay entrenamientos"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         }
       }
     },
-    "profile_heart_rate_zones_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heart Rate Zones"
+    "common_spm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "spm"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zonas de frecuencia cardiaca"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ppm"
           }
         }
       }
     },
-    "profile_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Profile"
+    "common_time" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perfil"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo"
           }
         }
       }
     },
-    "profile_total_kilometers": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kilometers this year"
+    "common_years" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "years"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kilómetros este año"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "años"
           }
         }
       }
     },
-    "profile_workouts_registered": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Workouts registered"
+    "placeholder_images_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap the plus button to add some"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrenamientos registrados"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulsa el botón + para añadir"
           }
         }
       }
     },
-    "search_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search"
+    "placeholder_images_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No images yet"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buscar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay imágenes"
           }
         }
       }
     },
-    "user_configuration_about_you": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "About you"
+    "placeholder_workouts_subtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import a .fit file to start"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sobre ti"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importa un archivo .fit para empezar"
           }
         }
       }
     },
-    "user_configuration_age": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Age"
+    "placeholder_workouts_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No workouts yet"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edad"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay entrenamientos"
           }
         }
       }
     },
-    "user_configuration_name": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name"
+    "profile_activity_grid_footer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last year's activity"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nombre"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actividad del último año"
           }
         }
       }
     },
-    "workout_detail_elevation_max_altitude": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Maximum altitude"
+    "profile_heart_rate_zones_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heart Rate Zones"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Altitud máxima"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zonas de frecuencia cardiaca"
           }
         }
       }
     },
-    "workout_detail_elevation_min_altitude": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Minimum altitude"
+    "profile_month_apr" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apr"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Altitud mínima"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abr"
           }
         }
       }
     },
-    "workout_detail_elevation_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elevation"
+    "profile_month_aug" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aug"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elevación"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ago"
           }
         }
       }
     },
-    "workout_detail_heart_rate_average": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average heart rate"
+    "profile_month_dec" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dec"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Frecuencia cardiaca media"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dic"
           }
         }
       }
     },
-    "workout_detail_heart_rate_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heart Rate"
+    "profile_month_feb" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feb"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Frecuencia cardiaca"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feb"
           }
         }
       }
     },
-    "workout_detail_metrics_cadence": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cadence"
+    "profile_month_jan" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jan"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cadencia"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ene"
           }
         }
       }
     },
-    "workout_detail_metrics_ground_contact_time": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "GCT"
+    "profile_month_jul" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jul"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "TCS"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jul"
           }
         }
       }
     },
-    "workout_detail_metrics_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Metrics"
+    "profile_month_jun" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jun"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Métricas"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jun"
           }
         }
       }
     },
-    "workout_detail_metrics_vertical_oscillation": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vertical Oscillation"
+    "profile_month_mar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mar"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oscilación vertical"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mar"
           }
         }
       }
     },
-    "workouts_title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activities"
+    "profile_month_may" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "May"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actividades"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "May"
           }
         }
       }
     },
-    "common_bpm": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "bpm"
+    "profile_month_nov" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nov"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ppm"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nov"
           }
         }
       }
     },
-    "common_spm": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "spm"
+    "profile_month_oct" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oct"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ppm"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oct"
           }
         }
       }
     },
-    "common_years": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "years"
+    "profile_month_sep" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sep"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "años"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sep"
           }
         }
       }
     },
-    "profile_activity_grid_footer": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Last year's activity"
+    "profile_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actividad del último año"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
           }
         }
       }
     },
-    "profile_month_jan": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jan"
+    "profile_total_kilometers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilometers this year"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ene"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kilómetros este año"
           }
         }
       }
     },
-    "profile_month_feb": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feb"
+    "profile_workouts_registered" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Workouts registered"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feb"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrenamientos registrados"
           }
         }
       }
     },
-    "profile_month_mar": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mar"
+    "search_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mar"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         }
       }
     },
-    "profile_month_apr": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apr"
+    "user_configuration_about_you" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About you"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abr"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre ti"
           }
         }
       }
     },
-    "profile_month_may": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "May"
+    "user_configuration_age" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Age"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "May"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edad"
           }
         }
       }
     },
-    "profile_month_jun": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jun"
+    "user_configuration_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jun"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
           }
         }
       }
     },
-    "profile_month_jul": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jul"
+    "workout_detail_elevation_max_altitude" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maximum altitude"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jul"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altitud máxima"
           }
         }
       }
     },
-    "profile_month_aug": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aug"
+    "workout_detail_elevation_min_altitude" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimum altitude"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ago"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Altitud mínima"
           }
         }
       }
     },
-    "profile_month_sep": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sep"
+    "workout_detail_elevation_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elevation"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sep"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elevación"
           }
         }
       }
     },
-    "profile_month_oct": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oct"
+    "workout_detail_heart_rate_average" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average heart rate"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oct"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frecuencia cardiaca media"
           }
         }
       }
     },
-    "profile_month_nov": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nov"
+    "workout_detail_heart_rate_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heart Rate"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nov"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frecuencia cardiaca"
           }
         }
       }
     },
-    "profile_month_dec": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dec"
+    "workout_detail_metrics_cadence" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cadence"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dic"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cadencia"
           }
         }
       }
     },
-    "accessibility_loading": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Loading"
+    "workout_detail_metrics_ground_contact_time" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GCT"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargando"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TCS"
           }
         }
       }
     },
-    "accessibility_open_workout": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opens workout details"
+    "workout_detail_metrics_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metrics"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abre los detalles del entrenamiento"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métricas"
           }
         }
       }
     },
-    "accessibility_workout_row": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Workout: %@. Distance: %@. Duration: %@."
+    "workout_detail_metrics_vertical_oscillation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vertical Oscillation"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrenamiento: %@. Distancia: %@. Duración: %@."
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oscilación vertical"
           }
         }
       }
     },
-    "accessibility_workout_summary": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pace %@, Distance %@, Time %@"
+    "workouts_garmin_fit_file" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Garmin .fit file"
           }
         },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ritmo %@, Distancia %@, Tiempo %@"
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivo .fit de Garmin"
+          }
+        }
+      }
+    },
+    "workouts_health_workouts_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Health Workouts"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrenamientos de Apple Health"
+          }
+        }
+      }
+    },
+    "workouts_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activities"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actividades"
           }
         }
       }
     }
   },
-  "version": "1.1"
+  "version" : "1.1"
 }

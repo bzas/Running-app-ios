@@ -36,6 +36,8 @@ public enum Localizables {
     
     public enum Workouts {
         public static let title = "workouts_title".localized
+        public static let healthWorkoutsTitle = "workouts_health_workouts_title".localized
+        public static let garminFitFile = "workouts_garmin_fit_file".localized
     }
     
     public enum Profile {

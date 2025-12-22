@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Common
+import Localization
 
 struct AppleHealthWorkoutsView: View {
     
@@ -34,7 +35,7 @@ struct AppleHealthWorkoutsView: View {
                         )
                     }
                 }
-                .navigationTitle("Health Workouts")
+                .navigationTitle(Localizables.Workouts.healthWorkoutsTitle)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
