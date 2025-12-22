@@ -18,13 +18,13 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
         try modelContext.save()
     }
     
-    public func fetchAll() async throws -> [WorkoutSession] {
+    public func fetchAll(lightWeight: Bool) async throws -> [WorkoutSession] {
         let descriptor = FetchDescriptor<WorkoutSessionDataModel>(
             sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
         )
         
         let models = try modelContext.fetch(descriptor)
-        return try models.map { try $0.toDomain() }
+        return try models.map { try $0.toDomain(lightWeight: lightWeight) }
     }
     
     public func updatePhotos(_ session: WorkoutSession) async throws {

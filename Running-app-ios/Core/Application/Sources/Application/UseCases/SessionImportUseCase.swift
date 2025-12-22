@@ -9,7 +9,7 @@ import Domain
 import Foundation
 
 public protocol SessionImportUseCaseProtocol: Sendable {
-    func fetchAllSessions() async throws -> [WorkoutSession]
+    func fetchAllSessions(lightWeight: Bool) async throws -> [WorkoutSession]
     func fetchSession(with sessionId: UUID) async throws -> WorkoutSession
 }
 
@@ -21,8 +21,8 @@ actor SessionImportUseCase: SessionImportUseCaseProtocol {
         self.repository = repository
     }
     
-    func fetchAllSessions() async throws -> [WorkoutSession] {
-        try await repository.fetchAll()
+    func fetchAllSessions(lightWeight: Bool) async throws -> [WorkoutSession] {
+        try await repository.fetchAll(lightWeight: lightWeight)
     }
     
     func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {

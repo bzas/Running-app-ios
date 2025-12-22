@@ -29,7 +29,7 @@ public actor WorkoutRepositoryMock: WorkoutRepositoryProtocol {
         savedSessions.append(session)
     }
     
-    public func fetchAll() async throws -> [WorkoutSession] {
+    public func fetchAll(lightWeight: Bool) async throws -> [WorkoutSession] {
         fetchAllResult
     }
     

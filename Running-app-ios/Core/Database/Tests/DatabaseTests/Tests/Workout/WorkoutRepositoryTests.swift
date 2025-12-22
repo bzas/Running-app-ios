@@ -19,7 +19,7 @@ struct WorkoutRepositoryTests {
         let session = WorkoutSession.mock
         
         try await repository.save(session)
-        let fetched = try await repository.fetchAll()
+        let fetched = try await repository.fetchAll(lightWeight: false)
         
         #expect(fetched.count == 1)
         #expect(fetched.first?.id == session.id)
@@ -33,9 +33,23 @@ struct WorkoutRepositoryTests {
             try await repository.save(session)
         }
         
-        let fetched = try await repository.fetchAll()
+        let fetched = try await repository.fetchAll(lightWeight: false)
         
         #expect(fetched.count == sessions.count)
+    }
+    
+    @Test func testFetchAllLightWeight() async throws {
+        let (repository, _) = try makeRepository()
+        let sessions = [WorkoutSession.lightWeightMock, WorkoutSession.lightWeightMock]
+        
+        for session in sessions {
+            try await repository.save(session)
+        }
+        
+        let fetched = try await repository.fetchAll(lightWeight: false)
+        
+        #expect(fetched.count == sessions.count)
+        #expect(fetched.first?.sessionTrackPoints.isEmpty == true)
     }
     
     @Test func testUpdatePhotos() async throws {
@@ -65,7 +79,7 @@ struct WorkoutRepositoryTests {
         try await repository.save(model)
         
         try await repository.delete(model)
-        let fetched = try await repository.fetchAll()
+        let fetched = try await repository.fetchAll(lightWeight: false)
         
         #expect(fetched.count == 0)
     }

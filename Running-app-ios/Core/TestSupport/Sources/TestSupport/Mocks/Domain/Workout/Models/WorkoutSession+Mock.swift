@@ -26,4 +26,13 @@ public extension WorkoutSession {
             groundContactTime: 250
         )
     }
+    
+    static var lightWeightMock: WorkoutSession {
+        WorkoutSession(
+            timestamp: Date(timeIntervalSince1970: 1000),
+            distance: 10_000,
+            totalTime: 2_700,
+            photos: [SessionPhoto(data: Data("test-photo".utf8))]
+        )
+    }
 }

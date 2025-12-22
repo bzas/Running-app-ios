@@ -60,7 +60,7 @@ public final class WorkoutsViewModel: ObservableObject {
     func fetchAll() {
         Task {
             do {
-                sessions = try await sessionImportUseCase.fetchAllSessions()
+                sessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: false)
                 isLoading = false
             } catch {
                 isLoading = false

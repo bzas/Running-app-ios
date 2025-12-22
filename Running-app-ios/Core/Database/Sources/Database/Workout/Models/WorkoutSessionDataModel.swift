@@ -81,9 +81,17 @@ public final class WorkoutSessionDataModel: Identifiable {
 
 public extension WorkoutSessionDataModel {
     
-    func toDomain() throws -> WorkoutSession {
-        let sortedTrackPoints = sessionTrackPoints.sorted { $0.timestamp < $1.timestamp }
+    func toDomain(lightWeight: Bool = false) throws -> WorkoutSession {
+        guard !lightWeight else {
+            return WorkoutSession(
+                timestamp: timestamp,
+                distance: distance ?? 0,
+                totalTime: totalTime ?? 0,
+                photos: photos.map { $0.toDomain() }
+            )
+        }
         
+        let sortedTrackPoints = sessionTrackPoints.sorted { $0.timestamp < $1.timestamp }
         return WorkoutSession(
             id: id,
             timestamp: timestamp,

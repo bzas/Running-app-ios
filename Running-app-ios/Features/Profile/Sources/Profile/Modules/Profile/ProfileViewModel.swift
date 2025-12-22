@@ -109,7 +109,7 @@ extension ProfileViewModel {
     func fetchSessions() {
         Task {
             do {
-                sessions = try await sessionImportUseCase.fetchAllSessions()
+                sessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: true)
                 
                 let calendar = Calendar.current
                 let currentYear = calendar.component(.year, from: Date())

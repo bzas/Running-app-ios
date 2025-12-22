@@ -40,7 +40,7 @@ public actor SessionImportUseCaseMock: SessionImportUseCaseProtocol {
         errorToThrow = error
     }
     
-    public func fetchAllSessions() async throws -> [WorkoutSession] {
+    public func fetchAllSessions(lightWeight: Bool) async throws -> [WorkoutSession] {
         fetchAllCallCount += 1
         
         if let errorToThrow {
