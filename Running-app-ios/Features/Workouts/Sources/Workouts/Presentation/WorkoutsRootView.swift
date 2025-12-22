@@ -60,7 +60,8 @@ public struct WorkoutsRootView: View {
             .sheet(isPresented: $coordinator.isPresentingHealthWorkouts) {
                 AppleHealthWorkoutsView(
                     viewModel: coordinator.assembly.makeAppleHealthWorkoutsViewModel(
-                        delegate: viewModel
+                        delegate: viewModel,
+                        alreadyImportedSessions: viewModel.sessions.map { $0.id }
                     ),
                     nameSpace: nameSpace
                 )

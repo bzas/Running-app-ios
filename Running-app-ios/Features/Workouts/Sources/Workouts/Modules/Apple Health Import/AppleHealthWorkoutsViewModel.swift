@@ -14,6 +14,7 @@ public final class AppleHealthWorkoutsViewModel: ObservableObject {
         
     @Published var sessions: [WorkoutSession] = []
     @Published var isLoading = true
+    @Published var alreadyImportedSessions: [UUID] = []
     
     weak var delegate: AppleHealthImportDelegate?
     
@@ -25,10 +26,12 @@ public final class AppleHealthWorkoutsViewModel: ObservableObject {
     public init(
         getHealthWorkoutsUseCase: GetHealthWorkoutsUseCaseProtocol,
         importHealthWorkoutUseCase: ImportHealthWorkoutUseCaseProtocol,
+        alreadyImportedSessions: [UUID],
         delegate: AppleHealthImportDelegate?
     ) {
         self.getHealthWorkoutsUseCase = getHealthWorkoutsUseCase
         self.importHealthWorkoutUseCase = importHealthWorkoutUseCase
+        self.alreadyImportedSessions = alreadyImportedSessions
         self.delegate = delegate
     }
     

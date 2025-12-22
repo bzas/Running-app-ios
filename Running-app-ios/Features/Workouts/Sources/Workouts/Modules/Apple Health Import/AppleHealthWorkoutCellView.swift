@@ -13,7 +13,7 @@ struct AppleHealthWorkoutCellView: View {
     
     var session: WorkoutSession
     var onImportSession: (WorkoutSession) -> Void
-    @State var tapped = false
+    @State var imported = false
     
     var body: some View {
         HStack {
@@ -35,10 +35,9 @@ struct AppleHealthWorkoutCellView: View {
             }
             
             Button {
-                onImportSession(session)
-                tapped = true
+                didTapImport()
             } label: {
-                if tapped {
+                if imported {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(.title, weight: .light))
                         .foregroundStyle(.blue)
@@ -53,5 +52,11 @@ struct AppleHealthWorkoutCellView: View {
         }
         .padding()
         .padding(.horizontal)
+    }
+    
+    func didTapImport() {
+        guard !imported else { return }
+        onImportSession(session)
+        imported = true
     }
 }

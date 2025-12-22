@@ -37,7 +37,7 @@ public final class SearchViewModel: ObservableObject {
         allSessions = []
         Task {
             do {
-                allSessions = try await sessionImportUseCase.fetchAllSessions()
+                allSessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: false)
                 sessions = allSessions
                 isLoading = false
             } catch {

@@ -60,29 +60,31 @@ struct WorkoutsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Menu {
-                    Button {
-                        onOpenFilePicker()
+                if !viewModel.isLoading {
+                    Menu {
+                        Button {
+                            onOpenFilePicker()
+                        } label: {
+                            Label(Localizables.Workouts.garminFitFile, systemImage: "document.fill")
+                        }
+                        Button {
+                            onOpenAppleWorkouts()
+                        } label: {
+                            Label("Apple Health", systemImage: "heart.fill")
+                        }
                     } label: {
-                        Label(Localizables.Workouts.garminFitFile, systemImage: "document.fill")
+                        HStack(spacing: 12) {
+                            Image(systemName: "plus")
+                                .font(.footnote)
+                            Text(Localizables.Common.add)
+                        }
+                        .padding(.horizontal, 6)
                     }
-                    Button {
-                        onOpenAppleWorkouts()
-                    } label: {
-                        Label("Apple Health", systemImage: "heart.fill")
-                    }
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: "plus")
-                            .font(.footnote)
-                        Text(Localizables.Common.add)
-                    }
-                    .padding(.horizontal, 6)
+                    .matchedTransitionSource(
+                        id: TransitionManager.appleWorkoutsTransitionId(),
+                        in: nameSpace
+                    )
                 }
-                .matchedTransitionSource(
-                    id: TransitionManager.appleWorkoutsTransitionId(),
-                    in: nameSpace
-                )
             }
         }
     }

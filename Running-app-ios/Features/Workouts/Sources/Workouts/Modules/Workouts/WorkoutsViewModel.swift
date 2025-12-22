@@ -44,14 +44,11 @@ public final class WorkoutsViewModel: ObservableObject {
     }
     
     func importFile(from file: URL) {
-        isLoading = true
-        
         Task {
             do {
                 try await garminUseCase.importSession(from: file)
                 fetchAll()
             } catch {
-                isLoading = false
                 showError(error)
             }
         }

@@ -52,7 +52,8 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
     }
     
     public func makeAppleHealthWorkoutsViewModel(
-        delegate: AppleHealthImportDelegate?
+        delegate: AppleHealthImportDelegate?,
+        alreadyImportedSessions: [UUID]
     ) -> AppleHealthWorkoutsViewModel {
         let getHealthWorkoutsUseCase = useCaseFactory.makeGetHealthWorkoutsUseCase()
         let importHealthWorkoutUseCaseProtocol = useCaseFactory.makeImportHealthWorkoutUseCase()
@@ -60,6 +61,7 @@ extension AppAssembly: WorkoutsAssemblyProtocol {
         return AppleHealthWorkoutsViewModel(
             getHealthWorkoutsUseCase: getHealthWorkoutsUseCase,
             importHealthWorkoutUseCase: importHealthWorkoutUseCaseProtocol,
+            alreadyImportedSessions: alreadyImportedSessions,
             delegate: delegate
         )
     }

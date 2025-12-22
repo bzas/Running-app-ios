@@ -31,7 +31,8 @@ struct AppleHealthWorkoutsView: View {
                     ForEach(viewModel.sessions) {
                         AppleHealthWorkoutCellView(
                             session: $0,
-                            onImportSession: { viewModel.fetchComplete(session: $0) }
+                            onImportSession: { viewModel.fetchComplete(session: $0) },
+                            imported: viewModel.alreadyImportedSessions.contains($0.id)
                         )
                     }
                 }

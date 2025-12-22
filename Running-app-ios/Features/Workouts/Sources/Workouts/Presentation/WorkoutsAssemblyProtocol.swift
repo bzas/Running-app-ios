@@ -7,11 +7,13 @@
 
 import Domain
 import WorkoutDetail
+import Foundation
 
 public protocol WorkoutsAssemblyProtocol {
     
     func makeWorkoutsViewModel() -> WorkoutsViewModel
     func makeAppleHealthWorkoutsViewModel(
-        delegate: AppleHealthImportDelegate?
+        delegate: AppleHealthImportDelegate?,
+        alreadyImportedSessions: [UUID]
     ) -> AppleHealthWorkoutsViewModel
 }
