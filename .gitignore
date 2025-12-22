@@ -37,3 +37,6 @@ fastlane/test_output/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+# Local workout files
+FIT Files/
