@@ -38,6 +38,18 @@ struct SessionImportUseCaseTests {
         #expect(sessions.first?.id == expectedSessions.first?.id)
         #expect(sessions.first?.sessionTrackPoints.isEmpty == true)
     }
+
+    @Test func testFetchAllSessionsPaged() async throws {
+        let repository = WorkoutRepositoryMock()
+        let expectedSessions = [WorkoutSession.mock, WorkoutSession.mock, WorkoutSession.mock]
+        await repository.setFetchAllResult(expectedSessions)
+        let useCase = SessionImportUseCase(repository: repository)
+
+        let sessions = try await useCase.fetchAllSessions(lightWeight: false, page: 1, pageSize: 1)
+
+        #expect(sessions.count == 1)
+        #expect(sessions.first?.id == expectedSessions[1].id)
+    }
     
     @Test func testFetchSession() async throws {
         let repository = WorkoutRepositoryMock()

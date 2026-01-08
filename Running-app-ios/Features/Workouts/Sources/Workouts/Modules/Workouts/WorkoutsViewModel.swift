@@ -16,6 +16,7 @@ public final class WorkoutsViewModel: ObservableObject {
     
     @Published var sessions: [WorkoutSession] = []
     @Published var isLoading = true
+    @Published var isLoadingPage = false
     
     // MARK: - Error handling
     
@@ -28,6 +29,9 @@ public final class WorkoutsViewModel: ObservableObject {
     private let sessionImportUseCase: SessionImportUseCaseProtocol
     private let workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
     private let requestHealthKitAccessUseCase: RequestHealthAccessUseCaseProtocol
+    private let pageSize = 20
+    private var currentPage = 0
+    private var canLoadMore = true
 
     public init(
         garminUseCase: GarminImportUseCaseProtocol,
@@ -56,13 +60,14 @@ public final class WorkoutsViewModel: ObservableObject {
     
     func fetchAll() {
         Task {
-            do {
-                sessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: false)
-                isLoading = false
-            } catch {
-                isLoading = false
-                showError(error)
-            }
+            await loadPage(reset: true)
+        }
+    }
+
+    func loadMoreIfNeeded(currentItem: WorkoutSession) {
+        guard currentItem.id == sessions.last?.id else { return }
+        Task {
+            await loadPage(reset: false)
         }
     }
     
@@ -87,6 +92,53 @@ public final class WorkoutsViewModel: ObservableObject {
     func requestHealthKitAccess() {
         Task {
             try? await requestHealthKitAccessUseCase.requestUserPermission()
+        }
+    }
+}
+
+// MARK: - Pagination
+
+private extension WorkoutsViewModel {
+
+    func loadPage(reset: Bool) async {
+        if reset {
+            isLoading = true
+            isLoadingPage = false
+            currentPage = 0
+            canLoadMore = true
+            sessions = []
+        } else {
+            guard !isLoadingPage, canLoadMore else { return }
+            isLoadingPage = true
+        }
+
+        let pageToLoad = currentPage
+
+        do {
+            let newSessions = try await sessionImportUseCase.fetchAllSessions(
+                lightWeight: false,
+                page: pageToLoad,
+                pageSize: pageSize
+            )
+
+            if reset {
+                sessions = newSessions
+                isLoading = false
+            } else {
+                sessions.append(contentsOf: newSessions)
+            }
+
+            currentPage = pageToLoad + 1
+            canLoadMore = newSessions.count == pageSize
+        } catch {
+            if reset {
+                isLoading = false
+            }
+            showError(error)
+        }
+
+        if !reset {
+            isLoadingPage = false
         }
     }
 }

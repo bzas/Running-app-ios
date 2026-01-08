@@ -14,13 +14,17 @@ public actor SessionImportUseCaseMock: SessionImportUseCaseProtocol {
     // MARK: - Tracking
     
     public private(set) var fetchAllCallCount = 0
+    public private(set) var fetchAllPagedCallCount = 0
     public private(set) var fetchSessionCallCount = 0
     public private(set) var lastFetchedSessionId: UUID?
+    public private(set) var lastFetchAllPage: Int?
+    public private(set) var lastFetchAllPageSize: Int?
     public let repository: WorkoutRepositoryProtocol
     
     // MARK: - Stubbing
     
     public var fetchAllResult: [WorkoutSession] = []
+    public var fetchAllPagedResults: [Int: [WorkoutSession]] = [:]
     public var fetchSessionResult: WorkoutSession?
     public var errorToThrow: Error?
     
@@ -30,6 +34,10 @@ public actor SessionImportUseCaseMock: SessionImportUseCaseProtocol {
 
     public func setFetchAllResult(_ sessions: [WorkoutSession]) {
         fetchAllResult = sessions
+    }
+
+    public func setFetchAllPagedResult(page: Int, sessions: [WorkoutSession]) {
+        fetchAllPagedResults[page] = sessions
     }
 
     public func setFetchSessionResult(_ session: WorkoutSession?) {
@@ -47,6 +55,22 @@ public actor SessionImportUseCaseMock: SessionImportUseCaseProtocol {
             throw errorToThrow
         }
         
+        return fetchAllResult
+    }
+
+    public func fetchAllSessions(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession] {
+        fetchAllPagedCallCount += 1
+        lastFetchAllPage = page
+        lastFetchAllPageSize = pageSize
+
+        if let errorToThrow {
+            throw errorToThrow
+        }
+
+        if let pagedResult = fetchAllPagedResults[page] {
+            return pagedResult
+        }
+
         return fetchAllResult
     }
     

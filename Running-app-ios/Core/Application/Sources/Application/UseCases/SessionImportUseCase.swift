@@ -10,6 +10,7 @@ import Foundation
 
 public protocol SessionImportUseCaseProtocol: Sendable {
     func fetchAllSessions(lightWeight: Bool) async throws -> [WorkoutSession]
+    func fetchAllSessions(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession]
     func fetchSession(with sessionId: UUID) async throws -> WorkoutSession
 }
 
@@ -23,6 +24,10 @@ actor SessionImportUseCase: SessionImportUseCaseProtocol {
     
     func fetchAllSessions(lightWeight: Bool) async throws -> [WorkoutSession] {
         try await repository.fetchAll(lightWeight: lightWeight)
+    }
+
+    func fetchAllSessions(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession] {
+        try await repository.fetchAll(lightWeight: lightWeight, page: page, pageSize: pageSize)
     }
     
     func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {

@@ -26,6 +26,19 @@ public actor WorkoutRepository: WorkoutRepositoryProtocol {
         let models = try modelContext.fetch(descriptor)
         return try models.map { try $0.toDomain(lightWeight: lightWeight) }
     }
+
+    public func fetchAll(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession] {
+        let offset = max(page, 0) * max(pageSize, 0)
+        let limit = max(pageSize, 0)
+        var descriptor = FetchDescriptor<WorkoutSessionDataModel>(
+            sortBy: [SortDescriptor(\.timestamp, order: .reverse)]
+        )
+        descriptor.fetchOffset = offset
+        descriptor.fetchLimit = limit
+
+        let models = try modelContext.fetch(descriptor)
+        return try models.map { try $0.toDomain(lightWeight: lightWeight) }
+    }
     
     public func updatePhotos(_ session: WorkoutSession) async throws {
         guard let model = try getSessionDataModel(for: session) else { return }

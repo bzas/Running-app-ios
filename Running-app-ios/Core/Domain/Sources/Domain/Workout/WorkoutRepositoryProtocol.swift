@@ -12,6 +12,7 @@ public protocol WorkoutRepositoryProtocol: Sendable {
     func updatePhotos(_ session: WorkoutSession) async throws
     func save(_ session: WorkoutSession) async throws
     func fetchAll(lightWeight: Bool) async throws -> [WorkoutSession]
+    func fetchAll(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession]
     func fetchSession(with sessionId: UUID) async throws -> WorkoutSession
     func delete(_ session: WorkoutSession) async throws
     func fetchAllPhotos() async throws -> [SessionPhoto]

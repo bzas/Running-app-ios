@@ -49,9 +49,20 @@ struct WorkoutsView: View {
                             nameSpace: nameSpace,
                             onTap: onOpenSession
                         )
+                        .onAppear {
+                            viewModel.loadMoreIfNeeded(currentItem: session)
+                        }
                     }
                     .onDelete(perform: viewModel.deleteSessions)
                     .padding(.bottom)
+
+                    if viewModel.isLoadingPage {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                    }
                 }
                 .listStyle(.plain)
             }

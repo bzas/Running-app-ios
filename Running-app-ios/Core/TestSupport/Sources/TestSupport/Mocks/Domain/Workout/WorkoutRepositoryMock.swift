@@ -32,6 +32,13 @@ public actor WorkoutRepositoryMock: WorkoutRepositoryProtocol {
     public func fetchAll(lightWeight: Bool) async throws -> [WorkoutSession] {
         fetchAllResult
     }
+
+    public func fetchAll(lightWeight: Bool, page: Int, pageSize: Int) async throws -> [WorkoutSession] {
+        let startIndex = max(page, 0) * max(pageSize, 0)
+        let endIndex = min(startIndex + max(pageSize, 0), fetchAllResult.count)
+        guard startIndex < endIndex else { return [] }
+        return Array(fetchAllResult[startIndex..<endIndex])
+    }
     
     public func fetchSession(with sessionId: UUID) async throws -> WorkoutSession {
         if let fetchSessionError {

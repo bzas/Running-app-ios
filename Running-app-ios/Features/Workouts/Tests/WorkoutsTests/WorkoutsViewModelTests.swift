@@ -66,6 +66,28 @@ struct WorkoutsViewModelTests {
         #expect(deleted.count == 1)
         #expect(deleted.first?.id == session.id)
     }
+
+    @Test func testLoadMoreIfNeededAppendsNextPage() async throws {
+        let repository = WorkoutRepositoryMock()
+        let firstPageSessions = (0..<20).map { _ in WorkoutSession.mock }
+        let secondPageSession = WorkoutSession.mock
+        await repository.setFetchAllResult(firstPageSessions + [secondPageSession])
+        let sessionImportUseCase = SessionImportUseCaseMock(repository: repository)
+        await sessionImportUseCase.setFetchAllPagedResult(page: 0, sessions: firstPageSessions)
+        await sessionImportUseCase.setFetchAllPagedResult(page: 1, sessions: [secondPageSession])
+        let sut = makeSUT(sessionImportUseCase: sessionImportUseCase)
+        
+        await waitUntilSessionsLoaded(sut, expectedCount: 20)
+        
+        if let lastSession = sut.sessions.last {
+            sut.loadMoreIfNeeded(currentItem: lastSession)
+        }
+        await waitUntilSessionsLoaded(sut, expectedCount: 21)
+        
+        #expect(sut.sessions.count == 21)
+        #expect(sut.sessions.first?.id == firstPageSessions.first?.id)
+        #expect(sut.sessions.last?.id == secondPageSession.id)
+    }
     
     @Test func testFetchAllErrorShowsAlert() async throws {
         let repository = WorkoutRepositoryMock()
@@ -90,12 +112,14 @@ private extension WorkoutsViewModelTests {
             repository: WorkoutRepositoryMock()
         ),
         sessionImportUseCase: SessionImportUseCaseProtocol = SessionImportUseCaseMock(repository: WorkoutRepositoryMock()),
-        workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol = WorkoutDeletionUseCaseMock(repository: WorkoutRepositoryMock())
+        workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol = WorkoutDeletionUseCaseMock(repository: WorkoutRepositoryMock()),
+        requestHealthKitAccessUseCase: RequestHealthAccessUseCaseProtocol = RequestHealthAccessUseCaseMock()
     ) -> WorkoutsViewModel {
         WorkoutsViewModel(
             garminUseCase: garminUseCase,
             sessionImportUseCase: sessionImportUseCase,
-            workoutDeletionUseCase: workoutDeletionUseCase
+            workoutDeletionUseCase: workoutDeletionUseCase,
+            requestHealthKitAccessUseCase: requestHealthKitAccessUseCase
         )
     }
 }
