@@ -86,6 +86,7 @@ public final class WorkoutDetailViewModel: ObservableObject {
     
     func setup() {
         Task {
+            AppLogger.workoutDetail.info("Workout detail setup.")
             await reloadSessionInfo()
             await calculateHeartRateZones()
             calculatePaceInfo()
@@ -134,10 +135,12 @@ private extension WorkoutDetailViewModel {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+        AppLogger.workoutDetail.error("Workout detail error: \(error.localizedDescription, privacy: .public)")
     }
     
     func reloadSessionInfo() async {
         do {
+            AppLogger.workoutDetail.info("Reloading session.")
             session = try await sessionImportUseCase.fetchSession(with: session.id)
         } catch {
             showError(error)

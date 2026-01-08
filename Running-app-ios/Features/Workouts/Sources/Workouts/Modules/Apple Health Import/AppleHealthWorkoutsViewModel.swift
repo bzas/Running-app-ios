@@ -8,6 +8,7 @@
 import Foundation
 import Application
 import Domain
+import Common
 
 @MainActor
 public final class AppleHealthWorkoutsViewModel: ObservableObject {
@@ -40,11 +41,12 @@ public final class AppleHealthWorkoutsViewModel: ObservableObject {
         
         Task {
             do {
+                AppLogger.appleHealth.info("Loading Health workouts.")
                 sessions = try await getHealthWorkoutsUseCase.fetchWorkouts()
                 isLoading = false
             } catch {
                 isLoading = false
-                print(error.localizedDescription)
+                AppLogger.appleHealth.error("Health workouts error: \(error.localizedDescription, privacy: .public)")
             }
         }
     }
@@ -52,10 +54,11 @@ public final class AppleHealthWorkoutsViewModel: ObservableObject {
     func fetchComplete(session: WorkoutSession) {
         Task {
             do {
+                AppLogger.appleHealth.info("Fetching full Health workout.")
                 try await importHealthWorkoutUseCase.fetchCompleteWorkout(lightWeightSession: session)
                 delegate?.didImportNewWorkout()
             } catch {
-                print(error.localizedDescription)
+                AppLogger.appleHealth.error("Health workout import error: \(error.localizedDescription, privacy: .public)")
             }
         }
     }

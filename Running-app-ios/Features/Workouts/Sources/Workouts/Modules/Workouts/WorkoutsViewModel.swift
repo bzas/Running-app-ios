@@ -10,6 +10,7 @@ import Domain
 import Application
 import GarminKit
 import Localization
+import Common
 
 @MainActor
 public final class WorkoutsViewModel: ObservableObject {
@@ -29,7 +30,7 @@ public final class WorkoutsViewModel: ObservableObject {
     private let sessionImportUseCase: SessionImportUseCaseProtocol
     private let workoutDeletionUseCase: WorkoutDeletionUseCaseProtocol
     private let requestHealthKitAccessUseCase: RequestHealthAccessUseCaseProtocol
-    private let pageSize = 20
+    private let pageSize = 10
     private var currentPage = 0
     private var canLoadMore = true
 
@@ -50,6 +51,7 @@ public final class WorkoutsViewModel: ObservableObject {
     func importFile(from file: URL) {
         Task {
             do {
+                AppLogger.importFlow.info("Importing Garmin file.")
                 try await garminUseCase.importSession(from: file)
                 fetchAll()
             } catch {
@@ -60,6 +62,7 @@ public final class WorkoutsViewModel: ObservableObject {
     
     func fetchAll() {
         Task {
+            AppLogger.workouts.info("Loading sessions.")
             await loadPage(reset: true)
         }
     }
@@ -67,6 +70,7 @@ public final class WorkoutsViewModel: ObservableObject {
     func loadMoreIfNeeded(currentItem: WorkoutSession) {
         guard currentItem.id == sessions.last?.id else { return }
         Task {
+            AppLogger.workouts.info("Loading sessions (next page).")
             await loadPage(reset: false)
         }
     }
@@ -87,6 +91,7 @@ public final class WorkoutsViewModel: ObservableObject {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+        AppLogger.workouts.error("Workouts error: \(error.localizedDescription, privacy: .public)")
     }
     
     func requestHealthKitAccess() {
@@ -101,6 +106,7 @@ public final class WorkoutsViewModel: ObservableObject {
 private extension WorkoutsViewModel {
 
     func loadPage(reset: Bool) async {
+        let startTime = Date()
         if reset {
             isLoading = true
             isLoadingPage = false
@@ -120,13 +126,18 @@ private extension WorkoutsViewModel {
                 page: pageToLoad,
                 pageSize: pageSize
             )
-
+            
             if reset {
                 sessions = newSessions
                 isLoading = false
             } else {
                 sessions.append(contentsOf: newSessions)
             }
+
+            let durationMs = Date().timeIntervalSince(startTime) * 1000
+            AppLogger.workouts.info(
+                "Loaded workouts page=\(pageToLoad, privacy: .public) count=\(newSessions.count, privacy: .public) total=\(self.sessions.count, privacy: .public) durationMs=\(durationMs, privacy: .public)."
+            )
 
             currentPage = pageToLoad + 1
             canLoadMore = newSessions.count == pageSize

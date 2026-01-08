@@ -62,6 +62,7 @@ struct WorkoutsView: View {
                             ProgressView()
                             Spacer()
                         }
+                        .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(.plain)

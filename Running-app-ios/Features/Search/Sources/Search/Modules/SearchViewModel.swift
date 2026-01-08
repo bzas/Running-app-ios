@@ -8,6 +8,7 @@
 import Foundation
 import Domain
 import Application
+import Common
 
 @MainActor
 public final class SearchViewModel: ObservableObject {
@@ -35,10 +36,13 @@ public final class SearchViewModel: ObservableObject {
     func fetchAll() {
         isLoading = true
         allSessions = []
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             do {
+                AppLogger.search.info("Loading sessions for search.")
                 allSessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: false)
-                sessions = allSessions
+                AppLogger.search.info("Loaded search sessions count=\(self.allSessions.count, privacy: .public).")
+                self.sessions = self.allSessions
                 isLoading = false
             } catch {
                 showError(error)
@@ -60,5 +64,6 @@ public final class SearchViewModel: ObservableObject {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+        AppLogger.search.error("Search error: \(error.localizedDescription, privacy: .public)")
     }
 }

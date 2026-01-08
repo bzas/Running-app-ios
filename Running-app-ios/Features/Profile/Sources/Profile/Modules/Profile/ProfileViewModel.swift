@@ -8,6 +8,7 @@
 import Foundation
 import Domain
 import Application
+import Common
 
 @MainActor
 public final class ProfileViewModel: ObservableObject {
@@ -100,6 +101,8 @@ extension ProfileViewModel {
         sessions = []
         lastYearSessions = []
         photos = []
+
+        AppLogger.profile.info("Profile setup started.")
         
         fetchSessions()
         fetchUserInfo()
@@ -107,9 +110,12 @@ extension ProfileViewModel {
     }
     
     func fetchSessions() {
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             do {
+                AppLogger.profile.info("Loading profile sessions.")
                 sessions = try await sessionImportUseCase.fetchAllSessions(lightWeight: true)
+                AppLogger.profile.info("Loaded profile sessions count=\(self.sessions.count, privacy: .public).")
                 
                 let calendar = Calendar.current
                 let currentYear = calendar.component(.year, from: Date())
@@ -130,6 +136,7 @@ extension ProfileViewModel {
     func fetchUserInfo() {
         Task {
             do {
+                AppLogger.profile.info("Loading user info.")
                 userInfo = try await getUserUseCase.currentUser()
             } catch {
                 showError(error)
@@ -140,6 +147,7 @@ extension ProfileViewModel {
     func fetchGallery() {
         Task {
             do {
+                AppLogger.profile.info("Loading gallery.")
                 photos = try await getGalleryUseCase.getAllPhotos()
             } catch {
                 showError(error)
@@ -150,5 +158,6 @@ extension ProfileViewModel {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+        AppLogger.profile.error("Profile error: \(error.localizedDescription, privacy: .public)")
     }
 }

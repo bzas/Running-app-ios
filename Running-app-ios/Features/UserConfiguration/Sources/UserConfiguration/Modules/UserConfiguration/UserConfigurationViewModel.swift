@@ -8,6 +8,7 @@
 import Foundation
 import Application
 import Domain
+import Common
 
 @MainActor
 public final class UserConfigurationViewModel: ObservableObject {
@@ -54,8 +55,10 @@ public final class UserConfigurationViewModel: ObservableObject {
         
         do {
             if savedUser != nil {
+                AppLogger.userConfig.info("Updating user.")
                 try await editUserUseCase.update(user)
             } else {
+                AppLogger.userConfig.info("Creating user.")
                 try await createUserUseCase.save(user)
             }
             completion?()
@@ -97,5 +100,6 @@ private extension UserConfigurationViewModel {
     func showError(_ error: Error) {
         errorTitle = error.localizedDescription
         shouldShowErrorAlert.toggle()
+        AppLogger.userConfig.error("User configuration error: \(error.localizedDescription, privacy: .public)")
     }
 }
